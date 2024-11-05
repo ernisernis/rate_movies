@@ -1,0 +1,23 @@
+*.iml
+.gradle
+/local.properties
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# IDE-specific files
+appInsightsSettings.xml
+deploymentTargetSelector.xml
+git_toolbox_blame.xml
+gradle.xml
+kotlinc.xml
+migrations.xml
+misc.xml
+runConfigurations.xml
+vcs.xml
+
+# IntelliJ / Android Studio
+.idea/
