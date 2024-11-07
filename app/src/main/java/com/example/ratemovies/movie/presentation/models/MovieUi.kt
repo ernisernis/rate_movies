@@ -1,6 +1,7 @@
 package com.example.ratemovies.movie.presentation.models
 
 data class MovieUi(
+    val id: String,
     val title: String,
     val overview: String,
     val imageUrl: String,
