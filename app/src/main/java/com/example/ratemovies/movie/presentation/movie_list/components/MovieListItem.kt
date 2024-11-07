@@ -1,5 +1,6 @@
 package com.example.ratemovies.movie.presentation.movie_list.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,7 +30,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.example.ratemovies.R
-import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.AsyncImage
 import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.movie.presentation.models.MovieUi
@@ -135,8 +135,6 @@ fun MovieListItem(
 
 }
 
-
-@OptIn(ExperimentalCoilApi::class)
 @PreviewLightDark()
 @Preview(
     showSystemUi = true,
@@ -144,24 +142,22 @@ fun MovieListItem(
 )
 @Composable
 fun MovieListItemPreview() {
-
-    val movieUi = MovieUi(
-        title = "Terrifier 3",
-        overview = "Five years after surviving Art the Clown's Halloween massacre",
-        imageUrl = "https://image.tmdb.org/t/p/w500/63xYQj1BwRFielxsBDXvHIJyXVm.jpg",
-        releaseDate = "2024-10-09",
-        genres = listOf("Horror", "Comedy", "Sci-fi"),
-        voteAverage = "7.3",
-        popularity = "3545"
-    )
-
     RateMoviesTheme {
         MovieListItem(
             modifier = Modifier.padding(24.dp).width(150.dp).height(300.dp),
-            movieUi = movieUi,
+            movieUi = previewMovie,
             onClick = {}
         )
     }
-
-
 }
+
+internal val previewMovie = MovieUi(
+    id = "terrifier",
+    title = "Terrifier 3",
+    overview = "Five years after surviving Art the Clown's Halloween massacre",
+    imageUrl = "https://image.tmdb.org/t/p/w500/63xYQj1BwRFielxsBDXvHIJyXVm.jpg",
+    releaseDate = "2024-10-09",
+    genres = listOf("Horror", "Comedy", "Sci-fi"),
+    voteAverage = "7.3",
+    popularity = "3545"
+)
