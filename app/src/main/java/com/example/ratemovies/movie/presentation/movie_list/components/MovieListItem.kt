@@ -51,7 +51,7 @@ fun MovieListItem(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer
         ),
-        modifier = modifier
+        modifier = modifier.clickable(onClick = onClick)
     ) {
 
         AsyncImage(
