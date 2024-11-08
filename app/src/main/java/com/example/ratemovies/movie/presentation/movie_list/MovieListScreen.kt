@@ -9,32 +9,39 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.runtime.getValue
 import com.example.ratemovies.movie.presentation.movie_list.components.MovieListItemsSection
 import com.example.ratemovies.movie.presentation.movie_list.components.previewMovie
 import com.example.ratemovies.ui.theme.RateMoviesTheme
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun MovieListScreen(
     state: MovieListState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: MovieListViewModel = koinViewModel()
 ) {
+
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     Column(
         modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()),
     ) {
         MovieListItemsSection(
             title = "Now Playing",
-            movies = state.movies,
+            movies = state.moviesUi,
             onClick = {}
         )
         MovieListItemsSection(
             title = "Popular",
-            movies = state.movies,
+            movies = state.moviesUi,
             onClick = {}
         )
         MovieListItemsSection(
             title = "Upcoming",
-            movies = state.movies,
+            movies = state.moviesUi,
             onClick = {}
         )
     }
@@ -47,8 +54,8 @@ fun MovieListScreenPreview() {
     RateMoviesTheme {
         MovieListScreen(
             state = MovieListState(
-                movies = (1..20).map {
-                    previewMovie.copy(id = it.toString())
+                moviesUi = (1..20).map {
+                    previewMovie.copy(id = it)
                 }
             ),
             modifier = Modifier.background(MaterialTheme.colorScheme.background)

@@ -24,8 +24,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .padding(innerPadding),
                         state = MovieListState(
-                            movies = (1..20).map {
-                                previewMovie.copy(id = it.toString())
+                            moviesUi = (1..20).map {
+                                previewMovie.copy(id = it)
                             }
                         )
                     )

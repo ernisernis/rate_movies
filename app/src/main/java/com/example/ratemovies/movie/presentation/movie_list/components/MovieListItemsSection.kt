@@ -44,7 +44,7 @@ fun ColumnScope.MovieListItemsSection(
         items(movies) { movieUi ->
             MovieListItem(
                 movieUi = movieUi,
-                modifier = Modifier.height(300.dp).width(150.dp),
+                modifier = Modifier.height(325.dp).width(154.dp),
                 onClick = { onClick() }
             )
         }
@@ -62,7 +62,7 @@ fun MovieListItemsSectionPreview() {
                 modifier = Modifier,
                 title = "Now Playing",
                 movies = (1..20).map {
-                    previewMovie.copy(id = it.toString())
+                    previewMovie.copy(id = it)
                 },
                 onClick = {}
             )
