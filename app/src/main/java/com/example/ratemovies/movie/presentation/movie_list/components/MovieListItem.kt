@@ -4,7 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,7 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,12 +56,12 @@ fun MovieListItem(
         AsyncImage(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.7f),
+                .aspectRatio(2f / 3f),
             model = movieUi.imageUrl,
             contentDescription = null,
-            placeholder = painterResource(R.drawable.ic_launcher_background),
-            error = painterResource(R.drawable.ic_launcher_background),
-            contentScale = ContentScale.FillBounds
+            placeholder = painterResource(R.drawable.poster780w1170hpreview),
+            error = painterResource(R.drawable.poster780w1170hpreview),
+            contentScale = ContentScale.Fit
         )
 
         // Rating
@@ -108,7 +107,7 @@ fun MovieListItem(
             // Date
             Text(
                 text = movieUi.releaseDate,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.labelSmall
             )
 
@@ -126,7 +125,7 @@ fun MovieListItem(
             // Like count
             Text(
                 text = movieUi.popularity,
-                color = Color.Gray,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 style = MaterialTheme.typography.labelSmall
             )
         }
@@ -144,7 +143,10 @@ fun MovieListItem(
 fun MovieListItemPreview() {
     RateMoviesTheme {
         MovieListItem(
-            modifier = Modifier.padding(24.dp).width(150.dp).height(300.dp),
+            modifier = Modifier
+                .padding(24.dp)
+                .height(325.dp)
+                .width(154.dp),
             movieUi = previewMovie,
             onClick = {}
         )
@@ -152,8 +154,9 @@ fun MovieListItemPreview() {
 }
 
 internal val previewMovie = MovieUi(
-    id = "terrifier",
+    id = 1,
     title = "Terrifier 3",
+    adult = false,
     overview = "Five years after surviving Art the Clown's Halloween massacre",
     imageUrl = "https://image.tmdb.org/t/p/w500/63xYQj1BwRFielxsBDXvHIJyXVm.jpg",
     releaseDate = "2024-10-09",
