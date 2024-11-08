@@ -25,7 +25,7 @@ fun ColumnScope.MovieListItemsSection(
     modifier: Modifier = Modifier,
     title: String,
     movies: List<MovieUi>,
-    onClick: () -> Unit
+    onClick: (MovieUi) -> Unit
 ) {
     // Title
     Text(
@@ -45,7 +45,7 @@ fun ColumnScope.MovieListItemsSection(
             MovieListItem(
                 movieUi = movieUi,
                 modifier = Modifier.height(325.dp).width(154.dp),
-                onClick = { onClick() }
+                onClick = { onClick(movieUi) }
             )
         }
     }
