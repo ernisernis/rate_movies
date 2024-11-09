@@ -22,6 +22,8 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+            val apiKey = project.findProperty("API_KEY") ?: ""
+            buildConfigField("String", "API_KEY", "$apiKey")
         }
         release {
             isMinifyEnabled = false
@@ -30,6 +32,8 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+            val apiKey = project.findProperty("API_KEY") ?: ""
+            buildConfigField("String", "API_KEY", "$apiKey")
         }
     }
     compileOptions {

@@ -1,5 +1,6 @@
 package com.example.ratemovies.movie.data
 
+import com.example.ratemovies.BuildConfig
 import com.example.ratemovies.core.data.networking.constructUrl
 import com.example.ratemovies.core.data.networking.safeCall
 import com.example.ratemovies.core.domain.util.NetworkError
@@ -22,7 +23,7 @@ class RemoteMovieDataSource(
           httpClient.get(
                 urlString = constructUrl("/movie/now_playing")
           ) {
-              parameter("api_key", "869c9e4ae649369528a52aafd1629f82")
+              parameter("api_key", BuildConfig.API_KEY)
               parameter("include_adult", true)
           }
        }.map { response ->

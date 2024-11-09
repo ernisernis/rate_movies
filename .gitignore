@@ -19,5 +19,7 @@ misc.xml
 runConfigurations.xml
 vcs.xml
 
+gradle.properties
+
 # IntelliJ / Android Studio
 .idea/
