@@ -31,7 +31,7 @@ class MovieListViewModel(
             is MovieListAction.OnMovieClick -> {
                 viewModelScope.launch {
                     navigator.navigate(
-                        destination = Destination.DetailScreen("1234")
+                        destination = Destination.DetailScreen(action.movieUi.banner)
                     )
                 }
             }
@@ -40,13 +40,17 @@ class MovieListViewModel(
 
     private fun loadMovies() {
         viewModelScope.launch {
+            _state.update { it.copy(
+                isLoading = true
+            ) }
+
             movieDataSource
                 .getMovies()
                 .onSuccess { movies ->
                     _state.update { it.copy(
-                      moviesUi = movies.map { it.toMovieUi() }
+                        moviesUi = movies.map { it.toMovieUi() },
+                        isLoading = false
                     ) }
-                    Log.d("ERNIS33", "loadMovies: $movies")
                 }
                 .onError { error ->
                     Log.d("ERNIS33", "loadMovies: $error")

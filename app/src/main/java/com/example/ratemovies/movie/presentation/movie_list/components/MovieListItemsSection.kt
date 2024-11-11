@@ -2,7 +2,6 @@ package com.example.ratemovies.movie.presentation.movie_list.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,32 +20,35 @@ import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 
 @Composable
-fun ColumnScope.MovieListItemsSection(
+fun MovieListItemsSection(
     modifier: Modifier = Modifier,
     title: String,
     movies: List<MovieUi>,
     onClick: (MovieUi) -> Unit
 ) {
-    // Title
-    Text(
-        text = title,
-        modifier = Modifier.padding(horizontal = Dimens.MovieScreenContainerPadding),
-        color = MaterialTheme.colorScheme.primary,
-        style = MaterialTheme.typography.headlineMedium
-    )
 
-    // Movie items
-    LazyRow(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(Dimens.MovieScreenContainerPadding)
-    ) {
-        items(movies) { movieUi ->
-            MovieListItem(
-                movieUi = movieUi,
-                modifier = Modifier.height(325.dp).width(154.dp),
-                onClick = { onClick(movieUi) }
-            )
+    Column() {
+        // Title
+        Text(
+            text = title,
+            modifier = Modifier.padding(horizontal = Dimens.MovieScreenContainerPadding),
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.headlineMedium
+        )
+
+        // Movie items
+        LazyRow(
+            modifier = modifier,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(Dimens.MovieScreenContainerPadding)
+        ) {
+            items(movies) { movieUi ->
+                MovieListItem(
+                    movieUi = movieUi,
+                    modifier = Modifier.height(325.dp).width(154.dp),
+                    onClick = { onClick(movieUi) }
+                )
+            }
         }
     }
 }
@@ -57,15 +59,13 @@ fun ColumnScope.MovieListItemsSection(
 @Composable
 fun MovieListItemsSectionPreview() {
     RateMoviesTheme {
-        Column {
-            MovieListItemsSection(
-                modifier = Modifier,
-                title = "Now Playing",
-                movies = (1..20).map {
-                    previewMovie.copy(id = it)
-                },
-                onClick = {}
-            )
-        }
+        MovieListItemsSection(
+            modifier = Modifier,
+            title = "Now Playing",
+            movies = (1..20).map {
+                previewMovie.copy(id = it)
+            },
+            onClick = {}
+        )
     }
 }

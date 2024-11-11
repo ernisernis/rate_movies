@@ -1,5 +1,7 @@
 package com.example.ratemovies.movie.presentation.movie_list
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.ratemovies.movie.presentation.movie_list.components.MovieListItemsSection
+import com.example.ratemovies.movie.presentation.movie_list.components.MovieListLoading
 import com.example.ratemovies.movie.presentation.movie_list.components.previewMovie
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
@@ -20,24 +23,28 @@ fun MovieListScreen(
     modifier: Modifier = Modifier,
     onAction: (MovieListAction) -> Unit,
 ) {
-    Column(
-        modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()),
-    ) {
-        MovieListItemsSection(
-            title = "Now Playing",
-            movies = state.moviesUi,
-            onClick = { onAction(MovieListAction.OnMovieClick(it)) }
-        )
-        MovieListItemsSection(
-            title = "Popular",
-            movies = state.moviesUi,
-            onClick = { onAction(MovieListAction.OnMovieClick(it)) }
-        )
-        MovieListItemsSection(
-            title = "Upcoming",
-            movies = state.moviesUi,
-            onClick = { onAction(MovieListAction.OnMovieClick(it)) }
-        )
+    if (state.isLoading) {
+        MovieListLoading()
+    } else {
+        Column(
+            modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+        ) {
+            MovieListItemsSection(
+                title = "Now Playing",
+                movies = state.moviesUi,
+                onClick = { onAction(MovieListAction.OnMovieClick(it)) }
+            )
+            MovieListItemsSection(
+                title = "Popular",
+                movies = state.moviesUi,
+                onClick = { onAction(MovieListAction.OnMovieClick(it)) }
+            )
+            MovieListItemsSection(
+                title = "Upcoming",
+                movies = state.moviesUi,
+                onClick = { onAction(MovieListAction.OnMovieClick(it)) }
+            )
+        }
     }
 }
 
