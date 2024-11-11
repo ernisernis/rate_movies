@@ -162,5 +162,6 @@ internal val previewMovie = MovieUi(
     releaseDate = "2024-10-09",
     genres = listOf("Horror", "Comedy", "Sci-fi"),
     voteAverage = "7.3",
-    popularity = "3545"
+    popularity = "3545",
+    banner = "https://image.tmdb.org/t/p/w1280/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg"
 )
