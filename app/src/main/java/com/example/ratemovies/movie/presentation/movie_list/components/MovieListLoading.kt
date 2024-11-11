@@ -9,17 +9,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
-
 @Composable
 fun MovieListLoading(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator()
     }
 }
-
 
 @PreviewLightDark
 @Composable

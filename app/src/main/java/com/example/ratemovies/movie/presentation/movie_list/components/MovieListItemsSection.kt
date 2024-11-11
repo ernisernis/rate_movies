@@ -18,42 +18,38 @@ import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.movie.presentation.models.MovieUi
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
-
 @Composable
 fun MovieListItemsSection(
     modifier: Modifier = Modifier,
     title: String,
     movies: List<MovieUi>,
-    onClick: (MovieUi) -> Unit
+    onClick: (MovieUi) -> Unit,
 ) {
-
-    Column() {
+    Column {
         // Title
         Text(
             text = title,
             modifier = Modifier.padding(horizontal = Dimens.MovieScreenContainerPadding),
             color = MaterialTheme.colorScheme.primary,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
 
         // Movie items
         LazyRow(
             modifier = modifier,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(Dimens.MovieScreenContainerPadding)
+            contentPadding = PaddingValues(Dimens.MovieScreenContainerPadding),
         ) {
             items(movies) { movieUi ->
                 MovieListItem(
                     movieUi = movieUi,
                     modifier = Modifier.height(325.dp).width(154.dp),
-                    onClick = { onClick(movieUi) }
+                    onClick = { onClick(movieUi) },
                 )
             }
         }
     }
 }
-
-
 
 @PreviewLightDark
 @Composable
@@ -62,10 +58,11 @@ fun MovieListItemsSectionPreview() {
         MovieListItemsSection(
             modifier = Modifier,
             title = "Now Playing",
-            movies = (1..20).map {
-                previewMovie.copy(id = it)
-            },
-            onClick = {}
+            movies =
+                (1..20).map {
+                    previewMovie.copy(id = it)
+                },
+            onClick = {},
         )
     }
 }

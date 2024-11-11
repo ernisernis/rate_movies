@@ -11,16 +11,15 @@ interface Navigator {
 
     suspend fun navigate(
         destination: Destination,
-        navOptions: NavOptionsBuilder.() -> Unit = {}
+        navOptions: NavOptionsBuilder.() -> Unit = {},
     )
 
     suspend fun navigateUp()
 }
 
 class DefaultNavigator(
-    override val startDestination: Destination
-): Navigator {
-
+    override val startDestination: Destination,
+) : Navigator {
     private val _navigationActions = Channel<NavigationAction>()
     override val navigationActions = _navigationActions.receiveAsFlow()
 
@@ -28,14 +27,15 @@ class DefaultNavigator(
         destination: Destination,
         navOptions: NavOptionsBuilder.() -> Unit,
     ) {
-        _navigationActions.send(NavigationAction.Navigate(
-            destination = destination,
-            navOptions = navOptions
-        ))
+        _navigationActions.send(
+            NavigationAction.Navigate(
+                destination = destination,
+                navOptions = navOptions,
+            ),
+        )
     }
 
     override suspend fun navigateUp() {
         _navigationActions.send(NavigationAction.NavigateUp)
     }
-
 }

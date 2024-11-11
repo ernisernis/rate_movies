@@ -13,13 +13,13 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
+val appModule =
+    module {
+        single { HttpClientFactory.create(CIO.create()) }
+        single<Navigator> {
+            DefaultNavigator(startDestination = Destination.MoviesGraph)
+        }
+        singleOf(::RemoteMovieDataSource).bind<MovieDataSource>()
 
-val appModule = module {
-    single { HttpClientFactory.create(CIO.create()) }
-    single<Navigator> {
-        DefaultNavigator(startDestination = Destination.MoviesGraph)
+        viewModelOf(::MovieListViewModel)
     }
-    singleOf(::RemoteMovieDataSource).bind<MovieDataSource>()
-
-    viewModelOf(::MovieListViewModel)
-}

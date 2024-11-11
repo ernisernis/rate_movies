@@ -3,9 +3,8 @@ package com.example.ratemovies.movie.data.mappers
 import com.example.ratemovies.movie.data.networking.dto.MovieDto
 import com.example.ratemovies.movie.domain.Movie
 
-
 fun MovieDto.toMovie(): Movie {
-    return Movie (
+    return Movie(
         id = id,
         title = title,
         adult = adult,
@@ -19,6 +18,6 @@ fun MovieDto.toMovie(): Movie {
         releaseDate = release_date,
         video = video,
         voteAverage = vote_average,
-        voteCount = vote_count
+        voteCount = vote_count,
     )
 }

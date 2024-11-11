@@ -13,5 +13,4 @@ object Dimens {
 
     val MovieScreenContainerPadding: Dp
         @Composable get() = 16.dp
-
 }

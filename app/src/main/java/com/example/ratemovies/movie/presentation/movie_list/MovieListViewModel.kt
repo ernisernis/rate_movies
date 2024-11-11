@@ -16,9 +16,8 @@ import kotlinx.coroutines.launch
 
 class MovieListViewModel(
     private val movieDataSource: MovieDataSource,
-    private val navigator: Navigator
-): ViewModel() {
-
+    private val navigator: Navigator,
+) : ViewModel() {
     private val _state = MutableStateFlow(MovieListState())
     val state = _state.asStateFlow()
 
@@ -27,30 +26,34 @@ class MovieListViewModel(
     }
 
     fun onAction(action: MovieListAction) {
-       when (action)  {
+        when (action) {
             is MovieListAction.OnMovieClick -> {
                 viewModelScope.launch {
                     navigator.navigate(
-                        destination = Destination.DetailScreen(action.movieUi.banner)
+                        destination = Destination.DetailScreen(action.movieUi.banner),
                     )
                 }
             }
-       }
+        }
     }
 
     private fun loadMovies() {
         viewModelScope.launch {
-            _state.update { it.copy(
-                isLoading = true
-            ) }
+            _state.update {
+                it.copy(
+                    isLoading = true,
+                )
+            }
 
             movieDataSource
                 .getMovies()
                 .onSuccess { movies ->
-                    _state.update { it.copy(
-                        moviesUi = movies.map { it.toMovieUi() },
-                        isLoading = false
-                    ) }
+                    _state.update {
+                        it.copy(
+                            moviesUi = movies.map { it.toMovieUi() },
+                            isLoading = false,
+                        )
+                    }
                 }
                 .onError { error ->
                     Log.d("ERNIS33", "loadMovies: $error")
