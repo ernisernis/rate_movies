@@ -2,9 +2,7 @@ package com.example.ratemovies.movie.presentation.models
 
 import com.example.ratemovies.core.domain.util.round
 import com.example.ratemovies.movie.domain.Movie
-import kotlinx.serialization.Serializable
 
-@Serializable
 data class MovieUi(
     val id: Int,
     val title: String,

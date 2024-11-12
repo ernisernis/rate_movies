@@ -8,6 +8,7 @@ import com.example.ratemovies.core.domain.util.onSuccess
 import com.example.ratemovies.core.navigation.Destination
 import com.example.ratemovies.core.navigation.Navigator
 import com.example.ratemovies.movie.domain.MovieDataSource
+import com.example.ratemovies.movie.domain.toMovieNavArgs
 import com.example.ratemovies.movie.presentation.models.toMovieUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,7 +31,7 @@ class MovieListViewModel(
             is MovieListAction.OnMovieClick -> {
                 viewModelScope.launch {
                     navigator.navigate(
-                        destination = Destination.DetailScreen(action.movieUi),
+                        destination = Destination.DetailScreen(action.movieUi.toMovieNavArgs()),
                     )
                 }
             }

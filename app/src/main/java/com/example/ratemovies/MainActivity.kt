@@ -20,7 +20,7 @@ import com.example.ratemovies.core.navigation.Destination
 import com.example.ratemovies.core.navigation.NavigationAction
 import com.example.ratemovies.core.navigation.Navigator
 import com.example.ratemovies.core.presentation.util.ObserveAsEvents
-import com.example.ratemovies.movie.presentation.models.MovieUi
+import com.example.ratemovies.movie.domain.MovieNavArgs
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailScreen
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreen
@@ -70,12 +70,12 @@ class MainActivity : ComponentActivity() {
                             composable<Destination.DetailScreen>(
                                 typeMap =
                                     mapOf(
-                                        typeOf<MovieUi>() to CustomNavType.MovieUiType,
+                                        typeOf<MovieNavArgs>() to CustomNavType.MovieNavType,
                                     ),
                             ) {
                                 val viewModel = koinViewModel<MovieDetailViewModel>()
                                 val state by viewModel.state.collectAsStateWithLifecycle()
-                                viewModel.initData(movieUi = it.toRoute<Destination.DetailScreen>().movieUi)
+                                viewModel.initData(movieNavArgs = it.toRoute<Destination.DetailScreen>().movieNavArgs)
 
                                 MovieDetailScreen(
                                     modifier = Modifier,

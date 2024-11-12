@@ -1,6 +1,6 @@
 package com.example.ratemovies.core.navigation
 
-import com.example.ratemovies.movie.presentation.models.MovieUi
+import com.example.ratemovies.movie.domain.MovieNavArgs
 import kotlinx.serialization.Serializable
 
 sealed interface Destination {
@@ -11,5 +11,5 @@ sealed interface Destination {
     data object MoviesScreen : Destination
 
     @Serializable
-    data class DetailScreen(val movieUi: MovieUi) : Destination
+    data class DetailScreen(val movieNavArgs: MovieNavArgs) : Destination
 }
