@@ -30,7 +30,7 @@ class MovieListViewModel(
             is MovieListAction.OnMovieClick -> {
                 viewModelScope.launch {
                     navigator.navigate(
-                        destination = Destination.DetailScreen(action.movieUi.banner),
+                        destination = Destination.DetailScreen(action.movieUi),
                     )
                 }
             }

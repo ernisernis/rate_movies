@@ -1,35 +1,35 @@
 package com.example.ratemovies
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import coil3.compose.AsyncImage
+import com.example.ratemovies.core.navigation.CustomNavType
 import com.example.ratemovies.core.navigation.Destination
 import com.example.ratemovies.core.navigation.NavigationAction
 import com.example.ratemovies.core.navigation.Navigator
 import com.example.ratemovies.core.presentation.util.ObserveAsEvents
+import com.example.ratemovies.movie.presentation.models.MovieUi
+import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailScreen
+import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreen
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
+import kotlin.reflect.typeOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,21 +68,23 @@ class MainActivity : ComponentActivity() {
                                     onAction = viewModel::onAction,
                                 )
                             }
-                            composable<Destination.DetailScreen> {
-                                val args = it.toRoute<Destination.DetailScreen>()
-                                Box(
-                                    modifier =
-                                        Modifier
-                                            .fillMaxSize()
-                                            .background(Color.Blue),
-                                    contentAlignment = Alignment.Center,
-                                ) {
-                                    AsyncImage(
-                                        model = args.id,
-                                        contentDescription = null,
-                                    )
-                                    Text("Hello from detail screen ID: ${args.id}")
-                                }
+                            composable<Destination.DetailScreen>(
+                                typeMap =
+                                    mapOf(
+                                        typeOf<MovieUi>() to CustomNavType.MovieUiType,
+                                    ),
+                            ) {
+                                val viewModel = koinViewModel<MovieDetailViewModel>()
+                                val state by viewModel.state.collectAsStateWithLifecycle()
+
+                                val arguments = it.toRoute<Destination.DetailScreen>()
+                                Log.d("ERNIS33", "onCreate: $arguments")
+
+                                MovieDetailScreen(
+                                    modifier = Modifier,
+                                    state = state,
+                                    onAction = viewModel::onAction,
+                                )
                             }
                         }
                     }
