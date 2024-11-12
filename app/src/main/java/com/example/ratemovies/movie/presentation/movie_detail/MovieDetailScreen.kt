@@ -1,5 +1,6 @@
 package com.example.ratemovies.movie.presentation.movie_detail
 
+import android.R.attr.banner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,7 +37,7 @@ fun MovieDetailScreen(
         // Banner
         item {
             AsyncImage(
-                model = state.movieUi.banner,
+                model = state.bannerUrl,
                 contentDescription = "Banner Image",
                 error = errorPainter,
                 placeholder = errorPainter,
@@ -55,8 +56,8 @@ fun MovieDetailScreen(
                     Modifier
                         .padding(horizontal = Dimens.MovieDetailContainerPadding)
                         .background(Color.Transparent).offset(y = -(45.dp)),
-                title = state.movieUi.title,
-                imageUrl = state.movieUi.imageUrl,
+                title = state.title,
+                imageUrl = state.imageUrl,
             )
         }
     }
@@ -69,7 +70,9 @@ private fun MovieDetailScreenPreview() {
         MovieDetailScreen(
             state =
                 MovieDetailState(
-                    movieUi = defaultMovieUi(),
+                    bannerUrl = defaultMovieUi().banner,
+                    title = defaultMovieUi().title,
+                    imageUrl = defaultMovieUi().imageUrl,
                 ),
             modifier = Modifier,
             onAction = {},

@@ -22,7 +22,9 @@ class MovieDetailViewModel(
     fun initData(movieUi: MovieUi) {
         _state.update {
             it.copy(
-                movieUi = movieUi,
+                bannerUrl = movieUi.banner,
+                title = movieUi.title,
+                imageUrl = movieUi.imageUrl,
             )
         }
     }
