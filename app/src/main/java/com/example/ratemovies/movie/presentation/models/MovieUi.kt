@@ -46,6 +46,6 @@ fun defaultMovieUi(): MovieUi {
         genres = listOf("Cyberpunk", "Sci-Fi Epic"),
         voteAverage = "9.3",
         popularity = "4968",
-        banner = "",
+        banner = "https://image.tmdb.org/t/p/w1280/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
     )
 }
