@@ -1,7 +1,6 @@
 package com.example.ratemovies
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -76,9 +75,7 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 val viewModel = koinViewModel<MovieDetailViewModel>()
                                 val state by viewModel.state.collectAsStateWithLifecycle()
-
-                                val arguments = it.toRoute<Destination.DetailScreen>()
-                                Log.d("ERNIS33", "onCreate: $arguments")
+                                viewModel.initData(movieUi = it.toRoute<Destination.DetailScreen>().movieUi)
 
                                 MovieDetailScreen(
                                     modifier = Modifier,
