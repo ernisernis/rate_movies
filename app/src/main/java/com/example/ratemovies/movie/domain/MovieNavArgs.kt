@@ -1,6 +1,5 @@
 package com.example.ratemovies.movie.domain
 
-import com.example.ratemovies.core.navigation.CustomNavType.MovieNavType
 import com.example.ratemovies.movie.presentation.models.MovieUi
 import kotlinx.serialization.Serializable
 
@@ -13,10 +12,10 @@ data class MovieNavArgs(
 )
 
 fun MovieUi.toMovieNavArgs(): MovieNavArgs {
-   return MovieNavArgs(
-       id = id,
-       bannerUrl = banner,
-       title = title,
-       imageUrl = imageUrl
-   )
+    return MovieNavArgs(
+        id = id,
+        bannerUrl = banner,
+        title = title,
+        imageUrl = imageUrl,
+    )
 }
