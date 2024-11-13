@@ -1,11 +1,9 @@
 package com.example.ratemovies.movie.presentation.movie_detail
 
-import android.R.attr.banner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
@@ -13,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.core.presentation.util.bottomInnerShadow
@@ -55,7 +52,7 @@ fun MovieDetailScreen(
                 modifier =
                     Modifier
                         .padding(horizontal = Dimens.MovieDetailContainerPadding)
-                        .background(Color.Transparent).offset(y = -(45.dp)),
+                        .background(Color.Transparent),
                 title = state.title,
                 imageUrl = state.imageUrl,
             )

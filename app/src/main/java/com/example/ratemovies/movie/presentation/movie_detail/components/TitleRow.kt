@@ -2,6 +2,8 @@ package com.example.ratemovies.movie.presentation.movie_detail.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -14,7 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
+import coil3.compose.SubcomposeAsyncImage
 import com.example.ratemovies.core.presentation.util.errorPainter
 import com.example.ratemovies.movie.presentation.movie_list.components.previewMovie
 import com.example.ratemovies.ui.theme.RateMoviesTheme
@@ -26,7 +28,7 @@ fun TitleRow(
     imageUrl: String,
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.offset(y = -(45).dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
@@ -43,16 +45,16 @@ fun TitleRow(
                     defaultElevation = 12.dp,
                 ),
         ) {
-            AsyncImage(
+            SubcomposeAsyncImage(
                 modifier =
                     Modifier
                         .width(60.dp)
                         .aspectRatio(2f / 3f),
                 model = imageUrl,
                 contentDescription = null,
-                error = errorPainter,
-                placeholder = errorPainter,
-                fallback = errorPainter,
+                error = {
+                    errorPainter
+                },
                 contentScale = ContentScale.Fit,
             )
         }
@@ -64,6 +66,7 @@ fun TitleRow(
 fun TitleRowPreview() {
     RateMoviesTheme {
         TitleRow(
+            modifier = Modifier.height(300.dp),
             title = previewMovie.title,
             imageUrl = previewMovie.imageUrl,
         )
