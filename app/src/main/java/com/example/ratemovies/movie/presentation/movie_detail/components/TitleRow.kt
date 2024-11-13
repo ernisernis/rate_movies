@@ -13,10 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import coil3.compose.SubcomposeAsyncImage
+import coil3.compose.AsyncImage
+import com.example.ratemovies.R
 import com.example.ratemovies.core.presentation.util.errorPainter
 import com.example.ratemovies.movie.presentation.movie_list.components.previewMovie
 import com.example.ratemovies.ui.theme.RateMoviesTheme
@@ -45,16 +47,15 @@ fun TitleRow(
                     defaultElevation = 12.dp,
                 ),
         ) {
-            SubcomposeAsyncImage(
+            AsyncImage(
                 modifier =
                     Modifier
                         .width(60.dp)
                         .aspectRatio(2f / 3f),
                 model = imageUrl,
                 contentDescription = null,
-                error = {
-                    errorPainter
-                },
+                placeholder = errorPainter,
+                error = painterResource(R.drawable.poster780w1170hpreview),
                 contentScale = ContentScale.Fit,
             )
         }
