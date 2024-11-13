@@ -4,5 +4,5 @@ data class MovieDetails(
     val id: Int,
     val releaseDate: String,
     val runtime: Int,
-    val voteCount: Int,
+    val voteAverage: Double,
 )

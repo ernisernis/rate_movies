@@ -8,6 +8,6 @@ fun MovieDetailsDto.toMovieDetails(): MovieDetails {
         id = id,
         releaseDate = release_date,
         runtime = runtime,
-        voteCount = vote_count,
+        voteAverage = vote_average,
     )
 }

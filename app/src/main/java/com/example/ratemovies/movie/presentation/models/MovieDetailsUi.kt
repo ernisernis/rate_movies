@@ -1,12 +1,13 @@
 package com.example.ratemovies.movie.presentation.models
 
+import com.example.ratemovies.core.domain.util.round
 import com.example.ratemovies.movie.domain.MovieDetails
 
 data class MovieDetailsUi(
     val id: Int,
     val releaseDate: String,
     val runtime: DisplayableRuntime,
-    val voteCount: Int,
+    val voteAverage: String,
 )
 
 data class DisplayableRuntime(
@@ -19,7 +20,7 @@ fun MovieDetails.toMovieDetailsUi(): MovieDetailsUi {
         id = id,
         releaseDate = releaseDate,
         runtime = runtime.toDisplayableRuntime(),
-        voteCount = voteCount,
+        voteAverage = voteAverage.round(1).toString(),
     )
 }
 

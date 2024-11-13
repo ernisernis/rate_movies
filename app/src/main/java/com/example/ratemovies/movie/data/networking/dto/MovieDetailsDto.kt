@@ -7,5 +7,5 @@ data class MovieDetailsDto(
     val id: Int,
     val release_date: String,
     val runtime: Int,
-    val vote_count: Int,
+    val vote_average: Double,
 )

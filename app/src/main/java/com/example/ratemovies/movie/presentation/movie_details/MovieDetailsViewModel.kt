@@ -33,8 +33,12 @@ class MovieDetailsViewModel(
             movieDataSource
                 .getMovieDetails(movieNavArgs.id)
                 .onSuccess { movieDetails ->
-                    Log.d("ERNIS33", "initData: 1: $movieDetails")
-                    Log.d("ERNIS33", "initData: ${movieDetails.toMovieDetailsUi()}")
+                    Log.d("ERNIS33", "initData: $movieDetails")
+                    _state.update {
+                        it.copy(
+                            movieDetailsUi = movieDetails.toMovieDetailsUi(),
+                        )
+                    }
                 }
                 .onError { error ->
                     Log.d("ERNIS33", "initData: $error")
