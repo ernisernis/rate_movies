@@ -1,4 +1,4 @@
-package com.example.ratemovies.movie.presentation.movie_detail
+package com.example.ratemovies.movie.presentation.movie_details
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.aspectRatio
@@ -16,14 +16,14 @@ import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.core.presentation.util.bottomInnerShadow
 import com.example.ratemovies.core.presentation.util.errorPainter
 import com.example.ratemovies.movie.presentation.models.defaultMovieUi
-import com.example.ratemovies.movie.presentation.movie_detail.components.TitleRow
+import com.example.ratemovies.movie.presentation.movie_details.components.TitleRow
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
 fun MovieDetailScreen(
-    state: MovieDetailState,
+    state: MovieDetailsState,
     modifier: Modifier = Modifier,
-    onAction: (MovieDetailAction) -> Unit,
+    onAction: (MovieDetailsAction) -> Unit,
 ) {
     LazyColumn(
         modifier =
@@ -66,7 +66,7 @@ private fun MovieDetailScreenPreview() {
     RateMoviesTheme {
         MovieDetailScreen(
             state =
-                MovieDetailState(
+                MovieDetailsState(
                     bannerUrl = defaultMovieUi().banner,
                     title = defaultMovieUi().title,
                     imageUrl = defaultMovieUi().imageUrl,

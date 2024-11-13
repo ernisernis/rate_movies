@@ -1,6 +1,6 @@
-package com.example.ratemovies.movie.presentation.movie_detail
+package com.example.ratemovies.movie.presentation.movie_details
 
-data class MovieDetailState(
+data class MovieDetailsState(
     val bannerUrl: String = "",
     val title: String = "",
     val imageUrl: String = "",

@@ -6,7 +6,7 @@ import com.example.ratemovies.core.navigation.Destination
 import com.example.ratemovies.core.navigation.Navigator
 import com.example.ratemovies.movie.data.RemoteMovieDataSource
 import com.example.ratemovies.movie.domain.MovieDataSource
-import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailViewModel
+import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
 import io.ktor.client.engine.cio.CIO
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -23,5 +23,5 @@ val appModule =
         singleOf(::RemoteMovieDataSource).bind<MovieDataSource>()
 
         viewModelOf(::MovieListViewModel)
-        viewModelOf(::MovieDetailViewModel)
+        viewModelOf(::MovieDetailsViewModel)
     }

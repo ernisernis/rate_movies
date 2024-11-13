@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -21,8 +22,8 @@ import com.example.ratemovies.core.navigation.NavigationAction
 import com.example.ratemovies.core.navigation.Navigator
 import com.example.ratemovies.core.presentation.util.ObserveAsEvents
 import com.example.ratemovies.movie.domain.MovieNavArgs
-import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailScreen
-import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailViewModel
+import com.example.ratemovies.movie.presentation.movie_details.MovieDetailScreen
+import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreen
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
 import com.example.ratemovies.ui.theme.RateMoviesTheme
@@ -73,9 +74,13 @@ class MainActivity : ComponentActivity() {
                                         typeOf<MovieNavArgs>() to CustomNavType.MovieNavType,
                                     ),
                             ) {
-                                val viewModel = koinViewModel<MovieDetailViewModel>()
+                                val viewModel = koinViewModel<MovieDetailsViewModel>()
+                                val movieNavArgs = it.toRoute<Destination.DetailScreen>().movieNavArgs
                                 val state by viewModel.state.collectAsStateWithLifecycle()
-                                viewModel.initData(movieNavArgs = it.toRoute<Destination.DetailScreen>().movieNavArgs)
+
+                                LaunchedEffect(movieNavArgs) {
+                                    viewModel.initData(movieNavArgs = it.toRoute<Destination.DetailScreen>().movieNavArgs)
+                                }
 
                                 MovieDetailScreen(
                                     modifier = Modifier,
