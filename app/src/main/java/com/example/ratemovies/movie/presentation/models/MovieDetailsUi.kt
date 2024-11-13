@@ -8,6 +8,7 @@ data class MovieDetailsUi(
     val releaseDate: String,
     val runtime: DisplayableRuntime,
     val voteAverage: String,
+    val genres: List<MovieGenreUi>,
 )
 
 data class DisplayableRuntime(
@@ -21,6 +22,7 @@ fun MovieDetails.toMovieDetailsUi(): MovieDetailsUi {
         releaseDate = releaseDate,
         runtime = runtime.toDisplayableRuntime(),
         voteAverage = voteAverage.round(1).toString(),
+        genres = genres.map { it.toMovieGenreUi() },
     )
 }
 

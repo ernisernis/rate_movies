@@ -16,4 +16,7 @@ object Dimens {
 
     val MovieDetailContainerPadding: Dp
         @Composable get() = 16.dp
+
+    val MovieDetailIconSize: Dp
+        @Composable get() = 20.dp
 }

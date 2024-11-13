@@ -32,8 +32,8 @@ fun SubtitleRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Text(text = releaseDate ?: "", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
-        Text(text = runtime ?: "", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
+        Text(text = releaseDate ?: "", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onBackground)
+        Text(text = runtime ?: "", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onBackground)
         Row(
             horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -42,11 +42,11 @@ fun SubtitleRow(
                 imageVector = Icons.Default.Star,
                 modifier =
                     Modifier
-                        .size(Dimens.MovieListItemIconSize),
+                        .size(Dimens.MovieDetailIconSize),
                 tint = gold,
                 contentDescription = null,
             )
-            Text(text = voteAverage ?: "", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
+            Text(text = voteAverage ?: "", style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onBackground)
         }
     }
 }

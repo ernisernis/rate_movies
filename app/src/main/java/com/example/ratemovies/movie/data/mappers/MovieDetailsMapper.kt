@@ -1,7 +1,9 @@
 package com.example.ratemovies.movie.data.mappers
 
 import com.example.ratemovies.movie.data.networking.dto.MovieDetailsDto
+import com.example.ratemovies.movie.data.networking.dto.MovieGenreDto
 import com.example.ratemovies.movie.domain.MovieDetails
+import com.example.ratemovies.movie.domain.MovieGenre
 
 fun MovieDetailsDto.toMovieDetails(): MovieDetails {
     return MovieDetails(
@@ -9,5 +11,15 @@ fun MovieDetailsDto.toMovieDetails(): MovieDetails {
         releaseDate = release_date,
         runtime = runtime,
         voteAverage = vote_average,
+        genres = genres.toMovieGenreList(),
     )
+}
+
+fun List<MovieGenreDto>.toMovieGenreList(): List<MovieGenre> {
+    return this.map {
+        MovieGenre(
+            id = it.id,
+            name = it.name,
+        )
+    }
 }

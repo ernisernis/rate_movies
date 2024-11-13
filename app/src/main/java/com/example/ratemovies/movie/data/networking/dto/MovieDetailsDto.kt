@@ -8,4 +8,5 @@ data class MovieDetailsDto(
     val release_date: String,
     val runtime: Int,
     val vote_average: Double,
+    val genres: List<MovieGenreDto>,
 )
