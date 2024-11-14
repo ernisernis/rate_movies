@@ -24,6 +24,7 @@ import com.example.ratemovies.movie.domain.MovieDetails
 import com.example.ratemovies.movie.domain.MovieGenre
 import com.example.ratemovies.movie.presentation.models.defaultMovieUi
 import com.example.ratemovies.movie.presentation.models.toMovieDetailsUi
+import com.example.ratemovies.movie.presentation.movie_details.components.DirectorRow
 import com.example.ratemovies.movie.presentation.movie_details.components.GenreRow
 import com.example.ratemovies.movie.presentation.movie_details.components.SubtitleRow
 import com.example.ratemovies.movie.presentation.movie_details.components.TitleRow
@@ -84,16 +85,12 @@ fun MovieDetailsScreen(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
-                if (state.movieDetailsUi?.director != null) {
-                    Text(
-                        text = "director: ${state.movieDetailsUi.director}",
-                    )
-                }
-                if (state.movieDetailsUi?.writer != null) {
-                    Text(
-                        text = "writer: ${state.movieDetailsUi.writer}",
-                    )
-                }
+                // Director, Writer
+                DirectorRow(
+                    modifier = Modifier.padding(Dimens.MovieDetailContainerPadding),
+                    director = state.movieDetailsUi?.director,
+                    writer = state.movieDetailsUi?.writer,
+                )
             }
         }
     }
