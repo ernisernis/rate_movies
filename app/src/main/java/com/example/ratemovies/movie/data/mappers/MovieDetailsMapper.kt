@@ -1,7 +1,11 @@
 package com.example.ratemovies.movie.data.mappers
 
+import com.example.ratemovies.movie.data.networking.dto.CastDto
+import com.example.ratemovies.movie.data.networking.dto.CrewDto
 import com.example.ratemovies.movie.data.networking.dto.MovieDetailsDto
 import com.example.ratemovies.movie.data.networking.dto.MovieGenreDto
+import com.example.ratemovies.movie.domain.Cast
+import com.example.ratemovies.movie.domain.Crew
 import com.example.ratemovies.movie.domain.MovieDetails
 import com.example.ratemovies.movie.domain.MovieGenre
 
@@ -13,6 +17,8 @@ fun MovieDetailsDto.toMovieDetails(): MovieDetails {
         voteAverage = vote_average,
         genres = genres.toMovieGenreList(),
         overview = overview,
+        cast = credits.cast.toCastList(),
+        crew = credits.crew.toCrewList(),
     )
 }
 
@@ -21,6 +27,28 @@ fun List<MovieGenreDto>.toMovieGenreList(): List<MovieGenre> {
         MovieGenre(
             id = it.id,
             name = it.name,
+        )
+    }
+}
+
+fun List<CastDto>.toCastList(): List<Cast> {
+    return this.map {
+        Cast(
+            id = it.id,
+            name = it.name,
+            profilePath = it.profile_path ?: "",
+            character = it.character,
+        )
+    }
+}
+
+fun List<CrewDto>.toCrewList(): List<Crew> {
+    return this.map {
+        Crew(
+            id = it.id,
+            name = it.name,
+            job = it.job,
+            profilePath = it.profile_path ?: "",
         )
     }
 }

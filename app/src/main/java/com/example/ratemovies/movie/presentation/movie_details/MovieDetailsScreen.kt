@@ -18,6 +18,8 @@ import coil3.compose.AsyncImage
 import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.core.presentation.util.bottomInnerShadow
 import com.example.ratemovies.core.presentation.util.errorPainter
+import com.example.ratemovies.movie.domain.Cast
+import com.example.ratemovies.movie.domain.Crew
 import com.example.ratemovies.movie.domain.MovieDetails
 import com.example.ratemovies.movie.domain.MovieGenre
 import com.example.ratemovies.movie.presentation.models.defaultMovieUi
@@ -82,6 +84,16 @@ fun MovieDetailsScreen(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
+                if (state.movieDetailsUi?.director != null) {
+                    Text(
+                        text = "director: ${state.movieDetailsUi.director}",
+                    )
+                }
+                if (state.movieDetailsUi?.writer != null) {
+                    Text(
+                        text = "writer: ${state.movieDetailsUi.writer}",
+                    )
+                }
             }
         }
     }
@@ -129,4 +141,34 @@ internal val defaultMovieDetails =
         overview =
             "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, " +
                 "the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance",
+        cast =
+            listOf(
+                Cast(
+                    id = 2524,
+                    name = "Tom Hardy",
+                    profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
+                    character = "Eddie Brock / Venom",
+                ),
+                Cast(
+                    id = 2524,
+                    name = "Tom Hardy",
+                    profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
+                    character = "Eddie Brock / Venom",
+                ),
+            ),
+        crew =
+            listOf(
+                Crew(
+                    id = 1195200,
+                    name = "David Michelinie",
+                    job = "Characters",
+                    profilePath = "/bSpGO1dKFfwb9mUc4KdUpBpRfYH.jpg",
+                ),
+                Crew(
+                    id = 1195200,
+                    name = "David Michelinie",
+                    job = "Director",
+                    profilePath = "/bSpGO1dKFfwb9mUc4KdUpBpRfYH.jpg",
+                ),
+            ),
     )

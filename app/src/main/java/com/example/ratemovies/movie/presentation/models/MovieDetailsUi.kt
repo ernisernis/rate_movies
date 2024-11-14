@@ -10,6 +10,10 @@ data class MovieDetailsUi(
     val voteAverage: String,
     val genres: List<MovieGenreUi>,
     val overview: String,
+    val cast: List<CastUi>,
+    val crew: List<CrewUi>,
+    val director: String?,
+    val writer: String?,
 )
 
 data class DisplayableRuntime(
@@ -25,6 +29,10 @@ fun MovieDetails.toMovieDetailsUi(): MovieDetailsUi {
         voteAverage = voteAverage.round(1).toString(),
         genres = genres.map { it.toMovieGenreUi() },
         overview = overview,
+        cast = cast.map { it.toCastUi() },
+        crew = crew.map { it.toCrewUi() },
+        director = crew.find { it.job == "Director" }?.name,
+        writer = crew.find { it.job == "Screenplay" }?.name,
     )
 }
 

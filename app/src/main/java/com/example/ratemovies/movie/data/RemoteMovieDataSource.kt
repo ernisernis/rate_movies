@@ -39,6 +39,7 @@ class RemoteMovieDataSource(
                 urlString = constructUrl("/movie/$id"),
             ) {
                 parameter("api_key", BuildConfig.API_KEY)
+                parameter("append_to_response", "credits")
             }
         }.map { response ->
             response.toMovieDetails()
