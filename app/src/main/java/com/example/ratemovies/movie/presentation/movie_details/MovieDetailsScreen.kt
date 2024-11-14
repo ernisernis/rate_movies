@@ -1,7 +1,5 @@
 package com.example.ratemovies.movie.presentation.movie_details
 
-import android.R.attr.name
-import android.R.attr.visible
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -12,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -29,7 +28,7 @@ import com.example.ratemovies.movie.presentation.movie_details.components.TitleR
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
-fun MovieDetailScreen(
+fun MovieDetailsScreen(
     state: MovieDetailsState,
     modifier: Modifier = Modifier,
     onAction: (MovieDetailsAction) -> Unit,
@@ -76,6 +75,13 @@ fun MovieDetailScreen(
                     modifier = Modifier.horizontalScroll(rememberScrollState()).padding(Dimens.MovieDetailContainerPadding),
                     genres = state.movieDetailsUi?.genres,
                 )
+                // Overview (movie description)
+                Text(
+                    text = state.movieDetailsUi?.overview ?: "",
+                    modifier = Modifier.padding(horizontal = Dimens.MovieDetailContainerPadding),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
             }
         }
     }
@@ -83,9 +89,9 @@ fun MovieDetailScreen(
 
 @Composable
 @PreviewLightDark
-private fun MovieDetailScreenPreview() {
+private fun MovieDetailsScreenPreview() {
     RateMoviesTheme {
-        MovieDetailScreen(
+        MovieDetailsScreen(
             state =
                 MovieDetailsState(
                     bannerUrl = defaultMovieUi().banner,
@@ -120,4 +126,7 @@ internal val defaultMovieDetails =
                     name = "Adventure",
                 ),
             ),
+        overview =
+            "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, " +
+                "the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance",
     )

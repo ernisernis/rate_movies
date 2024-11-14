@@ -12,6 +12,7 @@ fun MovieDetailsDto.toMovieDetails(): MovieDetails {
         runtime = runtime,
         voteAverage = vote_average,
         genres = genres.toMovieGenreList(),
+        overview = overview,
     )
 }
 

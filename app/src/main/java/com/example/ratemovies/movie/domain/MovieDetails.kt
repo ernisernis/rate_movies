@@ -6,4 +6,5 @@ data class MovieDetails(
     val runtime: Int,
     val voteAverage: Double,
     val genres: List<MovieGenre>,
+    val overview: String,
 )

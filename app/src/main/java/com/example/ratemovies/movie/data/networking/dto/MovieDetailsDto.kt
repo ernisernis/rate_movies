@@ -9,4 +9,5 @@ data class MovieDetailsDto(
     val runtime: Int,
     val vote_average: Double,
     val genres: List<MovieGenreDto>,
+    val overview: String,
 )

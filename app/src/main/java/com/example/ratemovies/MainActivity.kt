@@ -22,7 +22,7 @@ import com.example.ratemovies.core.navigation.NavigationAction
 import com.example.ratemovies.core.navigation.Navigator
 import com.example.ratemovies.core.presentation.util.ObserveAsEvents
 import com.example.ratemovies.movie.domain.MovieNavArgs
-import com.example.ratemovies.movie.presentation.movie_details.MovieDetailScreen
+import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsScreen
 import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreen
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
@@ -82,7 +82,7 @@ class MainActivity : ComponentActivity() {
                                     viewModel.initData(movieNavArgs = it.toRoute<Destination.DetailScreen>().movieNavArgs)
                                 }
 
-                                MovieDetailScreen(
+                                MovieDetailsScreen(
                                     modifier = Modifier,
                                     state = state,
                                     onAction = viewModel::onAction,
