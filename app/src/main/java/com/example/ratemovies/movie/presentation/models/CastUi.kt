@@ -13,7 +13,7 @@ fun Cast.toCastUi(): CastUi {
     return CastUi(
         id = id,
         name = name,
-        profilePath = profilePath,
+        profilePath = "https://image.tmdb.org/t/p/h632$profilePath",
         character = character,
     )
 }

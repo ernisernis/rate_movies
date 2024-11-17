@@ -7,13 +7,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.core.presentation.util.bottomInnerShadow
@@ -24,6 +28,7 @@ import com.example.ratemovies.movie.domain.MovieDetails
 import com.example.ratemovies.movie.domain.MovieGenre
 import com.example.ratemovies.movie.presentation.models.defaultMovieUi
 import com.example.ratemovies.movie.presentation.models.toMovieDetailsUi
+import com.example.ratemovies.movie.presentation.movie_details.components.CastLazyHorizontalRow
 import com.example.ratemovies.movie.presentation.movie_details.components.DirectorRow
 import com.example.ratemovies.movie.presentation.movie_details.components.GenreRow
 import com.example.ratemovies.movie.presentation.movie_details.components.SubtitleRow
@@ -40,6 +45,7 @@ fun MovieDetailsScreen(
         modifier =
             modifier
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .background(color = MaterialTheme.colorScheme.background),
     ) {
         // Banner
@@ -68,28 +74,50 @@ fun MovieDetailsScreen(
             Column {
                 // Subtitle
                 SubtitleRow(
-                    modifier = Modifier.padding(start = Dimens.MovieDetailContainerPadding),
+                    modifier =
+                        Modifier.padding(
+                            start = Dimens.MovieDetailContainerPadding,
+                            bottom = Dimens.MovieDetailContainerPadding / 2,
+                        ),
                     releaseDate = state.movieDetailsUi?.releaseDate,
                     runtime = state.movieDetailsUi?.runtime?.formatted,
                     voteAverage = state.movieDetailsUi?.voteAverage,
                 )
                 // Genre list
                 GenreRow(
-                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(Dimens.MovieDetailContainerPadding),
+                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(Dimens.MovieDetailComponentPadding),
                     genres = state.movieDetailsUi?.genres,
                 )
                 // Overview (movie description)
                 Text(
                     text = state.movieDetailsUi?.overview ?: "",
-                    modifier = Modifier.padding(horizontal = Dimens.MovieDetailContainerPadding),
+                    modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f),
                 )
                 // Director, Writer
                 DirectorRow(
-                    modifier = Modifier.padding(Dimens.MovieDetailContainerPadding),
+                    modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
                     director = state.movieDetailsUi?.director,
                     writer = state.movieDetailsUi?.writer,
+                )
+                // Light Divider
+                HorizontalDivider(
+                    modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
+                    thickness = 0.5.dp,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
+                )
+                // Cast title
+                Text(
+                    text = "Starring",
+                    modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+                // Cast tiles
+                CastLazyHorizontalRow(
+                    list = state.movieDetailsUi?.cast,
+                    modifier = Modifier.height(200.dp),
                 )
             }
         }
