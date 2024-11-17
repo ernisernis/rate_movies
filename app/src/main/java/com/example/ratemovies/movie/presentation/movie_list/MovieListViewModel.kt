@@ -48,10 +48,53 @@ class MovieListViewModel(
 
             movieDataSource
                 .getNowPlayingMovies()
-                .onSuccess { movies ->
+                .onSuccess { nowPlayingMovies ->
                     _state.update {
                         it.copy(
-                            moviesUi = movies.map { it.toMovieUi() },
+                            nowPlayingMoviesUi = nowPlayingMovies.map { it.toMovieUi() },
+                            isLoading = false,
+                        )
+                    }
+                }
+                .onError { error ->
+                    Log.d("ERNIS33", "loadMovies: $error")
+                }
+
+
+            movieDataSource
+                .getPopularMovies()
+                .onSuccess { popularMovies ->
+                    _state.update {
+                        it.copy(
+                            popularMoviesUi = popularMovies.map { it.toMovieUi() },
+                            isLoading = false,
+                        )
+                    }
+                }
+                .onError { error ->
+                    Log.d("ERNIS33", "loadMovies: $error")
+                }
+
+            movieDataSource
+                .getUpcomingMovies()
+                .onSuccess { upcomingMovies ->
+                    _state.update {
+                        it.copy(
+                            upcomingMoviesUi = upcomingMovies.map { it.toMovieUi() },
+                            isLoading = false,
+                        )
+                    }
+                }
+                .onError { error ->
+                    Log.d("ERNIS33", "loadMovies: $error")
+                }
+
+            movieDataSource
+                .getTopRatedMovies()
+                .onSuccess { topRatedMovies ->
+                    _state.update {
+                        it.copy(
+                            topRatedMoviesUi = topRatedMovies.map { it.toMovieUi() },
                             isLoading = false,
                         )
                     }

@@ -20,6 +20,45 @@ import io.ktor.client.request.parameter
 class RemoteMovieDataSource(
     private val httpClient: HttpClient,
 ) : MovieDataSource {
+    override suspend fun getUpcomingMovies(): Result<List<Movie>, NetworkError> {
+        return safeCall<MoviesResponseDto> {
+            httpClient.get(
+                urlString = constructUrl("/movie/upcoming"),
+            ) {
+                parameter("api_key", BuildConfig.API_KEY)
+                parameter("include_adult", true)
+            }
+        }.map { response ->
+            response.results.map { it.toMovie() }
+        }
+    }
+
+    override suspend fun getTopRatedMovies(): Result<List<Movie>, NetworkError> {
+        return safeCall<MoviesResponseDto> {
+            httpClient.get(
+                urlString = constructUrl("/movie/top_rated"),
+            ) {
+                parameter("api_key", BuildConfig.API_KEY)
+                parameter("include_adult", true)
+            }
+        }.map { response ->
+            response.results.map { it.toMovie() }
+        }
+    }
+
+    override suspend fun getPopularMovies(): Result<List<Movie>, NetworkError> {
+        return safeCall<MoviesResponseDto> {
+            httpClient.get(
+                urlString = constructUrl("/movie/popular"),
+            ) {
+                parameter("api_key", BuildConfig.API_KEY)
+                parameter("include_adult", true)
+            }
+        }.map { response ->
+            response.results.map { it.toMovie() }
+        }
+    }
+
     override suspend fun getNowPlayingMovies(): Result<List<Movie>, NetworkError> {
         return safeCall<MoviesResponseDto> {
             httpClient.get(

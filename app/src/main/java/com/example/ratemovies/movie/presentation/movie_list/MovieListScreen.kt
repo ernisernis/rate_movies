@@ -28,17 +28,22 @@ fun MovieListScreen(
         ) {
             MovieListItemsSection(
                 title = "Now Playing",
-                movies = state.moviesUi,
+                movies = state.nowPlayingMoviesUi,
                 onClick = { onAction(MovieListAction.OnMovieClick(it)) },
             )
             MovieListItemsSection(
                 title = "Popular",
-                movies = state.moviesUi,
+                movies = state.popularMoviesUi,
+                onClick = { onAction(MovieListAction.OnMovieClick(it)) },
+            )
+            MovieListItemsSection(
+                title = "Top Rated",
+                movies = state.topRatedMoviesUi,
                 onClick = { onAction(MovieListAction.OnMovieClick(it)) },
             )
             MovieListItemsSection(
                 title = "Upcoming",
-                movies = state.moviesUi,
+                movies = state.upcomingMoviesUi,
                 onClick = { onAction(MovieListAction.OnMovieClick(it)) },
             )
         }
@@ -52,7 +57,7 @@ fun MovieListScreenPreview() {
         MovieListScreen(
             state =
                 MovieListState(
-                    moviesUi =
+                    nowPlayingMoviesUi =
                         (1..20).map {
                             previewMovie.copy(id = it)
                         },
