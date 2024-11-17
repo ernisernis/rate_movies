@@ -17,7 +17,7 @@ fun MovieDetailsDto.toMovieDetails(): MovieDetails {
         voteAverage = vote_average,
         genres = genres.toMovieGenreList(),
         overview = overview,
-        cast = credits.cast.toCastList(),
+        cast = credits.cast.toCastList().filter { it.profilePath != null },
         crew = credits.crew.toCrewList(),
     )
 }
@@ -36,7 +36,7 @@ fun List<CastDto>.toCastList(): List<Cast> {
         Cast(
             id = it.id,
             name = it.name,
-            profilePath = it.profile_path ?: "",
+            profilePath = it.profile_path,
             character = it.character,
         )
     }
