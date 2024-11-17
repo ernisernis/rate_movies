@@ -47,7 +47,7 @@ class MovieListViewModel(
             }
 
             movieDataSource
-                .getMovies()
+                .getNowPlayingMovies()
                 .onSuccess { movies ->
                     _state.update {
                         it.copy(

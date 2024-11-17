@@ -20,7 +20,7 @@ import io.ktor.client.request.parameter
 class RemoteMovieDataSource(
     private val httpClient: HttpClient,
 ) : MovieDataSource {
-    override suspend fun getMovies(): Result<List<Movie>, NetworkError> {
+    override suspend fun getNowPlayingMovies(): Result<List<Movie>, NetworkError> {
         return safeCall<MoviesResponseDto> {
             httpClient.get(
                 urlString = constructUrl("/movie/now_playing"),
