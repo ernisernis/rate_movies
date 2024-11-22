@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,6 +30,7 @@ import com.example.ratemovies.movie.domain.MovieGenre
 import com.example.ratemovies.movie.presentation.models.defaultMovieUi
 import com.example.ratemovies.movie.presentation.models.toMovieDetailsUi
 import com.example.ratemovies.movie.presentation.movie_details.components.CastLazyHorizontalRow
+import com.example.ratemovies.movie.presentation.movie_details.components.DetailRatings
 import com.example.ratemovies.movie.presentation.movie_details.components.DirectorRow
 import com.example.ratemovies.movie.presentation.movie_details.components.GenreRow
 import com.example.ratemovies.movie.presentation.movie_details.components.SubtitleRow
@@ -81,8 +83,18 @@ fun MovieDetailsScreen(
                         ),
                     releaseDate = state.movieDetailsUi?.releaseDate,
                     runtime = state.movieDetailsUi?.runtime?.formatted,
-                    voteAverage = state.movieDetailsUi?.voteAverage,
                 )
+
+                // Ratings
+                DetailRatings(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(Dimens.MovieDetailComponentPadding),
+                    voteAverage = state.movieDetailsUi?.voteAverage,
+                    voteCount = state.movieDetailsUi?.voteCount?.formatted,
+                )
+
                 // Genre list
                 GenreRow(
                     modifier = Modifier.horizontalScroll(rememberScrollState()).padding(Dimens.MovieDetailComponentPadding),
@@ -93,7 +105,7 @@ fun MovieDetailsScreen(
                     text = state.movieDetailsUi?.overview ?: "",
                     modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.8f),
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = Dimens.MovieDetailsAlpha),
                 )
                 // Director, Writer
                 DirectorRow(
@@ -119,6 +131,8 @@ fun MovieDetailsScreen(
                     list = state.movieDetailsUi?.cast,
                     modifier = Modifier.height(200.dp),
                 )
+
+                Spacer(modifier = Modifier.height(100.dp))
             }
         }
     }
@@ -148,6 +162,7 @@ internal val defaultMovieDetails =
         releaseDate = "2024-10-22",
         runtime = 109,
         voteAverage = 6.387,
+        voteCount = 800,
         genres =
             listOf(
                 MovieGenre(

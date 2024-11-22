@@ -59,6 +59,6 @@ fun Int.toDisplayableVoteCount(): DisplayableValue {
     val formatter = NumberFormat.getNumberInstance(Locale.getDefault())
     return DisplayableValue(
         value = this,
-        formatted = formatter.format(this)
+        formatted = formatter.format(this),
     )
 }
