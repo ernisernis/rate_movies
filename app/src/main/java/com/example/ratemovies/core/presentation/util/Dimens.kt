@@ -23,4 +23,7 @@ object Dimens {
 
     val MovieDetailIconSize: Dp
         @Composable get() = 20.dp
+
+    val MovieDetailsAlpha: Float
+        get() = 0.8f
 }

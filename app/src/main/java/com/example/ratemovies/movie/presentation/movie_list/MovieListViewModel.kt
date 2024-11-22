@@ -60,7 +60,6 @@ class MovieListViewModel(
                     Log.d("ERNIS33", "loadMovies: $error")
                 }
 
-
             movieDataSource
                 .getPopularMovies()
                 .onSuccess { popularMovies ->
