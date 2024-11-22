@@ -15,6 +15,7 @@ fun MovieDetailsDto.toMovieDetails(): MovieDetails {
         releaseDate = release_date,
         runtime = runtime,
         voteAverage = vote_average,
+        voteCount = vote_count,
         genres = genres.toMovieGenreList(),
         overview = overview,
         cast = credits.cast.toCastList().filter { it.profilePath != null },
