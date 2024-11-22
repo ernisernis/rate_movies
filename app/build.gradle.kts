@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.bundles.coil)
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.koin)
+    implementation(libs.compose.material.icons.extended)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -13,6 +13,7 @@ coil = "3.0.1"
 ktor = "2.3.12"
 koin = "3.5.6"
 ktlint = "12.1.1"
+compose-material = "1.6.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,6 +42,8 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-material" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
