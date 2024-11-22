@@ -6,7 +6,7 @@ import com.example.ratemovies.movie.domain.MovieDetails
 data class MovieDetailsUi(
     val id: Int,
     val releaseDate: String,
-    val runtime: DisplayableRuntime,
+    val runtime: DisplayableValue,
     val voteAverage: String,
     val voteCount: String,
     val genres: List<MovieGenreUi>,
@@ -17,7 +17,7 @@ data class MovieDetailsUi(
     val writer: String?,
 )
 
-data class DisplayableRuntime(
+data class DisplayableValue(
     val value: Int,
     val formatted: String,
 )
@@ -38,7 +38,7 @@ fun MovieDetails.toMovieDetailsUi(): MovieDetailsUi {
     )
 }
 
-fun Int.toDisplayableRuntime(): DisplayableRuntime {
+fun Int.toDisplayableRuntime(): DisplayableValue {
     val hours = this / 60
     val mins = this % 60
     val formatted =
@@ -47,7 +47,7 @@ fun Int.toDisplayableRuntime(): DisplayableRuntime {
         } else {
             "${mins}min"
         }
-    return DisplayableRuntime(
+    return DisplayableValue(
         value = this,
         formatted = formatted,
     )
