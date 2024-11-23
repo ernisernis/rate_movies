@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.ratemovies.R
 import com.example.ratemovies.core.presentation.util.errorPainter
+import com.example.ratemovies.movie.presentation.components.PosterImage
 import com.example.ratemovies.movie.presentation.movie_list.components.previewMovie
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
@@ -47,16 +48,10 @@ fun TitleRow(
                     defaultElevation = 12.dp,
                 ),
         ) {
-            AsyncImage(
-                modifier =
-                    Modifier
-                        .width(60.dp)
-                        .aspectRatio(2f / 3f),
-                model = imageUrl,
-                contentDescription = null,
-                placeholder = errorPainter,
-                error = painterResource(R.drawable.poster780w1170hpreview),
-                contentScale = ContentScale.Fit,
+            PosterImage(
+                modifier = Modifier
+                    .width(60.dp),
+                url = imageUrl
             )
         }
     }
