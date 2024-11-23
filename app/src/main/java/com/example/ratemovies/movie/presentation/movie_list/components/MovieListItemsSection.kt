@@ -43,7 +43,10 @@ fun MovieListItemsSection(
             items(movies) { movieUi ->
                 MovieListItem(
                     movieUi = movieUi,
-                    modifier = Modifier.height(325.dp).width(154.dp),
+                    modifier =
+                        Modifier
+                            .height(325.dp)
+                            .width(154.dp),
                     onClick = { onClick(movieUi) },
                 )
             }

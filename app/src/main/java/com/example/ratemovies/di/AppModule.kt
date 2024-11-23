@@ -8,6 +8,7 @@ import com.example.ratemovies.movie.data.RemoteMovieDataSource
 import com.example.ratemovies.movie.domain.MovieDataSource
 import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
+import com.example.ratemovies.movie.presentation.movie_rate.MovieRateViewModel
 import io.ktor.client.engine.cio.CIO
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
@@ -24,4 +25,5 @@ val appModule =
 
         viewModelOf(::MovieListViewModel)
         viewModelOf(::MovieDetailsViewModel)
+        viewModelOf(::MovieRateViewModel)
     }

@@ -12,4 +12,7 @@ sealed interface Destination {
 
     @Serializable
     data class DetailScreen(val movieNavArgs: MovieNavArgs) : Destination
+
+    @Serializable
+    data class RateScreen(val movieNavArgs: MovieNavArgs) : Destination
 }

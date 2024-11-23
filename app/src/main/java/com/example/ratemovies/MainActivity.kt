@@ -26,6 +26,8 @@ import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsScree
 import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreen
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
+import com.example.ratemovies.movie.presentation.movie_rate.MovieRateScreen
+import com.example.ratemovies.movie.presentation.movie_rate.MovieRateViewModel
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
@@ -83,6 +85,26 @@ class MainActivity : ComponentActivity() {
                                 }
 
                                 MovieDetailsScreen(
+                                    modifier = Modifier,
+                                    state = state,
+                                    onAction = viewModel::onAction,
+                                )
+                            }
+                            composable<Destination.RateScreen>(
+                                typeMap =
+                                    mapOf(
+                                        typeOf<MovieNavArgs>() to CustomNavType.MovieNavType,
+                                    ),
+                            ) {
+                                val viewModel = koinViewModel<MovieRateViewModel>()
+                                val movieNavArgs = it.toRoute<Destination.RateScreen>().movieNavArgs
+                                val state by viewModel.state.collectAsStateWithLifecycle()
+
+                                LaunchedEffect(movieNavArgs) {
+                                    viewModel.initData(movieNavArgs = it.toRoute<Destination.DetailScreen>().movieNavArgs)
+                                }
+
+                                MovieRateScreen(
                                     modifier = Modifier,
                                     state = state,
                                     onAction = viewModel::onAction,

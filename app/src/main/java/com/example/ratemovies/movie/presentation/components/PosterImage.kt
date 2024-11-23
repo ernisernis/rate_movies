@@ -20,8 +20,9 @@ fun PosterImage(
     url: String,
 ) {
     AsyncImage(
-        modifier = modifier
-            .aspectRatio(2f / 3f),
+        modifier =
+            modifier
+                .aspectRatio(2f / 3f),
         model = url,
         contentDescription = "Poster image",
         placeholder = errorPainter,
@@ -36,7 +37,7 @@ fun PosterImagePreview() {
     RateMoviesTheme {
         PosterImage(
             modifier = Modifier.width(160.dp),
-            url = defaultMovieUi().imageUrl
+            url = defaultMovieUi().imageUrl,
         )
     }
 }
