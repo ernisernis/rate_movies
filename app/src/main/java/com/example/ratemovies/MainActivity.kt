@@ -105,7 +105,7 @@ class MainActivity : ComponentActivity() {
                                 }
 
                                 MovieRateScreen(
-                                    modifier = Modifier,
+                                    modifier = Modifier.fillMaxSize(),
                                     state = state,
                                     onAction = viewModel::onAction,
                                 )

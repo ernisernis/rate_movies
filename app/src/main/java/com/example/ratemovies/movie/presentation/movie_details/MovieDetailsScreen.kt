@@ -93,6 +93,7 @@ fun MovieDetailsScreen(
                             .padding(Dimens.MovieDetailComponentPadding),
                     voteAverage = state.movieDetailsUi?.voteAverage,
                     voteCount = state.movieDetailsUi?.voteCount?.formatted,
+                    onRatingClick = { onAction(MovieDetailsAction.OnRateClick) },
                 )
 
                 // Genre list

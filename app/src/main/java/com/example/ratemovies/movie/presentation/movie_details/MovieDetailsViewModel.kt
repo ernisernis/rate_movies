@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ratemovies.core.domain.util.onError
 import com.example.ratemovies.core.domain.util.onSuccess
+import com.example.ratemovies.core.navigation.Destination
 import com.example.ratemovies.core.navigation.Navigator
 import com.example.ratemovies.movie.domain.MovieDataSource
 import com.example.ratemovies.movie.domain.MovieNavArgs
@@ -48,7 +49,19 @@ class MovieDetailsViewModel(
 
     fun onAction(action: MovieDetailsAction) {
         when (action) {
-            is MovieDetailsAction.OnTestClick -> {
+            is MovieDetailsAction.OnRateClick -> {
+                val movieNavArgs =
+                    MovieNavArgs(
+                        id = state.value.movieDetailsUi?.id ?: 0,
+                        bannerUrl = state.value.bannerUrl,
+                        title = state.value.title,
+                        imageUrl = state.value.imageUrl,
+                    )
+                viewModelScope.launch {
+                    navigator.navigate(
+                        destination = Destination.RateScreen(movieNavArgs),
+                    )
+                }
             }
         }
     }

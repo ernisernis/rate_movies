@@ -1,5 +1,6 @@
 package com.example.ratemovies.movie.presentation.movie_details.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +19,7 @@ fun DetailRatings(
     modifier: Modifier = Modifier,
     voteAverage: String?,
     voteCount: String?,
+    onRatingClick: () -> Unit,
 ) {
     Row(
         modifier = modifier,
@@ -32,7 +34,10 @@ fun DetailRatings(
         )
 
         RatingAvailable(
-            modifier = Modifier,
+            modifier =
+                Modifier.clickable(true) {
+                    onRatingClick()
+                },
             icon = Icons.Default.StarOutline,
             iconTint = MaterialTheme.colorScheme.onBackground,
         )
@@ -47,6 +52,7 @@ fun DetailRatingsPreview() {
             modifier = Modifier.fillMaxWidth(),
             voteAverage = "7.4",
             voteCount = "157,364",
+            onRatingClick = {},
         )
     }
 }
