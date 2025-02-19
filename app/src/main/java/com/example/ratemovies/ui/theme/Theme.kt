@@ -1,91 +1,64 @@
 package com.example.ratemovies.ui.theme
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
 
-private val lightScheme =
-    lightColorScheme(
-        primary = primaryLight,
-        onPrimary = onPrimaryLight,
-        primaryContainer = primaryContainerLight,
-        onPrimaryContainer = onPrimaryContainerLight,
-        secondary = secondaryLight,
-        onSecondary = onSecondaryLight,
-        secondaryContainer = secondaryContainerLight,
-        onSecondaryContainer = onSecondaryContainerLight,
-        tertiary = tertiaryLight,
-        onTertiary = onTertiaryLight,
-        tertiaryContainer = tertiaryContainerLight,
-        onTertiaryContainer = onTertiaryContainerLight,
-        error = errorLight,
-        onError = onErrorLight,
-        errorContainer = errorContainerLight,
-        onErrorContainer = onErrorContainerLight,
-        background = backgroundLight,
-        onBackground = onBackgroundLight,
-        surface = surfaceLight,
-        onSurface = onSurfaceLight,
-        surfaceVariant = surfaceVariantLight,
-        onSurfaceVariant = onSurfaceVariantLight,
-        outline = outlineLight,
-        outlineVariant = outlineVariantLight,
-        scrim = scrimLight,
-        inverseSurface = inverseSurfaceLight,
-        inverseOnSurface = inverseOnSurfaceLight,
-        inversePrimary = inversePrimaryLight,
-        surfaceDim = surfaceDimLight,
-        surfaceBright = surfaceBrightLight,
-        surfaceContainerLowest = surfaceContainerLowestLight,
-        surfaceContainerLow = surfaceContainerLowLight,
-        surfaceContainer = surfaceContainerLight,
-        surfaceContainerHigh = surfaceContainerHighLight,
-        surfaceContainerHighest = surfaceContainerHighestLight,
+private val lightScheme = lightColorScheme(
+    // Main brand color used for prominent UI elements like buttons, active states, and app bars.
+    primary = Color(0xFFE5AC00),
+    // Text/icon color used on top of the primary color surface to ensure readability.
+    onPrimary = Color(0xFF000000),
+
+    // Used for less prominent elements that still need attention, such as floating action buttons (FABs), switches, or selection controls.
+    secondary = Color(0xFF9CCDEE),
+    // Text/icon color on top of a secondary surface.
+    onSecondary = Color(0xFF00344B),
+
+    // Background color of the entire app screen.
+    background = Color(0xFF171309),
+    // Text/icon color on top of the background surface.
+    onBackground = Color(0xFFECE1D1),
+
+    // Background color for surfaces like cards, dialogs, and sheets.
+    surface = Color(0xFF2A2B2A),
+    // Text/icon color used on surface components.
+    onSurface = Color(0xFFE6E2E0),
+
+    // Used to represent error states in UI elements.
+    error = Color(0xFFFFB4AB),
+    // Text/icon color used on error surfaces.
+    onError = Color(0xFF690005)
     )
 
-private val darkScheme =
-    darkColorScheme(
-        primary = primaryDark,
-        onPrimary = onPrimaryDark,
-        primaryContainer = primaryContainerDark,
-        onPrimaryContainer = onPrimaryContainerDark,
-        secondary = secondaryDark,
-        onSecondary = onSecondaryDark,
-        secondaryContainer = secondaryContainerDark,
-        onSecondaryContainer = onSecondaryContainerDark,
-        tertiary = tertiaryDark,
-        onTertiary = onTertiaryDark,
-        tertiaryContainer = tertiaryContainerDark,
-        onTertiaryContainer = onTertiaryContainerDark,
-        error = errorDark,
-        onError = onErrorDark,
-        errorContainer = errorContainerDark,
-        onErrorContainer = onErrorContainerDark,
-        background = backgroundDark,
-        onBackground = onBackgroundDark,
-        surface = surfaceDark,
-        onSurface = onSurfaceDark,
-        surfaceVariant = surfaceVariantDark,
-        onSurfaceVariant = onSurfaceVariantDark,
-        outline = outlineDark,
-        outlineVariant = outlineVariantDark,
-        scrim = scrimDark,
-        inverseSurface = inverseSurfaceDark,
-        inverseOnSurface = inverseOnSurfaceDark,
-        inversePrimary = inversePrimaryDark,
-        surfaceDim = surfaceDimDark,
-        surfaceBright = surfaceBrightDark,
-        surfaceContainerLowest = surfaceContainerLowestDark,
-        surfaceContainerLow = surfaceContainerLowDark,
-        surfaceContainer = surfaceContainerDark,
-        surfaceContainerHigh = surfaceContainerHighDark,
-        surfaceContainerHighest = surfaceContainerHighestDark,
-    )
+private val darkScheme = darkColorScheme(
+    // Main brand color used for prominent UI elements like buttons, active states, and app bars.
+    primary = Color(0xFFE5AC00),
+    // Text/icon color used on top of the primary color surface to ensure readability.
+    onPrimary = Color(0xFF000000),
+
+    // Used for less prominent elements that still need attention, such as floating action buttons (FABs), switches, or selection controls.
+    secondary = Color(0xFF9CCDEE),
+    // Text/icon color on top of a secondary surface.
+    onSecondary = Color(0xFF00344B),
+
+    // Background color of the entire app screen.
+    background = Color(0xFF171309),
+    // Text/icon color on top of the background surface.
+    onBackground = Color(0xFFECE1D1),
+
+    // Background color for surfaces like cards, dialogs, and sheets.
+    surface = Color(0xFF2A2B2A),
+    // Text/icon color used on surface components.
+    onSurface = Color(0xFFE6E2E0),
+
+    // Used to represent error states in UI elements.
+    error = Color(0xFFFFB4AB),
+    // Text/icon color used on error surfaces.
+    onError = Color(0xFF690005)
+)
 
 private val mediumContrastLightColorScheme =
     lightColorScheme(
@@ -248,16 +221,15 @@ fun RateMoviesTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    content:
-        @Composable()
-        () -> Unit,
+    content: @Composable () -> Unit,
 ) {
     val colorScheme =
         when {
-            dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-                val context = LocalContext.current
-                if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-            }
+            // TODO: Enable Dynamic color
+//            dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+//                val context = LocalContext.current
+//                if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+//            }
 
             darkTheme -> darkScheme
             else -> lightScheme

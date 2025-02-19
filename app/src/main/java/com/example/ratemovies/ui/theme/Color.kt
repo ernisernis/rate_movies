@@ -1,4 +1,5 @@
 package com.example.ratemovies.ui.theme
+
 import androidx.compose.ui.graphics.Color
 
 val gold = Color(0xFFF3CE13)

@@ -7,6 +7,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+gradle.properties
 
 # IDE-specific files
 appInsightsSettings.xml
@@ -18,8 +19,6 @@ migrations.xml
 misc.xml
 runConfigurations.xml
 vcs.xml
-
-gradle.properties
 
 # IntelliJ / Android Studio
 .idea/
