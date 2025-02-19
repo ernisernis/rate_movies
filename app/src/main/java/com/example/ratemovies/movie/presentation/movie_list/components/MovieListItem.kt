@@ -23,17 +23,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.ratemovies.R
 import com.example.ratemovies.core.presentation.util.Dimens
+import com.example.ratemovies.movie.domain.Movie
 import com.example.ratemovies.movie.presentation.models.MovieUi
+import com.example.ratemovies.movie.presentation.models.toMovieUi
 import com.example.ratemovies.ui.theme.RateMoviesTheme
-import com.example.ratemovies.ui.theme.gold
 
 @Composable
 fun MovieListItem(
@@ -42,47 +42,44 @@ fun MovieListItem(
     onClick: () -> Unit,
 ) {
     ElevatedCard(
-        elevation =
-            CardDefaults.cardElevation(
-                defaultElevation = 12.dp,
-            ),
-        colors =
-            CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            ),
-        modifier = modifier.clickable(onClick = onClick),
+        modifier = modifier
+            .clickable(onClick = onClick),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 12.dp,
+        ),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
     ) {
+        // Image
         AsyncImage(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(2f / 3f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(2f / 3f),
             model = movieUi.imageUrl,
-            contentDescription = null,
-            placeholder = painterResource(R.drawable.poster780w1170hpreview),
-            error = painterResource(R.drawable.poster780w1170hpreview),
+            contentDescription = stringResource(R.string.description_movie_item),
+            error = painterResource(R.drawable.placeholder_gradient),
+            placeholder = painterResource(R.drawable.placeholder_gradient),
             contentScale = ContentScale.Fit,
         )
 
-        // Rating
+        // Rating row (Icon + Vote text)
         Row(
-            horizontalArrangement = Arrangement.spacedBy(Dimens.MovieListItemContainerPadding / 2),
+            horizontalArrangement = Arrangement.spacedBy(Dimens.MovieListItemPaddingSmall),
             verticalAlignment = Alignment.CenterVertically,
-            modifier =
-                Modifier
-                    .padding(Dimens.MovieListItemContainerPadding),
+            modifier = Modifier
+                .padding(Dimens.MovieListItemPaddingNormal),
         ) {
             Icon(
                 imageVector = Icons.Default.Star,
-                modifier =
-                    Modifier
-                        .size(Dimens.MovieListItemIconSize),
-                tint = gold,
-                contentDescription = null,
+                modifier = Modifier
+                    .size(Dimens.MovieListItemIconSize),
+                contentDescription = stringResource(R.string.description_movie_star),
+                tint = MaterialTheme.colorScheme.primary,
             )
             Text(
                 text = movieUi.voteAverage,
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.labelMedium,
             )
         }
@@ -90,28 +87,26 @@ fun MovieListItem(
         // Title
         Text(
             text = movieUi.title,
-            modifier =
-                Modifier
-                    .padding(horizontal = Dimens.MovieListItemContainerPadding)
-                    .weight(1f),
+            modifier = Modifier
+                .padding(horizontal = Dimens.MovieListItemPaddingNormal)
+                .weight(1f),
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            color = MaterialTheme.colorScheme.onSurface,
             style = MaterialTheme.typography.labelMedium,
         )
 
         // Subtitle
         Row(
-            horizontalArrangement = Arrangement.spacedBy(Dimens.MovieListItemContainerPadding / 2),
+            horizontalArrangement = Arrangement.spacedBy(Dimens.MovieListItemPaddingSmall),
             verticalAlignment = Alignment.CenterVertically,
-            modifier =
-                Modifier
-                    .padding(Dimens.MovieListItemContainerPadding),
+            modifier = Modifier
+                .padding(Dimens.MovieListItemPaddingNormal),
         ) {
             // Date
             Text(
                 text = movieUi.releaseDate,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.labelSmall,
             )
 
@@ -120,28 +115,23 @@ fun MovieListItem(
             // Like icon
             Icon(
                 imageVector = Icons.Default.ThumbUp,
-                modifier =
-                    Modifier
-                        .size(Dimens.MovieListItemIconSize),
-                tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                contentDescription = null,
+                modifier = Modifier
+                    .size(Dimens.MovieListItemIconSize),
+                tint = MaterialTheme.colorScheme.onSurface,
+                contentDescription = stringResource(R.string.description_movie_thumb_up),
             )
 
             // Like count
             Text(
                 text = movieUi.popularity,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.labelSmall,
             )
         }
     }
 }
 
-@PreviewLightDark()
-@Preview(
-    showSystemUi = true,
-    device = Devices.NEXUS_5X,
-)
+@Preview
 @Composable
 fun MovieListItemPreview() {
     RateMoviesTheme {
@@ -151,22 +141,25 @@ fun MovieListItemPreview() {
                     .padding(24.dp)
                     .height(325.dp)
                     .width(154.dp),
-            movieUi = previewMovie,
+            movieUi = movie.toMovieUi(),
             onClick = {},
         )
     }
 }
 
-internal val previewMovie =
-    MovieUi(
-        id = 1,
-        title = "Terrifier 3",
-        adult = false,
-        overview = "Five years after surviving Art the Clown's Halloween massacre",
-        imageUrl = "https://image.tmdb.org/t/p/w500/63xYQj1BwRFielxsBDXvHIJyXVm.jpg",
-        releaseDate = "2024-10-09",
-        genres = listOf("Horror", "Comedy", "Sci-fi"),
-        voteAverage = "7.3",
-        popularity = "3545",
-        banner = "https://image.tmdb.org/t/p/w1280/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
-    )
+internal val movie = Movie(
+    id = 0,
+    title = "Terrifier 3",
+    adult = false,
+    backdropPath = "",
+    genreIds = listOf(1,3,4),
+    originalLanguage = "ENG",
+    originalTitle = "Terrifier 3",
+    overview = "Five years after surviving Art the Clown's Halloween massacre",
+    popularity = 3456.34,
+    posterPath = "/aosm8NMQ3UyoBVpSxyimorCQykC.jpg",
+    releaseDate = "2024.12.12",
+    video = false,
+    voteAverage = 123.3,
+    voteCount = 12345,
+)

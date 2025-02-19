@@ -12,10 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.example.ratemovies.movie.presentation.components.PosterImage
-import com.example.ratemovies.movie.presentation.movie_list.components.previewMovie
+import com.example.ratemovies.movie.presentation.models.toMovieUi
+import com.example.ratemovies.movie.presentation.movie_list.components.movie
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
@@ -52,14 +54,14 @@ fun TitleRow(
     }
 }
 
+@Preview
 @Composable
-@PreviewLightDark
 fun TitleRowPreview() {
     RateMoviesTheme {
         TitleRow(
             modifier = Modifier.height(300.dp),
-            title = previewMovie.title,
-            imageUrl = previewMovie.imageUrl,
+            title = movie.toMovieUi().title,
+            imageUrl = movie.toMovieUi().imageUrl,
         )
     }
 }

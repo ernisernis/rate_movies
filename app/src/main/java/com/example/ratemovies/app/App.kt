@@ -1,7 +1,6 @@
 package com.example.ratemovies.app
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -13,11 +12,11 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsScreen
 import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsViewModel
-import com.example.ratemovies.movie.presentation.movie_list.MovieListScreen
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateScreen
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.ratemovies.movie.presentation.movie_list.MovieListScreenRoot
 
 
 @Composable
@@ -34,12 +33,12 @@ fun App() {
             ) {
                 composable<Route.MovieList> {
                     val viewModel = hiltViewModel<MovieListViewModel>()
-                    val state by viewModel.state.collectAsStateWithLifecycle()
 
-                    MovieListScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        state = state,
-                        onAction = viewModel::onAction,
+                    MovieListScreenRoot(
+                        viewModel = viewModel,
+                        onMovieClick = { movie ->
+                            // TODO:
+                        }
                     )
                 }
                 composable<Route.MovieDetail> {

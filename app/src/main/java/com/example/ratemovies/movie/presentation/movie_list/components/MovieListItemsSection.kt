@@ -13,41 +13,42 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
 import com.example.ratemovies.core.presentation.util.Dimens
-import com.example.ratemovies.movie.presentation.models.MovieUi
+import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.presentation.models.toMovieUi
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
 fun MovieListItemsSection(
     modifier: Modifier = Modifier,
     title: String,
-    movies: List<MovieUi>,
-    onClick: (MovieUi) -> Unit,
+    movies: List<Movie>,
+    onClick: (Movie) -> Unit,
 ) {
     Column {
         // Title
         Text(
             text = title,
-            modifier = Modifier.padding(horizontal = Dimens.MovieScreenContainerPadding),
-            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .padding(horizontal = Dimens.MovieListContainerPadding),
+            color = MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.headlineMedium,
         )
 
         // Movie items
         LazyRow(
             modifier = modifier,
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(Dimens.MovieScreenContainerPadding),
+            horizontalArrangement = Arrangement.spacedBy(Dimens.MovieListItemPaddingNormal),
+            contentPadding = PaddingValues(Dimens.MovieListContainerPadding),
         ) {
-            items(movies) { movieUi ->
+            items(movies) { movie ->
                 MovieListItem(
-                    movieUi = movieUi,
+                    movieUi = movie.toMovieUi(),
                     modifier =
                         Modifier
-                            .height(325.dp)
-                            .width(154.dp),
-                    onClick = { onClick(movieUi) },
+                            .height(Dimens.MovieListItemHeight)
+                            .width(Dimens.MovieListItemWidth),
+                    onClick = { onClick(movie) },
                 )
             }
         }
@@ -63,7 +64,7 @@ fun MovieListItemsSectionPreview() {
             title = "Now Playing",
             movies =
                 (1..20).map {
-                    previewMovie.copy(id = it)
+                    movie.copy(id = it)
                 },
             onClick = {},
         )

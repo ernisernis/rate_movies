@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">RateMovies</string>
+    <string name="search_hint">Search...</string>
+    <string name="close_hint">Clear search</string>
+    <string name="search_results">Search Results</string>
+    <string name="favorites">Favorites</string>
+    <string name="no_search_results">Oops, there aren\'t any movie for your search query</string>
+    <string name="no_favorite_movies">You haven\'t saved any favorite movies yet </string>
+    <string name="error_disk_full">Oops, it seems like your disk is full.</string>
+    <string name="error_unknown">Oops, something went wrong.</string>
+    <string name="error_request_timeout">The request timed out.</string>
+    <string name="error_no_internet">Couldn\'t reach server, please check your internet connection</string>
+    <string name="error_too_many_requests">Your quota seems to be exceeded.</string>
+    <string name="error_serialization">Couldn\'t parse data</string>
+    <string name="rating">Rating</string>
+    <string name="description_unavailable">Description not available.</string>
+    <string name="go_back">Go back</string>
+    <string name="mark_as_favorite">Mark as favorite</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
+    <string name="description_movie_item">Movie image</string>
+    <string name="description_movie_star">Rating star icon</string>
+    <string name="description_movie_thumb_up">Thumb up icon</string>
+    <string name="description_banner">Banner Image</string>
+    <string name="description_poster">Poster image</string>
+    <string name="movie_detail_starring">Starring</string>
+    <string name="movie_detail_director">Director: </string>
+    <string name="movie_detail_writer">Writer: </string>
+    <string name="movie_detail_rate">Rate this</string>
+    <string name="rate_title">How would you rate %1$s</string>
+    <string name="rate">Rate</string>
+    <string name="movie_title_now_playing">Now Playing</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="rate_description_hint">Enter a description (optional)</string>
+    <string name="profile">Profile</string>
+    <string name="more_options">More options</string>
+    <string name="profile_review_delete">Delete</string>
 </resources>

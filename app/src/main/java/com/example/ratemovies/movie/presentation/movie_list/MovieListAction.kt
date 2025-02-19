@@ -1,7 +1,8 @@
 package com.example.ratemovies.movie.presentation.movie_list
 
-import com.example.ratemovies.movie.presentation.models.MovieUi
+import com.example.ratemovies.movie.domain.Movie
+
 
 interface MovieListAction {
-    data class OnMovieClick(val movieUi: MovieUi) : MovieListAction
+    data class OnMovieClick(val movie: Movie): MovieListAction
 }

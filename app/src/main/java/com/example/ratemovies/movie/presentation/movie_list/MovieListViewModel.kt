@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.ratemovies.core.domain.util.onError
 import com.example.ratemovies.core.domain.util.onSuccess
 import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
-import com.example.ratemovies.movie.presentation.models.toMovieUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -46,7 +45,7 @@ class MovieListViewModel @Inject constructor(
                 .onSuccess { nowPlayingMovies ->
                     _state.update {
                         it.copy(
-                            nowPlayingMoviesUi = nowPlayingMovies.map { it.toMovieUi() },
+                            nowPlayingMoviesUi = nowPlayingMovies,
                             isLoading = false,
                         )
                     }
@@ -60,7 +59,7 @@ class MovieListViewModel @Inject constructor(
                 .onSuccess { popularMovies ->
                     _state.update {
                         it.copy(
-                            popularMoviesUi = popularMovies.map { it.toMovieUi() },
+                            popularMoviesUi = popularMovies,
                             isLoading = false,
                         )
                     }
@@ -74,7 +73,7 @@ class MovieListViewModel @Inject constructor(
                 .onSuccess { upcomingMovies ->
                     _state.update {
                         it.copy(
-                            upcomingMoviesUi = upcomingMovies.map { it.toMovieUi() },
+                            upcomingMoviesUi = upcomingMovies,
                             isLoading = false,
                         )
                     }
@@ -88,7 +87,7 @@ class MovieListViewModel @Inject constructor(
                 .onSuccess { topRatedMovies ->
                     _state.update {
                         it.copy(
-                            topRatedMoviesUi = topRatedMovies.map { it.toMovieUi() },
+                            topRatedMoviesUi = topRatedMovies,
                             isLoading = false,
                         )
                     }

@@ -1,18 +1,53 @@
 package com.example.ratemovies.movie.presentation.movie_list
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.ratemovies.movie.domain.Movie
 import com.example.ratemovies.movie.presentation.movie_list.components.MovieListItemsSection
 import com.example.ratemovies.movie.presentation.movie_list.components.MovieListLoading
-import com.example.ratemovies.movie.presentation.movie_list.components.previewMovie
+import com.example.ratemovies.movie.presentation.movie_list.components.movie
 import com.example.ratemovies.ui.theme.RateMoviesTheme
+
+
+@Composable
+fun MovieListScreenRoot(
+    viewModel: MovieListViewModel = hiltViewModel(),
+    onMovieClick: (Movie) -> Unit,
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    if (state.isLoading) {
+        MovieListLoading(
+            modifier = Modifier
+                .statusBarsPadding()
+                .fillMaxSize()
+        )
+    } else {
+        MovieListScreen(
+            state = state,
+            modifier = Modifier
+                .statusBarsPadding()
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            onAction = { action ->
+                when (action) {
+                    is MovieListAction.OnMovieClick -> onMovieClick(action.movie)
+                    else -> Unit
+                }
+                viewModel.onAction(action)
+            }
+        )
+    }
+}
 
 @Composable
 fun MovieListScreen(
@@ -24,7 +59,7 @@ fun MovieListScreen(
         MovieListLoading()
     } else {
         Column(
-            modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+            modifier = modifier,
         ) {
             MovieListItemsSection(
                 title = "Now Playing",
@@ -50,7 +85,7 @@ fun MovieListScreen(
     }
 }
 
-@PreviewLightDark()
+@Preview
 @Composable
 fun MovieListScreenPreview() {
     RateMoviesTheme {
@@ -59,10 +94,13 @@ fun MovieListScreenPreview() {
                 MovieListState(
                     nowPlayingMoviesUi =
                         (1..20).map {
-                            previewMovie.copy(id = it)
+                            movie.copy(id = it)
                         },
                 ),
-            modifier = Modifier.background(MaterialTheme.colorScheme.background),
+            modifier = Modifier
+                .statusBarsPadding()
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
             onAction = {},
         )
     }
