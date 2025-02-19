@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ratemovies.core.domain.util.onError
 import com.example.ratemovies.core.domain.util.onSuccess
-import com.example.ratemovies.movie.domain.MovieDataSource
+import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
 import com.example.ratemovies.movie.presentation.models.toMovieUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MovieListViewModel(
-    private val movieDataSource: MovieDataSource,
+    private val movieDataSource: RemoteMovieDataSource,
 ) : ViewModel() {
     private val _state = MutableStateFlow(MovieListState())
     val state = _state.asStateFlow()

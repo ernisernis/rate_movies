@@ -1,4 +1,4 @@
-package com.example.ratemovies.movie.data
+package com.example.ratemovies.movie.data.network
 
 import com.example.ratemovies.BuildConfig
 import com.example.ratemovies.core.data.networking.constructUrl
@@ -11,15 +11,14 @@ import com.example.ratemovies.movie.data.mappers.toMovieDetails
 import com.example.ratemovies.movie.data.dto.MovieDetailsDto
 import com.example.ratemovies.movie.data.dto.MoviesResponseDto
 import com.example.ratemovies.movie.domain.Movie
-import com.example.ratemovies.movie.domain.MovieDataSource
 import com.example.ratemovies.movie.domain.MovieDetails
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
-class RemoteMovieDataSource(
+class KtorRemoteMovieDataSource(
     private val httpClient: HttpClient,
-) : MovieDataSource {
+) : RemoteMovieDataSource {
     override suspend fun getUpcomingMovies(): Result<List<Movie>, NetworkError> {
         return safeCall<MoviesResponseDto> {
             httpClient.get(
