@@ -12,8 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsScreen
-import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsViewModel
+import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailsScreen
+import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateScreen
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateViewModel
@@ -54,7 +54,7 @@ fun App() {
                     )
                 }
                 composable<Route.MovieDetail> {
-                    val viewModel = hiltViewModel<MovieDetailsViewModel>()
+                    val viewModel = hiltViewModel<MovieDetailViewModel>()
                     val state by viewModel.state.collectAsStateWithLifecycle()
 
                     MovieDetailsScreen(

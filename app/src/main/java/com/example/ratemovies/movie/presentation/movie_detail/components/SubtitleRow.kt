@@ -1,4 +1,4 @@
-package com.example.ratemovies.movie.presentation.movie_details.components
+package com.example.ratemovies.movie.presentation.movie_detail.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.example.ratemovies.movie.presentation.models.toDisplayableRuntime
-import com.example.ratemovies.movie.presentation.movie_details.defaultMovieDetails
+import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetails
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable

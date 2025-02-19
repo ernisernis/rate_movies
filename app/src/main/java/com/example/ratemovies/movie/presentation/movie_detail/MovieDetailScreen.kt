@@ -1,4 +1,4 @@
-package com.example.ratemovies.movie.presentation.movie_details
+package com.example.ratemovies.movie.presentation.movie_detail
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -29,19 +29,19 @@ import com.example.ratemovies.movie.domain.MovieDetails
 import com.example.ratemovies.movie.domain.MovieGenre
 import com.example.ratemovies.movie.presentation.models.defaultMovieUi
 import com.example.ratemovies.movie.presentation.models.toMovieDetailsUi
-import com.example.ratemovies.movie.presentation.movie_details.components.CastLazyHorizontalRow
-import com.example.ratemovies.movie.presentation.movie_details.components.DetailRatings
-import com.example.ratemovies.movie.presentation.movie_details.components.DirectorRow
-import com.example.ratemovies.movie.presentation.movie_details.components.GenreRow
-import com.example.ratemovies.movie.presentation.movie_details.components.SubtitleRow
-import com.example.ratemovies.movie.presentation.movie_details.components.TitleRow
+import com.example.ratemovies.movie.presentation.movie_detail.components.CastLazyHorizontalRow
+import com.example.ratemovies.movie.presentation.movie_detail.components.DetailRatings
+import com.example.ratemovies.movie.presentation.movie_detail.components.DirectorRow
+import com.example.ratemovies.movie.presentation.movie_detail.components.GenreRow
+import com.example.ratemovies.movie.presentation.movie_detail.components.SubtitleRow
+import com.example.ratemovies.movie.presentation.movie_detail.components.TitleRow
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
 fun MovieDetailsScreen(
-    state: MovieDetailsState,
+    state: MovieDetailState,
     modifier: Modifier = Modifier,
-    onAction: (MovieDetailsAction) -> Unit,
+    onAction: (MovieDetailAction) -> Unit,
 ) {
     Column(
         modifier =
@@ -93,7 +93,7 @@ fun MovieDetailsScreen(
                             .padding(Dimens.MovieDetailComponentPadding),
                     voteAverage = state.movieDetailsUi?.voteAverage,
                     voteCount = state.movieDetailsUi?.voteCount?.formatted,
-                    onRatingClick = { onAction(MovieDetailsAction.OnRateClick) },
+                    onRatingClick = { onAction(MovieDetailAction.OnRateClick) },
                 )
 
                 // Genre list
@@ -145,7 +145,7 @@ private fun MovieDetailsScreenPreview() {
     RateMoviesTheme {
         MovieDetailsScreen(
             state =
-                MovieDetailsState(
+                MovieDetailState(
                     bannerUrl = defaultMovieUi().banner,
                     title = defaultMovieUi().title,
                     imageUrl = defaultMovieUi().imageUrl,

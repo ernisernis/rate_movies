@@ -1,4 +1,4 @@
-package com.example.ratemovies.movie.presentation.movie_details
+package com.example.ratemovies.movie.presentation.movie_detail
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -16,10 +16,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieDetailsViewModel @Inject constructor(
+class MovieDetailViewModel @Inject constructor(
     private val movieDataSource: RemoteMovieDataSource,
 ) : ViewModel() {
-    private val _state = MutableStateFlow(MovieDetailsState())
+    private val _state = MutableStateFlow(MovieDetailState())
     val state = _state.asStateFlow()
 
     fun initData(movieNavArgs: MovieNavArgs) {
@@ -47,9 +47,9 @@ class MovieDetailsViewModel @Inject constructor(
         }
     }
 
-    fun onAction(action: MovieDetailsAction) {
+    fun onAction(action: MovieDetailAction) {
         when (action) {
-            is MovieDetailsAction.OnRateClick -> {
+            is MovieDetailAction.OnRateClick -> {
                 // TODO
             }
         }

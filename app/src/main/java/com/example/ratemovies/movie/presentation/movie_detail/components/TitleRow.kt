@@ -1,4 +1,4 @@
-package com.example.ratemovies.movie.presentation.movie_details.components
+package com.example.ratemovies.movie.presentation.movie_detail.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
