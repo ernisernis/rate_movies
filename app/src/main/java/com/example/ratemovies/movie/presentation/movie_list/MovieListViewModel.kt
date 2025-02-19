@@ -5,10 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ratemovies.core.domain.util.onError
 import com.example.ratemovies.core.domain.util.onSuccess
-import com.example.ratemovies.core.navigation.Destination
-import com.example.ratemovies.core.navigation.Navigator
 import com.example.ratemovies.movie.domain.MovieDataSource
-import com.example.ratemovies.movie.domain.toMovieNavArgs
 import com.example.ratemovies.movie.presentation.models.toMovieUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class MovieListViewModel(
     private val movieDataSource: MovieDataSource,
-    private val navigator: Navigator,
 ) : ViewModel() {
     private val _state = MutableStateFlow(MovieListState())
     val state = _state.asStateFlow()
@@ -29,11 +25,7 @@ class MovieListViewModel(
     fun onAction(action: MovieListAction) {
         when (action) {
             is MovieListAction.OnMovieClick -> {
-                viewModelScope.launch {
-                    navigator.navigate(
-                        destination = Destination.DetailScreen(action.movieUi.toMovieNavArgs()),
-                    )
-                }
+                // TODO
             }
         }
     }
