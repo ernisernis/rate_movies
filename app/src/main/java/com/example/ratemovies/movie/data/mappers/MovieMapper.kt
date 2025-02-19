@@ -1,6 +1,6 @@
 package com.example.ratemovies.movie.data.mappers
 
-import com.example.ratemovies.movie.data.networking.dto.MovieDto
+import com.example.ratemovies.movie.data.dto.MovieDto
 import com.example.ratemovies.movie.domain.Movie
 
 fun MovieDto.toMovie(): Movie {

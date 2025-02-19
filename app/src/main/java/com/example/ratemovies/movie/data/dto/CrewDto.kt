@@ -1,11 +1,11 @@
-package com.example.ratemovies.movie.data.networking.dto
+package com.example.ratemovies.movie.data.dto
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CastDto(
+data class CrewDto(
     val id: Int,
     val name: String,
+    val job: String,
     val profile_path: String?,
-    val character: String,
 )

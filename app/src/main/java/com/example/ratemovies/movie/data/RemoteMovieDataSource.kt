@@ -8,8 +8,8 @@ import com.example.ratemovies.core.domain.util.Result
 import com.example.ratemovies.core.domain.util.map
 import com.example.ratemovies.movie.data.mappers.toMovie
 import com.example.ratemovies.movie.data.mappers.toMovieDetails
-import com.example.ratemovies.movie.data.networking.dto.MovieDetailsDto
-import com.example.ratemovies.movie.data.networking.dto.MoviesResponseDto
+import com.example.ratemovies.movie.data.dto.MovieDetailsDto
+import com.example.ratemovies.movie.data.dto.MoviesResponseDto
 import com.example.ratemovies.movie.domain.Movie
 import com.example.ratemovies.movie.domain.MovieDataSource
 import com.example.ratemovies.movie.domain.MovieDetails

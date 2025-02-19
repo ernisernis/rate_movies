@@ -1,4 +1,4 @@
-package com.example.ratemovies.movie.data.networking.dto
+package com.example.ratemovies.movie.data.dto
 
 import kotlinx.serialization.Serializable
 

@@ -1,9 +1,9 @@
 package com.example.ratemovies.movie.data.mappers
 
-import com.example.ratemovies.movie.data.networking.dto.CastDto
-import com.example.ratemovies.movie.data.networking.dto.CrewDto
-import com.example.ratemovies.movie.data.networking.dto.MovieDetailsDto
-import com.example.ratemovies.movie.data.networking.dto.MovieGenreDto
+import com.example.ratemovies.movie.data.dto.CastDto
+import com.example.ratemovies.movie.data.dto.CrewDto
+import com.example.ratemovies.movie.data.dto.MovieDetailsDto
+import com.example.ratemovies.movie.data.dto.MovieGenreDto
 import com.example.ratemovies.movie.domain.Cast
 import com.example.ratemovies.movie.domain.Crew
 import com.example.ratemovies.movie.domain.MovieDetails
