@@ -1,6 +1,5 @@
 package com.example.ratemovies.movie.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.ratemovies.movie.domain.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel

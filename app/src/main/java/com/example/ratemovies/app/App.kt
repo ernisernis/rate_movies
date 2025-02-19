@@ -49,6 +49,7 @@ fun App() {
                         viewModel = viewModel,
                         onMovieClick = { movie ->
                             selectedMovieViewModel.onSelectMovie(movie)
+                            navController.navigate(Route.MovieDetail(movie.id))
                         }
                     )
                 }
