@@ -11,8 +11,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.example.ratemovies.core.navigation.CustomNavType
-import com.example.ratemovies.movie.domain.MovieNavArgs
 import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsScreen
 import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreen
@@ -20,7 +18,6 @@ import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateScreen
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
-import kotlin.reflect.typeOf
 
 
 @Composable
@@ -45,12 +42,7 @@ fun App() {
                         onAction = viewModel::onAction,
                     )
                 }
-                composable<Route.MovieDetail>(
-                    typeMap =
-                    mapOf(
-                        typeOf<MovieNavArgs>() to CustomNavType.MovieNavType,
-                    ),
-                ) {
+                composable<Route.MovieDetail> {
                     val viewModel = hiltViewModel<MovieDetailsViewModel>()
                     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -60,12 +52,7 @@ fun App() {
                         onAction = viewModel::onAction,
                     )
                 }
-                composable<Route.MovieRate>(
-                    typeMap =
-                    mapOf(
-                        typeOf<MovieNavArgs>() to CustomNavType.MovieNavType,
-                    ),
-                ) {
+                composable<Route.MovieRate> {
                     val viewModel = hiltViewModel<MovieRateViewModel>()
                     val state by viewModel.state.collectAsStateWithLifecycle()
 
