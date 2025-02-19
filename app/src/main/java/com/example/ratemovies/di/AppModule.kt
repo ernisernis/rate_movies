@@ -1,23 +1,37 @@
 package com.example.ratemovies.di
 
 import com.example.ratemovies.core.data.networking.HttpClientFactory
-import com.example.ratemovies.movie.data.RemoteMovieDataSource
-import com.example.ratemovies.movie.domain.MovieDataSource
-import com.example.ratemovies.movie.presentation.movie_details.MovieDetailsViewModel
-import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
-import com.example.ratemovies.movie.presentation.movie_rate.MovieRateViewModel
-import io.ktor.client.engine.cio.CIO
-import org.koin.androidx.viewmodel.dsl.viewModelOf
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.bind
-import org.koin.dsl.module
+import com.example.ratemovies.movie.data.network.KtorRemoteMovieDataSource
+import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.okhttp.OkHttp
 
-val appModule =
-    module {
-        single { HttpClientFactory.create(CIO.create()) }
-        singleOf(::RemoteMovieDataSource).bind<MovieDataSource>()
+import javax.inject.Singleton
 
-        viewModelOf(::MovieListViewModel)
-        viewModelOf(::MovieDetailsViewModel)
-        viewModelOf(::MovieRateViewModel)
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideHttpClientEngine(): HttpClientEngine {
+        return OkHttp.create()
     }
+
+    @Provides
+    @Singleton
+    fun provideHttpClientFactory(engine: HttpClientEngine): HttpClient {
+        return HttpClientFactory.create(engine)
+    }
+
+    @Provides
+    @Singleton
+    fun provideKtorRemoteMovieDataSource(httpClient: HttpClient): RemoteMovieDataSource {
+        return KtorRemoteMovieDataSource(httpClient)
+    }
+}

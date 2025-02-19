@@ -65,7 +65,6 @@ dependencies {
     implementation(libs.androidx.compose.navigation)
     implementation(libs.bundles.coil)
     implementation(libs.bundles.ktor)
-    implementation(libs.bundles.koin)
     implementation(libs.compose.material.icons.extended)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -77,6 +76,7 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.testing)
     kspAndroidTest(libs.hilt.compiler)

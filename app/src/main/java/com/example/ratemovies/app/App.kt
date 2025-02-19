@@ -19,7 +19,7 @@ import com.example.ratemovies.movie.presentation.movie_list.MovieListScreen
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateScreen
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateViewModel
-import org.koin.androidx.compose.koinViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import kotlin.reflect.typeOf
 
 
@@ -36,8 +36,9 @@ fun App() {
                 startDestination = Route.MovieList,
             ) {
                 composable<Route.MovieList> {
-                    val viewModel = koinViewModel<MovieListViewModel>()
+                    val viewModel = hiltViewModel<MovieListViewModel>()
                     val state by viewModel.state.collectAsStateWithLifecycle()
+
                     MovieListScreen(
                         modifier = Modifier.padding(innerPadding),
                         state = state,
@@ -50,9 +51,8 @@ fun App() {
                         typeOf<MovieNavArgs>() to CustomNavType.MovieNavType,
                     ),
                 ) {
-                    val viewModel = koinViewModel<MovieDetailsViewModel>()
+                    val viewModel = hiltViewModel<MovieDetailsViewModel>()
                     val state by viewModel.state.collectAsStateWithLifecycle()
-
 
                     MovieDetailsScreen(
                         modifier = Modifier,
@@ -66,7 +66,7 @@ fun App() {
                         typeOf<MovieNavArgs>() to CustomNavType.MovieNavType,
                     ),
                 ) {
-                    val viewModel = koinViewModel<MovieRateViewModel>()
+                    val viewModel = hiltViewModel<MovieRateViewModel>()
                     val state by viewModel.state.collectAsStateWithLifecycle()
 
                     MovieRateScreen(

@@ -8,12 +8,15 @@ import com.example.ratemovies.core.domain.util.onSuccess
 import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
 import com.example.ratemovies.movie.domain.MovieNavArgs
 import com.example.ratemovies.movie.presentation.models.toMovieDetailsUi
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieDetailsViewModel(
+@HiltViewModel
+class MovieDetailsViewModel @Inject constructor(
     private val movieDataSource: RemoteMovieDataSource,
 ) : ViewModel() {
     private val _state = MutableStateFlow(MovieDetailsState())
