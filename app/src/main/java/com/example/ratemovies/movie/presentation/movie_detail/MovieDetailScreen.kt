@@ -92,8 +92,8 @@ fun MovieDetailScreen(
         TitleRow(
             modifier = Modifier
                 .padding(horizontal = Dimens.MovieDetailContainerPadding),
-            title = state.movieUi?.title ?: "",
-            imageUrl = state.movieUi?.imageUrl ?: "",
+            title = state.movieUi?.title,
+            imageUrl = state.movieUi?.imageUrl,
         )
 
         AnimatedVisibility(
