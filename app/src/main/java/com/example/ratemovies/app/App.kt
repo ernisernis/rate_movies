@@ -128,7 +128,7 @@ fun RmNavHost(
 ) {
     NavHost(
         navController = navController,
-        modifier = modifier
+        modifier = Modifier
             .background(MaterialTheme.colorScheme.background),
         startDestination = Route.MovieGraph
     ) {
