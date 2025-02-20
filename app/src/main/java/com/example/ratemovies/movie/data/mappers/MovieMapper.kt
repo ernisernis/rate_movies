@@ -1,7 +1,10 @@
 package com.example.ratemovies.movie.data.mappers
 
+import com.example.ratemovies.core.presentation.util.formatVoteAverage
 import com.example.ratemovies.movie.data.dto.MovieDto
 import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.domain.Rating
+import com.example.ratemovies.movie.presentation.models.toDisplayableRuntime
 import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetail
 
 fun MovieDto.toMovie(): Movie {
@@ -21,5 +24,19 @@ fun MovieDto.toMovie(): Movie {
         voteAverage = vote_average,
         voteCount = vote_count,
         movieDetail = defaultMovieDetail,
+    )
+}
+
+fun Movie.toRating(): Rating {
+    return Rating(
+        id = id,
+        posterPath = posterPath,
+        title = title,
+        releaseDate = releaseDate,
+        runtimeFormatted = movieDetail?.runtime?.toDisplayableRuntime()?.formatted,
+        voteAverage = voteAverage.formatVoteAverage(),
+        description = null,
+        userRating = 0,
+        creationTime = System.currentTimeMillis(),
     )
 }

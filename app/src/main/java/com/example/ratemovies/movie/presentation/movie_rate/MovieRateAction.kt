@@ -1,7 +1,11 @@
 package com.example.ratemovies.movie.presentation.movie_rate
 
-sealed interface MovieRateAction {
-    data class OnRateClick(val index: Int) : MovieRateAction
+import com.example.ratemovies.movie.domain.Movie
 
-    object OnRateSubmit : MovieRateAction
+sealed interface MovieRateAction {
+    data class OnMovieRateClick(val index: Int): MovieRateAction
+    data class OnMovieRateSubmit(val movie: Movie): MovieRateAction
+    data class OnSelectedMovieChange(val movie: Movie): MovieRateAction
+    data object OnBackClick: MovieRateAction
+    data class OnDescriptionChange(val text: String): MovieRateAction
 }

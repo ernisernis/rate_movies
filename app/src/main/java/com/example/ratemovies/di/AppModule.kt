@@ -5,6 +5,8 @@ import com.example.ratemovies.movie.data.network.KtorRemoteMovieDataSource
 import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
 import com.example.ratemovies.movie.data.repository.DefaultMovieRepository
 import com.example.ratemovies.movie.domain.MovieRepository
+import com.example.ratemovies.movie.presentation.models.use_case.ValidateRateDescription
+import com.example.ratemovies.movie.presentation.models.use_case.ValidateRateNumber
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,5 +43,17 @@ object AppModule {
     @Singleton
     fun provideDefaultMovieRepository(remoteMovieDataSource: RemoteMovieDataSource): MovieRepository {
         return DefaultMovieRepository(remoteMovieDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideValidateRateDescription(): ValidateRateDescription {
+        return ValidateRateDescription()
+    }
+
+    @Provides
+    @Singleton
+    fun provideValidateRateNumber(): ValidateRateNumber {
+        return ValidateRateNumber()
     }
 }

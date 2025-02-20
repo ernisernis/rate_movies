@@ -14,7 +14,6 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
-import com.example.ratemovies.movie.presentation.movie_rate.MovieRateScreen
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
@@ -24,6 +23,8 @@ import com.example.ratemovies.movie.presentation.SelectedMovieViewModel
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailAction
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailScreenRoot
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreenRoot
+import com.example.ratemovies.movie.presentation.movie_rate.MovieRateAction
+import com.example.ratemovies.movie.presentation.movie_rate.MovieRateScreenRoot
 
 
 @Composable
@@ -80,12 +81,23 @@ fun App() {
                 }
                 composable<Route.MovieRate> {
                     val viewModel = hiltViewModel<MovieRateViewModel>()
-                    val state by viewModel.state.collectAsStateWithLifecycle()
+                    val selectedMovieViewModel = it.sharedHiltViewModel<SelectedMovieViewModel>(navController)
+                    val selectedMovie by selectedMovieViewModel.selectedMovie.collectAsStateWithLifecycle()
 
-                    MovieRateScreen(
-                        modifier = Modifier.fillMaxSize(),
-                        state = state,
-                        onAction = viewModel::onAction,
+                    LaunchedEffect(selectedMovie) {
+                        selectedMovie?.let { movie ->
+                            viewModel.onAction(MovieRateAction.OnSelectedMovieChange(movie))
+                        }
+                    }
+
+                    MovieRateScreenRoot(
+                        viewModel = viewModel,
+                        onBackClick = {
+                            navController.navigateUp()
+                        },
+                        onRateSubmitSuccess = {
+                            navController.popBackStack<Route.MovieList>(inclusive = false)
+                        }
                     )
                 }
             }
