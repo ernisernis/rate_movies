@@ -145,13 +145,6 @@ fun MovieDetailScreen(
                     director = state.movieUi?.movieDetailUi?.director,
                     writer = state.movieUi?.movieDetailUi?.writer,
                 )
-                // Light Divider
-                HorizontalDivider(
-                    modifier = Modifier
-                        .padding(Dimens.MovieDetailComponentPadding),
-                    thickness = 0.5.dp,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
-                )
 
                 state.movieUi?.movieDetailUi?.cast?.let { cast ->
                    // Light Divider
