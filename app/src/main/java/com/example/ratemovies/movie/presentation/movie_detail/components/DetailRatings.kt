@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.ratemovies.ui.theme.RateMoviesTheme
-import com.example.ratemovies.ui.theme.gold
 
 @Composable
 fun DetailRatings(
@@ -28,7 +27,7 @@ fun DetailRatings(
         RatingColumn(
             modifier = Modifier,
             icon = Icons.Default.StarRate,
-            iconTint = gold,
+            iconTint = MaterialTheme.colorScheme.primary,
             voteAverage = voteAverage ?: "",
             voteCount = voteCount ?: "",
         )

@@ -19,7 +19,6 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.ui.theme.RateMoviesTheme
-import com.example.ratemovies.ui.theme.gold
 
 @Composable
 fun RatingColumn(
@@ -73,7 +72,7 @@ fun RatingColumnPreview() {
         RatingColumn(
             modifier = Modifier,
             icon = Icons.Default.StarRate,
-            iconTint = gold,
+            iconTint = MaterialTheme.colorScheme.primary,
             voteAverage = "6,481",
             voteCount = "800",
         )

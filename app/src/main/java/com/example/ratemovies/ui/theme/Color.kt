@@ -2,7 +2,6 @@ package com.example.ratemovies.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val gold = Color(0xFFF3CE13)
 val primaryLight = Color(0xFF795900)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFF6BA14)
