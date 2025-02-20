@@ -1,11 +1,11 @@
 package com.example.ratemovies.movie.presentation.models
 
 import com.example.ratemovies.core.domain.util.round
-import com.example.ratemovies.movie.domain.MovieDetails
+import com.example.ratemovies.movie.domain.MovieDetail
 import java.text.NumberFormat
 import java.util.Locale
 
-data class MovieDetailsUi(
+data class MovieDetailUi(
     val id: Int,
     val releaseDate: String,
     val runtime: DisplayableValue,
@@ -24,8 +24,8 @@ data class DisplayableValue(
     val formatted: String,
 )
 
-fun MovieDetails.toMovieDetailsUi(): MovieDetailsUi {
-    return MovieDetailsUi(
+fun MovieDetail.toMovieDetailUi(): MovieDetailUi {
+    return MovieDetailUi(
         id = id,
         releaseDate = releaseDate,
         runtime = runtime.toDisplayableRuntime(),

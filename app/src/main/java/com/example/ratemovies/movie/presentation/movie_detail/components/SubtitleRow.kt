@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.example.ratemovies.movie.presentation.models.toDisplayableRuntime
-import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetails
+import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetail
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
@@ -34,8 +34,8 @@ fun SubtitleRow(
 fun SubtitleRowPreview() {
     RateMoviesTheme {
         SubtitleRow(
-            releaseDate = defaultMovieDetails.releaseDate,
-            runtime = defaultMovieDetails.runtime.toDisplayableRuntime().formatted,
+            releaseDate = defaultMovieDetail.releaseDate,
+            runtime = defaultMovieDetail.runtime.toDisplayableRuntime().formatted,
         )
     }
 }

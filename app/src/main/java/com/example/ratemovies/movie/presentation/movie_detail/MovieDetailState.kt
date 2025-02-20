@@ -1,10 +1,10 @@
 package com.example.ratemovies.movie.presentation.movie_detail
 
-import com.example.ratemovies.movie.presentation.models.MovieDetailsUi
+import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.presentation.models.MovieUi
 
 data class MovieDetailState(
-    val bannerUrl: String = "",
-    val title: String = "",
-    val imageUrl: String = "",
-    val movieDetailsUi: MovieDetailsUi? = null,
+    val movie: Movie? = null,
+    val movieUi: MovieUi? = null,
+    val isBookmarked: Boolean = false,
 )

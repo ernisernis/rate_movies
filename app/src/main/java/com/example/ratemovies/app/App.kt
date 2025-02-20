@@ -12,7 +12,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailsScreen
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailViewModel
 import com.example.ratemovies.movie.presentation.movie_list.MovieListViewModel
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateScreen
@@ -22,6 +21,8 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.example.ratemovies.movie.presentation.SelectedMovieViewModel
+import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailAction
+import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailScreenRoot
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreenRoot
 
 
@@ -53,14 +54,28 @@ fun App() {
                         }
                     )
                 }
+
                 composable<Route.MovieDetail> {
                     val viewModel = hiltViewModel<MovieDetailViewModel>()
-                    val state by viewModel.state.collectAsStateWithLifecycle()
+                    val selectedMovieViewModel = it.sharedHiltViewModel<SelectedMovieViewModel>(navController)
+                    val selectedMovie by selectedMovieViewModel.selectedMovie.collectAsStateWithLifecycle()
 
-                    MovieDetailsScreen(
-                        modifier = Modifier,
-                        state = state,
-                        onAction = viewModel::onAction,
+                    LaunchedEffect(selectedMovie) {
+                        selectedMovie?.let { movie ->
+                            viewModel.onAction(MovieDetailAction.OnSelectedMovieChange(movie))
+                        }
+                    }
+
+                    MovieDetailScreenRoot(
+                        viewModel = viewModel,
+                        onRateClick = { movie ->
+                            // It seems like we are re-selecting the same movie, but we are updating 'MovieDetail' params on Movie data class
+                            selectedMovieViewModel.onSelectMovie(movie)
+                            navController.navigate(Route.MovieRate)
+                        },
+                        onBackClick = {
+                           navController.navigateUp()
+                        }
                     )
                 }
                 composable<Route.MovieRate> {

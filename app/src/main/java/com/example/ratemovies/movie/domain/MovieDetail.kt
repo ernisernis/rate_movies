@@ -1,6 +1,6 @@
 package com.example.ratemovies.movie.domain
 
-data class MovieDetails(
+data class MovieDetail(
     val id: Int,
     val releaseDate: String,
     val runtime: Int,

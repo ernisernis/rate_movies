@@ -60,7 +60,7 @@ fun RatingColumn(
 
         Text(
             text = voteCount,
-            color = MaterialTheme.colorScheme.onBackground.copy(alpha = Dimens.MovieDetailsAlpha),
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = Dimens.MovieDetailAlpha),
             style = MaterialTheme.typography.bodyMedium,
         )
     }

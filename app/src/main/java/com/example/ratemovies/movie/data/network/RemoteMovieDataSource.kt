@@ -1,18 +1,14 @@
 package com.example.ratemovies.movie.data.network
 
-import com.example.ratemovies.core.domain.util.NetworkError
+import com.example.ratemovies.core.domain.util.DataError
 import com.example.ratemovies.core.domain.util.Result
-import com.example.ratemovies.movie.domain.Movie
-import com.example.ratemovies.movie.domain.MovieDetails
+import com.example.ratemovies.movie.data.dto.MovieDetailDto
+import com.example.ratemovies.movie.data.dto.MovieResponseDto
 
 interface RemoteMovieDataSource {
-    suspend fun getUpcomingMovies(): Result<List<Movie>, NetworkError>
-
-    suspend fun getTopRatedMovies(): Result<List<Movie>, NetworkError>
-
-    suspend fun getPopularMovies(): Result<List<Movie>, NetworkError>
-
-    suspend fun getNowPlayingMovies(): Result<List<Movie>, NetworkError>
-
-    suspend fun getMovieDetails(id: Int): Result<MovieDetails, NetworkError>
+    suspend fun getUpcomingMovies(): Result<MovieResponseDto, DataError.Remote>
+    suspend fun getTopRatedMovies(): Result<MovieResponseDto, DataError.Remote>
+    suspend fun getPopularMovies(): Result<MovieResponseDto, DataError.Remote>
+    suspend fun getNowPlayingMovies(): Result<MovieResponseDto, DataError.Remote>
+    suspend fun getMovieDetail(id: Int): Result<MovieDetailDto, DataError.Remote>
 }

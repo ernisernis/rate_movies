@@ -71,7 +71,7 @@ fun CastItem(castUi: CastUi) {
             Text(
                 text = castUi.character,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = Dimens.MovieDetailsAlpha),
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = Dimens.MovieDetailAlpha),
             )
         }
     }

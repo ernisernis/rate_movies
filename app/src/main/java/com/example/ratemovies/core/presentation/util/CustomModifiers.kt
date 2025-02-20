@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 // Custom modifier for bottom inner shadow
 fun Modifier.bottomInnerShadow(
     shadowColor: Color = Color.Black,
-    shadowAlpha: Float = Dimens.MovieDetailsAlpha,
+    shadowAlpha: Float = Dimens.MovieDetailAlpha,
     shadowHeightFraction: Float = 0.6f,
 ) = this.then(
     Modifier.drawWithContent {

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ratemovies.core.domain.util.onError
 import com.example.ratemovies.core.domain.util.onSuccess
-import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
+import com.example.ratemovies.movie.domain.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
-    private val movieDataSource: RemoteMovieDataSource,
+    private val movieRepository: MovieRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow(MovieListState())
     val state = _state.asStateFlow()
@@ -40,7 +40,7 @@ class MovieListViewModel @Inject constructor(
                 )
             }
 
-            movieDataSource
+            movieRepository
                 .getNowPlayingMovies()
                 .onSuccess { nowPlayingMovies ->
                     _state.update {
@@ -54,7 +54,7 @@ class MovieListViewModel @Inject constructor(
                     Log.d("ERNIS33", "loadMovies: $error")
                 }
 
-            movieDataSource
+            movieRepository
                 .getPopularMovies()
                 .onSuccess { popularMovies ->
                     _state.update {
@@ -68,7 +68,7 @@ class MovieListViewModel @Inject constructor(
                     Log.d("ERNIS33", "loadMovies: $error")
                 }
 
-            movieDataSource
+            movieRepository
                 .getUpcomingMovies()
                 .onSuccess { upcomingMovies ->
                     _state.update {
@@ -82,7 +82,7 @@ class MovieListViewModel @Inject constructor(
                     Log.d("ERNIS33", "loadMovies: $error")
                 }
 
-            movieDataSource
+            movieRepository
                 .getTopRatedMovies()
                 .onSuccess { topRatedMovies ->
                     _state.update {

@@ -1,7 +1,11 @@
 package com.example.ratemovies.movie.presentation.models
 
 import com.example.ratemovies.core.domain.util.round
+import com.example.ratemovies.core.presentation.util.getBannerUrl
+import com.example.ratemovies.core.presentation.util.getImageUrl
+import com.example.ratemovies.core.presentation.util.getReleaseYear
 import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetail
 
 data class MovieUi(
     val id: Int,
@@ -14,6 +18,8 @@ data class MovieUi(
     val voteAverage: String,
     val popularity: String,
     val banner: String,
+    val releaseYear: String,
+    val movieDetailUi: MovieDetailUi?,
 )
 
 fun Movie.toMovieUi(): MovieUi {
@@ -22,12 +28,14 @@ fun Movie.toMovieUi(): MovieUi {
         title = title,
         adult = adult,
         overview = overview,
-        imageUrl = "https://image.tmdb.org/t/p/w780$posterPath",
+        imageUrl = posterPath.getImageUrl(),
         releaseDate = releaseDate,
         genres = emptyList(),
         voteAverage = voteAverage.round(1).toString(),
         popularity = popularity.toInt().toString(),
-        banner = "https://image.tmdb.org/t/p/w1280$backdropPath",
+        banner = backdropPath.getBannerUrl(),
+        releaseYear = releaseDate.getReleaseYear(),
+        movieDetailUi = movieDetail?.toMovieDetailUi(),
     )
 }
 
@@ -45,5 +53,7 @@ fun defaultMovieUi(): MovieUi {
         voteAverage = "9.3",
         popularity = "4968",
         banner = "https://image.tmdb.org/t/p/w1280/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
+        releaseYear = "2024-12-12".getReleaseYear(),
+        movieDetailUi = defaultMovieDetail.toMovieDetailUi()
     )
 }

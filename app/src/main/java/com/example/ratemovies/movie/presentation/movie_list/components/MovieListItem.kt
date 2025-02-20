@@ -33,6 +33,7 @@ import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.movie.domain.Movie
 import com.example.ratemovies.movie.presentation.models.MovieUi
 import com.example.ratemovies.movie.presentation.models.toMovieUi
+import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetail
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
@@ -162,4 +163,5 @@ internal val movie = Movie(
     video = false,
     voteAverage = 123.3,
     voteCount = 12345,
+    movieDetail = defaultMovieDetail,
 )

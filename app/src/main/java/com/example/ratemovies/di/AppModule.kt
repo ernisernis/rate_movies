@@ -3,6 +3,8 @@ package com.example.ratemovies.di
 import com.example.ratemovies.core.data.networking.HttpClientFactory
 import com.example.ratemovies.movie.data.network.KtorRemoteMovieDataSource
 import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
+import com.example.ratemovies.movie.data.repository.DefaultMovieRepository
+import com.example.ratemovies.movie.domain.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,5 +35,11 @@ object AppModule {
     @Singleton
     fun provideKtorRemoteMovieDataSource(httpClient: HttpClient): RemoteMovieDataSource {
         return KtorRemoteMovieDataSource(httpClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDefaultMovieRepository(remoteMovieDataSource: RemoteMovieDataSource): MovieRepository {
+        return DefaultMovieRepository(remoteMovieDataSource)
     }
 }

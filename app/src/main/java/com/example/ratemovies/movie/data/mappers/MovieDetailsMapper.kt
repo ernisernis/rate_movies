@@ -2,15 +2,15 @@ package com.example.ratemovies.movie.data.mappers
 
 import com.example.ratemovies.movie.data.dto.CastDto
 import com.example.ratemovies.movie.data.dto.CrewDto
-import com.example.ratemovies.movie.data.dto.MovieDetailsDto
+import com.example.ratemovies.movie.data.dto.MovieDetailDto
 import com.example.ratemovies.movie.data.dto.MovieGenreDto
 import com.example.ratemovies.movie.domain.Cast
 import com.example.ratemovies.movie.domain.Crew
-import com.example.ratemovies.movie.domain.MovieDetails
+import com.example.ratemovies.movie.domain.MovieDetail
 import com.example.ratemovies.movie.domain.MovieGenre
 
-fun MovieDetailsDto.toMovieDetails(): MovieDetails {
-    return MovieDetails(
+fun MovieDetailDto.toMovieDetail(): MovieDetail {
+    return MovieDetail(
         id = id,
         releaseDate = release_date,
         runtime = runtime,

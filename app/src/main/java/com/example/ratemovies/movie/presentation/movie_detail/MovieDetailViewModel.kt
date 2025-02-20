@@ -1,13 +1,14 @@
 package com.example.ratemovies.movie.presentation.movie_detail
 
-import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ratemovies.core.domain.util.onError
+import androidx.navigation.toRoute
+import com.example.ratemovies.app.Route
 import com.example.ratemovies.core.domain.util.onSuccess
-import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
-import com.example.ratemovies.movie.domain.MovieNavArgs
-import com.example.ratemovies.movie.presentation.models.toMovieDetailsUi
+import com.example.ratemovies.movie.domain.MovieRepository
+import com.example.ratemovies.movie.presentation.models.toMovieDetailUi
+import com.example.ratemovies.movie.presentation.models.toMovieUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,40 +18,38 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
-    private val movieDataSource: RemoteMovieDataSource,
+    private val movieRepository: MovieRepository,
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
+    private val movieId = savedStateHandle.toRoute<Route.MovieDetail>().id
+
     private val _state = MutableStateFlow(MovieDetailState())
     val state = _state.asStateFlow()
-
-    fun initData(movieNavArgs: MovieNavArgs) {
-        _state.update {
-            it.copy(
-                bannerUrl = movieNavArgs.bannerUrl,
-                title = movieNavArgs.title,
-                imageUrl = movieNavArgs.imageUrl,
-            )
-        }
-        viewModelScope.launch {
-            movieDataSource
-                .getMovieDetails(movieNavArgs.id)
-                .onSuccess { movieDetails ->
-                    Log.d("ERNIS33", "initData: $movieDetails")
-                    _state.update {
-                        it.copy(
-                            movieDetailsUi = movieDetails.toMovieDetailsUi(),
-                        )
-                    }
-                }
-                .onError { error ->
-                    Log.d("ERNIS33", "initData: $error")
-                }
-        }
-    }
 
     fun onAction(action: MovieDetailAction) {
         when (action) {
             is MovieDetailAction.OnRateClick -> {
                 // TODO
+            }
+            is MovieDetailAction.OnSelectedMovieChange -> {
+                _state.update { it.copy(
+                    movie = action.movie,
+                    movieUi = action.movie.toMovieUi(),
+                ) }
+                viewModelScope.launch {
+                    movieRepository
+                        .getMovieDetail(id = movieId)
+                        .onSuccess { movieDetail ->
+                            _state.update { it.copy(
+                                movie = state.value.movie?.copy(
+                                    movieDetail = movieDetail
+                                ),
+                                movieUi = state.value.movieUi?.copy(
+                                    movieDetailUi = movieDetail.toMovieDetailUi()
+                                )
+                            ) }
+                        }
+                }
             }
         }
     }

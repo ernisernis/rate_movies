@@ -1,8 +1,8 @@
 package com.example.ratemovies.movie.presentation.movie_detail
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -16,122 +16,172 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import com.example.ratemovies.R
 import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.core.presentation.util.bottomInnerShadow
 import com.example.ratemovies.core.presentation.util.errorPainter
 import com.example.ratemovies.movie.domain.Cast
 import com.example.ratemovies.movie.domain.Crew
-import com.example.ratemovies.movie.domain.MovieDetails
+import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.domain.MovieDetail
 import com.example.ratemovies.movie.domain.MovieGenre
-import com.example.ratemovies.movie.presentation.models.defaultMovieUi
-import com.example.ratemovies.movie.presentation.models.toMovieDetailsUi
 import com.example.ratemovies.movie.presentation.movie_detail.components.CastLazyHorizontalRow
 import com.example.ratemovies.movie.presentation.movie_detail.components.DetailRatings
 import com.example.ratemovies.movie.presentation.movie_detail.components.DirectorRow
 import com.example.ratemovies.movie.presentation.movie_detail.components.GenreRow
 import com.example.ratemovies.movie.presentation.movie_detail.components.SubtitleRow
 import com.example.ratemovies.movie.presentation.movie_detail.components.TitleRow
-import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
-fun MovieDetailsScreen(
+fun MovieDetailScreenRoot(
+    viewModel: MovieDetailViewModel = hiltViewModel(),
+    onRateClick: (Movie) -> Unit,
+    onBackClick: () -> Unit,
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    MovieDetailScreen(
+        state = state,
+        modifier = Modifier
+            .fillMaxSize(),
+        onAction = { action ->
+           when (action)  {
+               is MovieDetailAction.OnRateClick -> {
+                   // TODO:
+               }
+               is MovieDetailAction.OnBackClick -> onBackClick()
+               else -> Unit
+           }
+            viewModel.onAction(action)
+        }
+    )
+}
+
+@Composable
+fun MovieDetailScreen(
     state: MovieDetailState,
     modifier: Modifier = Modifier,
-    onAction: (MovieDetailAction) -> Unit,
+    onAction: (MovieDetailAction) -> Unit
 ) {
     Column(
-        modifier =
-            modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .background(color = MaterialTheme.colorScheme.background),
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
     ) {
-        // Banner
-        AsyncImage(
-            model = state.bannerUrl,
-            contentDescription = "Banner Image",
-            error = errorPainter,
-            placeholder = errorPainter,
-            fallback = errorPainter,
-            modifier =
-                Modifier
+        Box {
+            // Banner
+            AsyncImage(
+                model = state.movieUi?.banner,
+                modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(16 / 9f)
                     .bottomInnerShadow(),
-        )
+                contentDescription = stringResource(R.string.description_banner),
+                error = errorPainter,
+                placeholder = errorPainter,
+                fallback = errorPainter,
+            )
+        }
+
         // Title and Image
         TitleRow(
-            modifier =
-                Modifier
-                    .padding(horizontal = Dimens.MovieDetailContainerPadding),
-            title = state.title,
-            imageUrl = state.imageUrl,
+            modifier = Modifier
+                .padding(horizontal = Dimens.MovieDetailContainerPadding),
+            title = state.movieUi?.title ?: "",
+            imageUrl = state.movieUi?.imageUrl ?: "",
         )
 
-        AnimatedVisibility(visible = state.movieDetailsUi != null) {
+        AnimatedVisibility(
+            visible = state.movieUi?.movieDetailUi != null
+        ) {
             Column {
                 // Subtitle
                 SubtitleRow(
                     modifier =
                         Modifier.padding(
-                            start = Dimens.MovieDetailContainerPadding,
-                            bottom = Dimens.MovieDetailContainerPadding / 2,
+                            start = Dimens.MovieDetailItemPaddingBig,
+                            bottom = Dimens.MovieDetailItemPaddingNormal,
                         ),
-                    releaseDate = state.movieDetailsUi?.releaseDate,
-                    runtime = state.movieDetailsUi?.runtime?.formatted,
+                    releaseDate = state.movieUi?.movieDetailUi?.releaseDate,
+                    runtime = state.movieUi?.movieDetailUi?.runtime?.formatted,
                 )
 
                 // Ratings
                 DetailRatings(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(Dimens.MovieDetailComponentPadding),
-                    voteAverage = state.movieDetailsUi?.voteAverage,
-                    voteCount = state.movieDetailsUi?.voteCount?.formatted,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(Dimens.MovieDetailComponentPadding),
+                    voteAverage = state.movieUi?.movieDetailUi?.voteAverage,
+                    voteCount = state.movieUi?.movieDetailUi?.voteCount?.formatted,
                     onRatingClick = { onAction(MovieDetailAction.OnRateClick) },
                 )
 
                 // Genre list
                 GenreRow(
-                    modifier = Modifier.horizontalScroll(rememberScrollState()).padding(Dimens.MovieDetailComponentPadding),
-                    genres = state.movieDetailsUi?.genres,
+                    modifier = Modifier
+                        .horizontalScroll(rememberScrollState())
+                        .padding(Dimens.MovieDetailComponentPadding),
+                    genres = state.movieUi?.movieDetailUi?.genres,
                 )
                 // Overview (movie description)
                 Text(
-                    text = state.movieDetailsUi?.overview ?: "",
-                    modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
+                    text = state.movieUi?.movieDetailUi?.overview ?: "",
+                    modifier = Modifier
+                        .padding(Dimens.MovieDetailComponentPadding),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = Dimens.MovieDetailsAlpha),
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = Dimens.MovieDetailAlpha),
                 )
                 // Director, Writer
                 DirectorRow(
-                    modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
-                    director = state.movieDetailsUi?.director,
-                    writer = state.movieDetailsUi?.writer,
+                    modifier = Modifier
+                        .padding(Dimens.MovieDetailComponentPadding),
+                    director = state.movieUi?.movieDetailUi?.director,
+                    writer = state.movieUi?.movieDetailUi?.writer,
                 )
                 // Light Divider
                 HorizontalDivider(
-                    modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
+                    modifier = Modifier
+                        .padding(Dimens.MovieDetailComponentPadding),
                     thickness = 0.5.dp,
                     color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
                 )
                 // Cast title
                 Text(
-                    text = "Starring",
-                    modifier = Modifier.padding(Dimens.MovieDetailComponentPadding),
+                    text = stringResource(R.string.movie_detail_starring),
+                    modifier = Modifier
+                        .padding(Dimens.MovieDetailComponentPadding),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
-                // Cast tiles
-                CastLazyHorizontalRow(
-                    list = state.movieDetailsUi?.cast,
-                    modifier = Modifier.height(200.dp),
-                )
+
+                state.movieUi?.movieDetailUi?.cast?.let { cast ->
+                   // Light Divider
+                    HorizontalDivider(
+                        modifier = Modifier
+                            .padding(Dimens.MovieDetailComponentPadding),
+                        thickness = 0.5.dp,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
+                    )
+                    // Cast title
+                    Text(
+                        text = stringResource(R.string.movie_detail_starring),
+                        modifier = Modifier
+                            .padding(Dimens.MovieDetailComponentPadding),
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    // Cast tiles
+                    CastLazyHorizontalRow(
+                        modifier = Modifier
+                            .height(200.dp),
+                        list = cast,
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(100.dp))
             }
@@ -139,26 +189,28 @@ fun MovieDetailsScreen(
     }
 }
 
-@Composable
-@PreviewLightDark
-private fun MovieDetailsScreenPreview() {
-    RateMoviesTheme {
-        MovieDetailsScreen(
-            state =
-                MovieDetailState(
-                    bannerUrl = defaultMovieUi().banner,
-                    title = defaultMovieUi().title,
-                    imageUrl = defaultMovieUi().imageUrl,
-                    movieDetailsUi = defaultMovieDetails.toMovieDetailsUi(),
-                ),
-            modifier = Modifier,
-            onAction = {},
-        )
-    }
-}
 
-internal val defaultMovieDetails =
-    MovieDetails(
+// TODO:
+//@Composable
+//@PreviewLightDark
+//private fun MovieDetailsScreenPreview() {
+//    RateMoviesTheme {
+//        MovieDetailsScreen(
+//            state =
+//                MovieDetailState(
+//                    bannerUrl = defaultMovieUi().banner,
+//                    title = defaultMovieUi().title,
+//                    imageUrl = defaultMovieUi().imageUrl,
+//                    movieDetailsUi = defaultMovieDetail.toMovieDetailsUi(),
+//                ),
+//            modifier = Modifier,
+//            onAction = {},
+//        )
+//    }
+//}
+
+internal val defaultMovieDetail =
+    MovieDetail(
         id = 912649,
         releaseDate = "2024-10-22",
         runtime = 109,

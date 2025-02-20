@@ -3,7 +3,7 @@ package com.example.ratemovies.movie.data.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDetailsDto(
+data class MovieDetailDto(
     val id: Int,
     val release_date: String,
     val runtime: Int,
