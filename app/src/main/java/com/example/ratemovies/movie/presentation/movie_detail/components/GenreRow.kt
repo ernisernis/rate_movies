@@ -12,7 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.movie.presentation.models.MovieGenreUi
@@ -31,22 +31,28 @@ fun GenreRow(
             Box(
                 modifier =
                     Modifier.background(
-                        MaterialTheme.colorScheme.primaryContainer,
+                        MaterialTheme.colorScheme.primary,
                         RoundedCornerShape(50),
                     ).padding(vertical = 8.dp, horizontal = 14.dp),
             ) {
-                Text(genre.name, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimaryContainer)
+                Text(
+                    text = genre.name,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onPrimary,
+                )
             }
         }
     }
 }
 
+@Preview
 @Composable
-@PreviewLightDark
 fun GenreRowPreview() {
     RateMoviesTheme {
         GenreRow(
-            modifier = Modifier.horizontalScroll(rememberScrollState()).padding(Dimens.MovieDetailContainerPadding),
+            modifier = Modifier
+                .horizontalScroll(rememberScrollState())
+                .padding(Dimens.MovieDetailContainerPadding),
             genres =
                 listOf(
                     MovieGenreUi(

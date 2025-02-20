@@ -129,13 +129,15 @@ fun MovieDetailScreen(
                     genres = state.movieUi?.movieDetailUi?.genres,
                 )
                 // Overview (movie description)
-                Text(
-                    text = state.movieUi?.movieDetailUi?.overview ?: "",
-                    modifier = Modifier
-                        .padding(Dimens.MovieDetailComponentPadding),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = Dimens.MovieDetailAlpha),
-                )
+                state.movieUi?.movieDetailUi?.overview?.let {
+                    Text(
+                        text = it,
+                        modifier = Modifier
+                            .padding(Dimens.MovieDetailComponentPadding),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = Dimens.MovieDetailAlpha),
+                    )
+                }
                 // Director, Writer
                 DirectorRow(
                     modifier = Modifier
@@ -149,14 +151,6 @@ fun MovieDetailScreen(
                         .padding(Dimens.MovieDetailComponentPadding),
                     thickness = 0.5.dp,
                     color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
-                )
-                // Cast title
-                Text(
-                    text = stringResource(R.string.movie_detail_starring),
-                    modifier = Modifier
-                        .padding(Dimens.MovieDetailComponentPadding),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
                 )
 
                 state.movieUi?.movieDetailUi?.cast?.let { cast ->

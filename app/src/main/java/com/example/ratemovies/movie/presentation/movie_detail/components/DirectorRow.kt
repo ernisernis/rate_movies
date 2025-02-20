@@ -9,12 +9,14 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.example.ratemovies.R
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
@@ -26,7 +28,7 @@ fun DirectorRow(
     val directorText =
         if (director != null) {
             buildAnnotatedString {
-                append("Director: ")
+                append(stringResource(R.string.movie_detail_director))
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                     append(director)
                 }
@@ -38,7 +40,7 @@ fun DirectorRow(
     val writerText =
         if (writer != null) {
             buildAnnotatedString {
-                append("Writer: ")
+                append(stringResource(R.string.movie_detail_writer))
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                     append(writer)
                 }
@@ -54,9 +56,9 @@ fun DirectorRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        if (directorText != null) {
+        directorText?.let {
             Text(
-                text = directorText,
+                text = it,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground,
             )
@@ -68,9 +70,9 @@ fun DirectorRow(
                 color = MaterialTheme.colorScheme.onBackground,
             )
         }
-        if (writerText != null) {
+        writerText?.let {
             Text(
-                text = writerText,
+                text = it,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground,
             )
