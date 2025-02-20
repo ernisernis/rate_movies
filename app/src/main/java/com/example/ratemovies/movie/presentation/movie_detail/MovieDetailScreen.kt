@@ -62,7 +62,9 @@ fun MovieDetailScreenRoot(
         onAction = { action ->
            when (action)  {
                is MovieDetailAction.OnRateClick -> {
-                   // TODO:
+                   state.movie?.let {
+                       onRateClick(it)
+                   }
                }
                is MovieDetailAction.OnBackClick -> onBackClick()
                else -> Unit
