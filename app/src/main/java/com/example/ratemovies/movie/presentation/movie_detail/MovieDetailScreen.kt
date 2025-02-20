@@ -2,14 +2,17 @@ package com.example.ratemovies.movie.presentation.movie_detail
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
@@ -26,6 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.example.ratemovies.R
 import com.example.ratemovies.core.presentation.util.Dimens
+import com.example.ratemovies.core.presentation.util.RmIcons
 import com.example.ratemovies.core.presentation.util.bottomInnerShadow
 import com.example.ratemovies.core.presentation.util.errorPainter
 import com.example.ratemovies.movie.domain.Cast
@@ -33,6 +37,7 @@ import com.example.ratemovies.movie.domain.Crew
 import com.example.ratemovies.movie.domain.Movie
 import com.example.ratemovies.movie.domain.MovieDetail
 import com.example.ratemovies.movie.domain.MovieGenre
+import com.example.ratemovies.movie.presentation.components.DefaultIconContainer
 import com.example.ratemovies.movie.presentation.models.toMovieUi
 import com.example.ratemovies.movie.presentation.movie_detail.components.CastLazyHorizontalRow
 import com.example.ratemovies.movie.presentation.movie_detail.components.DetailRatings
@@ -90,6 +95,33 @@ fun MovieDetailScreen(
                 placeholder = errorPainter,
                 fallback = errorPainter,
             )
+            // Close, Bookmark buttons
+            Row(
+                modifier = Modifier
+                    .statusBarsPadding()
+                    .fillMaxWidth()
+                    .padding(Dimens.MovieDetailItemPaddingBig),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                DefaultIconContainer(
+                    icon = RmIcons.Back,
+                    modifier = Modifier,
+                    onClick = {
+                        onAction(MovieDetailAction.OnBackClick)
+                    }
+                )
+                DefaultIconContainer(
+                    icon = if (state.isBookmarked) {
+                        RmIcons.BookmarkSelected
+                    } else {
+                        RmIcons.BookmarkUnselected
+                    },
+                    modifier = Modifier,
+                    onClick = {
+                        // TODO:
+                    }
+                )
+            }
         }
 
         // Title and Image
