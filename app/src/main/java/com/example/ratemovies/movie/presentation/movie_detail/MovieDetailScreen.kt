@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -32,12 +33,15 @@ import com.example.ratemovies.movie.domain.Crew
 import com.example.ratemovies.movie.domain.Movie
 import com.example.ratemovies.movie.domain.MovieDetail
 import com.example.ratemovies.movie.domain.MovieGenre
+import com.example.ratemovies.movie.presentation.models.toMovieUi
 import com.example.ratemovies.movie.presentation.movie_detail.components.CastLazyHorizontalRow
 import com.example.ratemovies.movie.presentation.movie_detail.components.DetailRatings
 import com.example.ratemovies.movie.presentation.movie_detail.components.DirectorRow
 import com.example.ratemovies.movie.presentation.movie_detail.components.GenreRow
 import com.example.ratemovies.movie.presentation.movie_detail.components.SubtitleRow
 import com.example.ratemovies.movie.presentation.movie_detail.components.TitleRow
+import com.example.ratemovies.movie.presentation.movie_list.components.movie
+import com.example.ratemovies.ui.theme.RateMoviesTheme
 
 @Composable
 fun MovieDetailScreenRoot(
@@ -176,25 +180,21 @@ fun MovieDetailScreen(
     }
 }
 
-
-// TODO:
-//@Composable
-//@PreviewLightDark
-//private fun MovieDetailsScreenPreview() {
-//    RateMoviesTheme {
-//        MovieDetailsScreen(
-//            state =
-//                MovieDetailState(
-//                    bannerUrl = defaultMovieUi().banner,
-//                    title = defaultMovieUi().title,
-//                    imageUrl = defaultMovieUi().imageUrl,
-//                    movieDetailsUi = defaultMovieDetail.toMovieDetailsUi(),
-//                ),
-//            modifier = Modifier,
-//            onAction = {},
-//        )
-//    }
-//}
+@Preview
+@Composable
+private fun MovieDetailsScreenPreview() {
+    val state = MovieDetailState(
+        movie = movie,
+        movieUi = movie.toMovieUi(),
+    )
+    RateMoviesTheme {
+        MovieDetailScreen(
+            state = state,
+            modifier = Modifier,
+            onAction = {},
+        )
+    }
+}
 
 internal val defaultMovieDetail =
     MovieDetail(
@@ -225,13 +225,25 @@ internal val defaultMovieDetail =
             listOf(
                 Cast(
                     id = 2524,
-                    name = "Tom Hardy",
+                    name = "Tom Hardy 1",
                     profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
                     character = "Eddie Brock / Venom",
                 ),
                 Cast(
                     id = 2524,
-                    name = "Tom Hardy",
+                    name = "Tom Hardy 2",
+                    profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
+                    character = "Eddie Brock / Venom",
+                ),
+                Cast(
+                    id = 2524,
+                    name = "Tom Hardy 3",
+                    profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
+                    character = "Eddie Brock / Venom",
+                ),
+                Cast(
+                    id = 2524,
+                    name = "Tom Hardy 4",
                     profilePath = "/d81K0RH8UX7tZj49tZaQhZ9ewH.jpg",
                     character = "Eddie Brock / Venom",
                 ),
