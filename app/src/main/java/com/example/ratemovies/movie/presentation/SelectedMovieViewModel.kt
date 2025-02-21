@@ -18,4 +18,8 @@ class SelectedMovieViewModel @Inject constructor(
     fun onSelectMovie(movie: Movie?) {
         _selectedMovie.value = movie
     }
+
+    fun onSelectMovieId(id: Int) {
+        // TODO:
+    }
 }

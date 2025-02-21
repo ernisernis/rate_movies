@@ -37,6 +37,8 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.example.ratemovies.core.presentation.util.BottomNavigationVisibility
 import com.example.ratemovies.movie.presentation.SelectedMovieViewModel
+import com.example.ratemovies.movie.presentation.movie_bookmark.MovieBookmarkScreenRoot
+import com.example.ratemovies.movie.presentation.movie_bookmark.MovieBookmarkViewModel
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailAction
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailScreenRoot
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreenRoot
@@ -199,11 +201,16 @@ fun RmNavHost(
             }
 
             composable<Route.MovieBookmark> {
-                Box(
-                    modifier = Modifier
-                        .background(Color.Red)
-                        .fillMaxSize()
-                ) {  }
+                val viewModel = hiltViewModel<MovieBookmarkViewModel>()
+                val selectedMovieViewModel = it.sharedHiltViewModel<SelectedMovieViewModel>(navController)
+
+                MovieBookmarkScreenRoot(
+                    viewModel = viewModel,
+                    onMovieIdClick = { id ->
+                        selectedMovieViewModel.onSelectMovieId(id)
+                        navController.navigate(Route.MovieDetail(id))
+                    }
+                )
             }
         }
     }
