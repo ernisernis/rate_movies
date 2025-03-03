@@ -82,8 +82,11 @@ dependencies {
     kspAndroidTest(libs.hilt.compiler)
 
     // Room
-    implementation(libs.androidx.room)
+    implementation(libs.bundles.room)
     ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-    testImplementation(libs.androidx.room.test)
+    testImplementation(libs.androidx.room.testing)
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }

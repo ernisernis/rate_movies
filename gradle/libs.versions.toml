@@ -52,8 +52,7 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 androidx-room = { group = "androidx.room", name = "room-runtime", version.ref = "room_version" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room_version" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room_version" }
-androidx-room-test = { group = "androidx.room", name = "room-testing", version.ref = "room_version"}
-
+androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room_version"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -75,4 +74,8 @@ ktor = [
 coil = [
     "coil-compose",
     "coil-compose-network"
+]
+room = [
+    "androidx-room",
+    "androidx-room-ktx",
 ]
