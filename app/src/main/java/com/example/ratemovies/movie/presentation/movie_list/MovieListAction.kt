@@ -1,6 +1,6 @@
 package com.example.ratemovies.movie.presentation.movie_list
 
-import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.domain.model.Movie
 
 
 interface MovieListAction {

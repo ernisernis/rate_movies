@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.ratemovies.app.Route
 import com.example.ratemovies.core.domain.util.onSuccess
-import com.example.ratemovies.movie.domain.MovieRepository
+import com.example.ratemovies.movie.domain.repository.MovieRepository
 import com.example.ratemovies.movie.presentation.models.toMovieDetailUi
 import com.example.ratemovies.movie.presentation.models.toMovieUi
 import dagger.hilt.android.lifecycle.HiltViewModel

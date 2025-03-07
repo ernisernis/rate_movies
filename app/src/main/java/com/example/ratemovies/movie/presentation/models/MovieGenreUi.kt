@@ -1,6 +1,6 @@
 package com.example.ratemovies.movie.presentation.models
 
-import com.example.ratemovies.movie.domain.MovieGenre
+import com.example.ratemovies.movie.domain.model.MovieGenre
 
 data class MovieGenreUi(
     val id: Int,

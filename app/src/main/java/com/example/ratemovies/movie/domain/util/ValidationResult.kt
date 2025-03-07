@@ -1,4 +1,4 @@
-package com.example.ratemovies.movie.domain
+package com.example.ratemovies.movie.domain.util
 
 data class ValidationResult(
     val successful: Boolean,

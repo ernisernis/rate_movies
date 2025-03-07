@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.ratemovies.R
 import com.example.ratemovies.core.presentation.util.Dimens
-import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.domain.model.Movie
 import com.example.ratemovies.movie.presentation.models.MovieUi
 import com.example.ratemovies.movie.presentation.models.toMovieUi
 import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetail

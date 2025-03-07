@@ -1,4 +1,4 @@
-package com.example.ratemovies.movie.domain
+package com.example.ratemovies.movie.domain.util
 
 import com.example.ratemovies.movie.presentation.models.MovieUi
 import kotlinx.serialization.Serializable

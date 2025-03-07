@@ -5,13 +5,13 @@ import com.example.ratemovies.core.domain.util.Result
 import com.example.ratemovies.core.domain.util.map
 import com.example.ratemovies.movie.data.mappers.toMovie
 import com.example.ratemovies.movie.data.mappers.toMovieDetail
-import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
-import com.example.ratemovies.movie.domain.Movie
-import com.example.ratemovies.movie.domain.MovieDetail
-import com.example.ratemovies.movie.domain.MovieRepository
+import com.example.ratemovies.movie.domain.data_source.MovieDataSource
+import com.example.ratemovies.movie.domain.model.Movie
+import com.example.ratemovies.movie.domain.model.MovieDetail
+import com.example.ratemovies.movie.domain.repository.MovieRepository
 
-class DefaultMovieRepository(
-    private val remoteMovieDataSource: RemoteMovieDataSource,
+class MovieRepositoryImpl(
+    private val remoteMovieDataSource: MovieDataSource,
 ) : MovieRepository {
     override suspend fun getUpcomingMovies(): Result<List<Movie>, DataError.Remote> {
         return remoteMovieDataSource

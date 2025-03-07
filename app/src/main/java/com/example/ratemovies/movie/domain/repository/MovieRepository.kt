@@ -1,7 +1,9 @@
-package com.example.ratemovies.movie.domain
+package com.example.ratemovies.movie.domain.repository
 
 import com.example.ratemovies.core.domain.util.DataError
 import com.example.ratemovies.core.domain.util.Result
+import com.example.ratemovies.movie.domain.model.Movie
+import com.example.ratemovies.movie.domain.model.MovieDetail
 
 interface MovieRepository {
     suspend fun getUpcomingMovies(): Result<List<Movie>, DataError.Remote>

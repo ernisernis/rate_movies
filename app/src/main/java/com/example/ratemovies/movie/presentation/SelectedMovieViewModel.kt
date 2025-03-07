@@ -1,7 +1,7 @@
 package com.example.ratemovies.movie.presentation
 
 import androidx.lifecycle.ViewModel
-import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.domain.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

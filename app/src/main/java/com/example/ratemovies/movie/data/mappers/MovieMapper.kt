@@ -2,8 +2,8 @@ package com.example.ratemovies.movie.data.mappers
 
 import com.example.ratemovies.core.presentation.util.formatVoteAverage
 import com.example.ratemovies.movie.data.dto.MovieDto
-import com.example.ratemovies.movie.domain.Movie
-import com.example.ratemovies.movie.domain.Rating
+import com.example.ratemovies.movie.domain.model.Movie
+import com.example.ratemovies.movie.domain.model.Rating
 import com.example.ratemovies.movie.presentation.models.toDisplayableRuntime
 import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetail
 

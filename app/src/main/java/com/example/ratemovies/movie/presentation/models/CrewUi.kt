@@ -1,6 +1,6 @@
 package com.example.ratemovies.movie.presentation.models
 
-import com.example.ratemovies.movie.domain.Crew
+import com.example.ratemovies.movie.domain.model.Crew
 
 data class CrewUi(
     val id: Int,

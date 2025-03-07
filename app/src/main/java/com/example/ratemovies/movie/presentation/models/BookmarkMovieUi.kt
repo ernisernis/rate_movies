@@ -2,7 +2,7 @@ package com.example.ratemovies.movie.presentation.models
 
 import com.example.ratemovies.core.presentation.util.getImageUrl
 import com.example.ratemovies.core.presentation.util.getReleaseYear
-import com.example.ratemovies.movie.domain.BookmarkMovie
+import com.example.ratemovies.movie.domain.model.BookmarkMovie
 
 data class BookmarkMovieUi(
     val id: Int,

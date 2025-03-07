@@ -1,6 +1,6 @@
 package com.example.ratemovies.movie.presentation.movie_detail
 
-import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.domain.model.Movie
 import com.example.ratemovies.movie.presentation.models.MovieUi
 
 data class MovieDetailState(

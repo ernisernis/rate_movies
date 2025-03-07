@@ -1,6 +1,6 @@
 package com.example.ratemovies.movie.presentation.models.use_case
 
-import com.example.ratemovies.movie.domain.ValidationResult
+import com.example.ratemovies.movie.domain.util.ValidationResult
 
 class ValidateRateNumber {
 

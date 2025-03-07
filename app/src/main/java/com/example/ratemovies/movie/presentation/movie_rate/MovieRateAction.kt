@@ -1,6 +1,6 @@
 package com.example.ratemovies.movie.presentation.movie_rate
 
-import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.domain.model.Movie
 
 sealed interface MovieRateAction {
     data class OnMovieRateClick(val index: Int): MovieRateAction

@@ -1,7 +1,7 @@
 package com.example.ratemovies.movie.presentation.models
 
 import com.example.ratemovies.core.domain.util.round
-import com.example.ratemovies.movie.domain.MovieDetail
+import com.example.ratemovies.movie.domain.model.MovieDetail
 import java.text.NumberFormat
 import java.util.Locale
 

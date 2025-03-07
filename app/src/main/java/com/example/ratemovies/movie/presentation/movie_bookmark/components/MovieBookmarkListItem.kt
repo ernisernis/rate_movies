@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.example.ratemovies.R
 import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.core.presentation.util.RmIcons
-import com.example.ratemovies.movie.domain.BookmarkMovie
+import com.example.ratemovies.movie.domain.model.BookmarkMovie
 import com.example.ratemovies.movie.presentation.components.DefaultIconContainer
 import com.example.ratemovies.movie.presentation.components.PosterImage
 import com.example.ratemovies.movie.presentation.models.BookmarkMovieUi

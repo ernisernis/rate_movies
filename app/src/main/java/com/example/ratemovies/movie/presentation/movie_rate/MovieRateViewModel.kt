@@ -3,8 +3,8 @@ package com.example.ratemovies.movie.presentation.movie_rate
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ratemovies.movie.data.mappers.toRating
-import com.example.ratemovies.movie.domain.Movie
-import com.example.ratemovies.movie.domain.MovieRepository
+import com.example.ratemovies.movie.domain.model.Movie
+import com.example.ratemovies.movie.domain.repository.MovieRepository
 import com.example.ratemovies.movie.presentation.models.toMovieUi
 import com.example.ratemovies.movie.presentation.models.use_case.ValidateRateDescription
 import com.example.ratemovies.movie.presentation.models.use_case.ValidateRateNumber

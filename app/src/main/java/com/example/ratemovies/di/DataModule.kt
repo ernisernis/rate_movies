@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import com.example.ratemovies.core.data.networking.HttpClientFactory
 import com.example.ratemovies.movie.data.database.MovieDatabase
-import com.example.ratemovies.movie.data.network.KtorRemoteMovieDataSource
-import com.example.ratemovies.movie.data.network.RemoteMovieDataSource
-import com.example.ratemovies.movie.data.repository.DefaultMovieRepository
-import com.example.ratemovies.movie.domain.MovieRepository
+import com.example.ratemovies.movie.data.data_source.MovieDataSourceImpl
+import com.example.ratemovies.movie.domain.data_source.MovieDataSource
+import com.example.ratemovies.movie.data.repository.MovieRepositoryImpl
+import com.example.ratemovies.movie.domain.repository.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,13 +48,13 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideKtorRemoteMovieDataSource(httpClient: HttpClient): RemoteMovieDataSource {
-        return KtorRemoteMovieDataSource(httpClient)
+    fun provideKtorRemoteMovieDataSource(httpClient: HttpClient): MovieDataSource {
+        return MovieDataSourceImpl(httpClient)
     }
 
     @Provides
     @Singleton
-    fun provideDefaultMovieRepository(remoteMovieDataSource: RemoteMovieDataSource): MovieRepository {
-        return DefaultMovieRepository(remoteMovieDataSource)
+    fun provideDefaultMovieRepository(remoteMovieDataSource: MovieDataSource): MovieRepository {
+        return MovieRepositoryImpl(remoteMovieDataSource)
     }
 }

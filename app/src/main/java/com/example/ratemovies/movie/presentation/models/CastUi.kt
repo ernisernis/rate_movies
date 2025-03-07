@@ -1,6 +1,6 @@
 package com.example.ratemovies.movie.presentation.models
 
-import com.example.ratemovies.movie.domain.Cast
+import com.example.ratemovies.movie.domain.model.Cast
 
 data class CastUi(
     val id: Int,

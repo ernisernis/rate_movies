@@ -5,11 +5,11 @@ import com.example.ratemovies.movie.data.dto.CreditsResponseDto
 import com.example.ratemovies.movie.data.dto.CrewDto
 import com.example.ratemovies.movie.data.dto.MovieDetailDto
 import com.example.ratemovies.movie.data.dto.MovieGenreDto
-import com.example.ratemovies.movie.domain.Cast
-import com.example.ratemovies.movie.domain.CreditsResponse
-import com.example.ratemovies.movie.domain.Crew
-import com.example.ratemovies.movie.domain.MovieDetail
-import com.example.ratemovies.movie.domain.MovieGenre
+import com.example.ratemovies.movie.domain.model.Cast
+import com.example.ratemovies.movie.domain.model.CreditsResponse
+import com.example.ratemovies.movie.domain.model.Crew
+import com.example.ratemovies.movie.domain.model.MovieDetail
+import com.example.ratemovies.movie.domain.model.MovieGenre
 
 fun MovieDetailDto.toMovieDetail(): MovieDetail {
     return MovieDetail(

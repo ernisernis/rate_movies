@@ -4,7 +4,7 @@ import com.example.ratemovies.core.domain.util.round
 import com.example.ratemovies.core.presentation.util.getBannerUrl
 import com.example.ratemovies.core.presentation.util.getImageUrl
 import com.example.ratemovies.core.presentation.util.getReleaseYear
-import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.domain.model.Movie
 import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetail
 
 data class MovieUi(

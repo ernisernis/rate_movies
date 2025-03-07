@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.example.ratemovies.core.presentation.util.Dimens
-import com.example.ratemovies.movie.domain.Movie
+import com.example.ratemovies.movie.domain.model.Movie
 import com.example.ratemovies.movie.presentation.models.toMovieUi
 import com.example.ratemovies.ui.theme.RateMoviesTheme
 
