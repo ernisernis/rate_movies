@@ -10,3 +10,27 @@ data class MovieDetail(
     val overview: String,
     val credits: CreditsResponse,
 )
+
+data class MovieGenre(
+    val id: Int,
+    val name: String,
+)
+
+data class CreditsResponse(
+    val cast: List<Cast>,
+    val crew: List<Crew>,
+)
+
+data class Cast(
+    val id: Int,
+    val name: String,
+    val profilePath: String?,
+    val character: String,
+)
+
+data class Crew(
+    val id: Int,
+    val name: String,
+    val job: String,
+    val profilePath: String,
+)
