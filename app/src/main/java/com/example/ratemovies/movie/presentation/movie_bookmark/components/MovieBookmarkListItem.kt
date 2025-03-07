@@ -44,9 +44,7 @@ fun MovieBookmarkListItem(
             .fillMaxWidth()
             .clickable(onClick = onClick)
             .padding(Dimens.MovieBookmarkItemPaddingNormal),
-        horizontalArrangement = Arrangement.spacedBy(
-            Dimens.MovieBookmarkItemPaddingNormal
-        ),
+        horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingNormal),
         verticalAlignment = Alignment.CenterVertically
     ) {
 
@@ -59,10 +57,7 @@ fun MovieBookmarkListItem(
         Column(
             modifier = Modifier
                 .weight(1f),
-            verticalArrangement = Arrangement.spacedBy(
-                Dimens.MovieBookmarkItemPaddingSmall,
-                Alignment.CenterVertically
-            ),
+            verticalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingSmall, Alignment.CenterVertically),
         ) {
             // Title
             Text(
@@ -76,23 +71,17 @@ fun MovieBookmarkListItem(
 
             // Year + runtime
             Row(
-                horizontalArrangement = Arrangement.spacedBy(
-                    Dimens.MovieBookmarkItemPaddingNormal
-                )
+                horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingNormal)
             ) {
                 Text(
                     text = bookmarkMovieUi.releaseYear,
-                    color = MaterialTheme.colorScheme.onSurface.copy(
-                        alpha = Dimens.MovieBookmarkAlpha
-                    ),
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.MovieBookmarkAlpha),
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 bookmarkMovieUi.runtimeFormatted?.let {
                     Text(
                         text = it,
-                        color = MaterialTheme.colorScheme.onSurface.copy(
-                            alpha = Dimens.MovieBookmarkAlpha
-                        ),
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = Dimens.MovieBookmarkAlpha),
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }
@@ -101,9 +90,7 @@ fun MovieBookmarkListItem(
             // Star icon + rating
             Row(
                 modifier = Modifier,
-                horizontalArrangement = Arrangement.spacedBy(
-                    Dimens.MovieBookmarkItemPaddingSmall
-                ),
+                horizontalArrangement = Arrangement.spacedBy(Dimens.MovieBookmarkItemPaddingSmall),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
