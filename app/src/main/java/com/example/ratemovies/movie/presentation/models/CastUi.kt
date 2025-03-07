@@ -5,7 +5,7 @@ import com.example.ratemovies.movie.domain.Cast
 data class CastUi(
     val id: Int,
     val name: String,
-    val profilePath: String,
+    val profilePath: String?,
     val character: String,
 )
 

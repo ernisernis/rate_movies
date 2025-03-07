@@ -33,6 +33,7 @@ import com.example.ratemovies.core.presentation.util.RmIcons
 import com.example.ratemovies.core.presentation.util.bottomInnerShadow
 import com.example.ratemovies.core.presentation.util.errorPainter
 import com.example.ratemovies.movie.domain.Cast
+import com.example.ratemovies.movie.domain.CreditsResponse
 import com.example.ratemovies.movie.domain.Crew
 import com.example.ratemovies.movie.domain.Movie
 import com.example.ratemovies.movie.domain.MovieDetail
@@ -238,24 +239,25 @@ internal val defaultMovieDetail =
         voteAverage = 6.387,
         voteCount = 800,
         genres =
-            listOf(
-                MovieGenre(
-                    id = 878,
-                    name = "Science Fiction",
-                ),
-                MovieGenre(
-                    id = 28,
-                    name = "Action",
-                ),
-                MovieGenre(
-                    id = 12,
-                    name = "Adventure",
-                ),
+        listOf(
+            MovieGenre(
+                id = 878,
+                name = "Science Fiction",
             ),
+            MovieGenre(
+                id = 28,
+                name = "Action",
+            ),
+            MovieGenre(
+                id = 12,
+                name = "Adventure",
+            ),
+        ),
         overview =
-            "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, " +
+        "Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, " +
                 "the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie's last dance",
-        cast =
+        credits = CreditsResponse(
+            cast =
             listOf(
                 Cast(
                     id = 2524,
@@ -282,7 +284,7 @@ internal val defaultMovieDetail =
                     character = "Eddie Brock / Venom",
                 ),
             ),
-        crew =
+            crew =
             listOf(
                 Crew(
                     id = 1195200,
@@ -296,5 +298,6 @@ internal val defaultMovieDetail =
                     job = "Director",
                     profilePath = "/bSpGO1dKFfwb9mUc4KdUpBpRfYH.jpg",
                 ),
-            ),
+            )
+        ),
     )

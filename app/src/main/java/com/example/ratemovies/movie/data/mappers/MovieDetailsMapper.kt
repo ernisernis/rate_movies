@@ -1,10 +1,12 @@
 package com.example.ratemovies.movie.data.mappers
 
 import com.example.ratemovies.movie.data.dto.CastDto
+import com.example.ratemovies.movie.data.dto.CreditsResponseDto
 import com.example.ratemovies.movie.data.dto.CrewDto
 import com.example.ratemovies.movie.data.dto.MovieDetailDto
 import com.example.ratemovies.movie.data.dto.MovieGenreDto
 import com.example.ratemovies.movie.domain.Cast
+import com.example.ratemovies.movie.domain.CreditsResponse
 import com.example.ratemovies.movie.domain.Crew
 import com.example.ratemovies.movie.domain.MovieDetail
 import com.example.ratemovies.movie.domain.MovieGenre
@@ -16,40 +18,85 @@ fun MovieDetailDto.toMovieDetail(): MovieDetail {
         runtime = runtime,
         voteAverage = voteAverage,
         voteCount = voteCount,
-        genres = genres.toMovieGenreList(),
+        genres = genres.map { it.toMovieGenre() },
         overview = overview,
-        cast = credits.cast.toCastList().filter { it.profilePath != null },
-        crew = credits.crew.toCrewList(),
+        credits = credits.toCreditsResponse(),
     )
 }
 
-fun List<MovieGenreDto>.toMovieGenreList(): List<MovieGenre> {
-    return this.map {
-        MovieGenre(
-            id = it.id,
-            name = it.name,
-        )
-    }
+fun CreditsResponseDto.toCreditsResponse(): CreditsResponse {
+    return CreditsResponse (
+        cast = cast.map { it.toCast() },
+        crew = crew.map { it.toCrew() },
+    )
 }
 
-fun List<CastDto>.toCastList(): List<Cast> {
-    return this.map {
-        Cast(
-            id = it.id,
-            name = it.name,
-            profilePath = it.profilePath,
-            character = it.character,
-        )
-    }
+fun MovieGenreDto.toMovieGenre(): MovieGenre {
+    return MovieGenre(
+        id = id,
+        name = name
+    )
 }
 
-fun List<CrewDto>.toCrewList(): List<Crew> {
-    return this.map {
-        Crew(
-            id = it.id,
-            name = it.name,
-            job = it.job,
-            profilePath = it.profilePath ?: "",
-        )
-    }
+fun CastDto.toCast(): Cast {
+    return Cast(
+        id = id,
+        name = name,
+        profilePath = profilePath,
+        character = character,
+    )
+}
+
+fun CrewDto.toCrew(): Crew {
+    return Crew(
+        id = id,
+        name = name,
+        job = job,
+        profilePath = profilePath ?: "",
+    )
+}
+
+fun MovieGenre.toMovieGenreDto(): MovieGenreDto {
+    return MovieGenreDto(
+        id = id,
+        name = name
+    )
+}
+
+fun CreditsResponse.toCreditsResponseDto(): CreditsResponseDto {
+    return CreditsResponseDto(
+        cast = cast.map { it.toCastDto() },
+        crew = crew.map { it.toCrewDto() }
+    )
+}
+
+fun Cast.toCastDto(): CastDto {
+    return CastDto(
+        id = id,
+        name = name,
+        profilePath = profilePath,
+        character = character,
+    )
+}
+
+fun Crew.toCrewDto(): CrewDto {
+    return CrewDto(
+        id = id,
+        name = name,
+        job = job,
+        profilePath = profilePath
+    )
+}
+
+fun MovieDetail.toMovieDetailDto(): MovieDetailDto {
+    return MovieDetailDto(
+        id = id,
+        releaseDate = releaseDate,
+        runtime = runtime,
+        voteAverage = voteAverage,
+        voteCount = voteCount,
+        genres = genres.map { it.toMovieGenreDto() },
+        overview = overview,
+        credits = credits.toCreditsResponseDto(),
+    )
 }

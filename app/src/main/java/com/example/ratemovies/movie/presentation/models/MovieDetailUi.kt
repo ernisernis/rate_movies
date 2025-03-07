@@ -13,7 +13,7 @@ data class MovieDetailUi(
     val voteCount: DisplayableValue,
     val genres: List<MovieGenreUi>,
     val overview: String,
-    val cast: List<CastUi>,
+    val cast: List<CastUi>?,
     val crew: List<CrewUi>,
     val director: String?,
     val writer: String?,
@@ -33,10 +33,10 @@ fun MovieDetail.toMovieDetailUi(): MovieDetailUi {
         voteCount = voteCount.toDisplayableVoteCount(),
         genres = genres.map { it.toMovieGenreUi() },
         overview = overview,
-        cast = cast.map { it.toCastUi() },
-        crew = crew.map { it.toCrewUi() },
-        director = crew.find { it.job == "Director" }?.name,
-        writer = crew.find { it.job == "Screenplay" }?.name,
+        cast = credits.cast.map { it.toCastUi() }.filter { it.profilePath != null }.ifEmpty { null },
+        crew = credits.crew.map { it.toCrewUi() },
+        director = credits.crew.find { it.job == "Director" }?.name,
+        writer = credits.crew.find { it.job == "Screenplay" }?.name,
     )
 }
 
