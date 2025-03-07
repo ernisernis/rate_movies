@@ -12,10 +12,10 @@ import com.example.ratemovies.movie.domain.MovieGenre
 fun MovieDetailDto.toMovieDetail(): MovieDetail {
     return MovieDetail(
         id = id,
-        releaseDate = release_date,
+        releaseDate = releaseDate,
         runtime = runtime,
-        voteAverage = vote_average,
-        voteCount = vote_count,
+        voteAverage = voteAverage,
+        voteCount = voteCount,
         genres = genres.toMovieGenreList(),
         overview = overview,
         cast = credits.cast.toCastList().filter { it.profilePath != null },
@@ -37,7 +37,7 @@ fun List<CastDto>.toCastList(): List<Cast> {
         Cast(
             id = it.id,
             name = it.name,
-            profilePath = it.profile_path,
+            profilePath = it.profilePath,
             character = it.character,
         )
     }
@@ -49,7 +49,7 @@ fun List<CrewDto>.toCrewList(): List<Crew> {
             id = it.id,
             name = it.name,
             job = it.job,
-            profilePath = it.profile_path ?: "",
+            profilePath = it.profilePath ?: "",
         )
     }
 }
