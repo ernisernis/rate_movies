@@ -58,21 +58,15 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
-    implementation(libs.compose.ui.text.google.fonts)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.compose.navigation)
-    implementation(libs.bundles.coil)
-    implementation(libs.bundles.ktor)
-    implementation(libs.compose.material.icons.extended)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Room
+    implementation(libs.bundles.room)
+    ksp(libs.androidx.room.compiler)
+    testImplementation(libs.androidx.room.testing)
 
     // Hilt
     implementation(libs.hilt.android)
@@ -81,10 +75,23 @@ dependencies {
     androidTestImplementation(libs.hilt.testing)
     kspAndroidTest(libs.hilt.compiler)
 
-    // Room
-    implementation(libs.bundles.room)
-    ksp(libs.androidx.room.compiler)
-    testImplementation(libs.androidx.room.testing)
+    // Coil
+    implementation(libs.bundles.coil)
+
+    // Ktor
+    implementation(libs.bundles.ktor)
+
+
+    implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.compose.navigation)
+    implementation(libs.compose.material.icons.extended)
+    implementation(libs.kotlinx.serialization.json)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }
 
 ksp {
