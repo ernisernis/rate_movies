@@ -38,6 +38,7 @@ fun MovieBookmarkScreenRoot(
             .fillMaxSize(),
         onAction = { action ->
             when (action) {
+                is MovieBookmarkAction.OnMovieClick -> onMovieIdClick(action.id)
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -81,10 +82,10 @@ fun MovieBookmarkScreen(
                        .height(Dimens.MovieBookmarkItemHeight),
                    bookmarkMovieUi = bookmarkMovie.toBookmarkMovieUi(),
                    onClick = {
-                       // TODO
+                       onAction(MovieBookmarkAction.OnMovieClick(bookmarkMovie.id))
                    },
                    onBookmarkClick = {
-                       // TODO
+                       onAction(MovieBookmarkAction.OnBookmarkClick(bookmarkMovie.id))
                    }
                )
            }
