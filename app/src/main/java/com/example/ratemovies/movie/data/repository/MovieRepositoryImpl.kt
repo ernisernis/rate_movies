@@ -1,12 +1,17 @@
 package com.example.ratemovies.movie.data.repository
 
+import android.database.sqlite.SQLiteException
+import android.util.Log
 import com.example.ratemovies.core.domain.util.DataError
+import com.example.ratemovies.core.domain.util.EmptyResult
 import com.example.ratemovies.core.domain.util.Result
 import com.example.ratemovies.core.domain.util.map
 import com.example.ratemovies.movie.data.database.BookmarkMovieDao
+import com.example.ratemovies.movie.data.mappers.toBookmarkEntity
 import com.example.ratemovies.movie.data.mappers.toBookmarkMovie
 import com.example.ratemovies.movie.data.mappers.toMovie
 import com.example.ratemovies.movie.data.mappers.toMovieDetail
+import com.example.ratemovies.movie.data.mappers.toMovieEntity
 import com.example.ratemovies.movie.domain.data_source.MovieDataSource
 import com.example.ratemovies.movie.domain.model.BookmarkMovie
 import com.example.ratemovies.movie.domain.model.Movie
@@ -64,11 +69,29 @@ class MovieRepositoryImpl(
         bookmarkMovieDao.deleteMovieEntity(id)
     }
 
-    override suspend fun getBookmarks(): Flow<List<BookmarkMovie>> {
+    override fun getBookmarks(): Flow<List<BookmarkMovie>> {
         return bookmarkMovieDao
             .getBookmarkMovies()
             .map { bookmarkEntities ->
                bookmarkEntities.map { it.toBookmarkMovie() }
+            }
+    }
+
+    override suspend fun markAsBookmarked(movie: Movie): EmptyResult<DataError.Local> {
+        return try {
+            bookmarkMovieDao.upsertMovieEntity(movie.toMovieEntity())
+            bookmarkMovieDao.upsertBookmarkEntity(movie.toBookmarkEntity())
+            Result.Success(Unit)
+        } catch (e: SQLiteException) {
+            Result.Error(DataError.Local.DISK_FULL)
+        }
+    }
+
+    override fun isBookBookmarked(id: Int): Flow<Boolean> {
+        return bookmarkMovieDao
+            .getBookmarkMovies()
+            .map { bookEntities ->
+                bookEntities.any { it.id == id }
             }
     }
 }

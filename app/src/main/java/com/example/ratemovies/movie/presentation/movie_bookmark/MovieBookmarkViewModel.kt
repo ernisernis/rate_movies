@@ -6,6 +6,7 @@ import com.example.ratemovies.movie.domain.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
@@ -51,6 +52,7 @@ class MovieBookmarkViewModel @Inject constructor(
                         bookmarkMovies = bookmarkMovies
                     ) }
                 }
+                .launchIn(viewModelScope)
         }
     }
 }

@@ -15,11 +15,8 @@ interface BookmarkMovieDao {
     @Upsert
     suspend fun upsertBookmarkEntity(bookmark: BookmarkEntity)
 
-    @Query("SELECT * FROM BookmarkEntity")
-    fun getBookmarkMovies(): Flow<List<BookmarkEntity>>
-
     @Query("SELECT * FROM BookmarkEntity ORDER BY creationTime DESC")
-    fun getBookmarksOrderedByCreatedTime(): Flow<List<BookmarkEntity>>
+    fun getBookmarkMovies(): Flow<List<BookmarkEntity>>
 
     @Query("SELECT * FROM MovieEntity WHERE id = :id")
     suspend fun getMovieEntity(id: Int): MovieEntity?

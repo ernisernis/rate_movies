@@ -121,7 +121,7 @@ fun MovieDetailScreen(
                     },
                     modifier = Modifier,
                     onClick = {
-                        // TODO:
+                        onAction(MovieDetailAction.OnBookmarkClick)
                     }
                 )
             }

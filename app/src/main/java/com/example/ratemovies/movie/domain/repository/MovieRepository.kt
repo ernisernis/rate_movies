@@ -1,6 +1,7 @@
 package com.example.ratemovies.movie.domain.repository
 
 import com.example.ratemovies.core.domain.util.DataError
+import com.example.ratemovies.core.domain.util.EmptyResult
 import com.example.ratemovies.core.domain.util.Result
 import com.example.ratemovies.movie.domain.model.BookmarkMovie
 import com.example.ratemovies.movie.domain.model.Movie
@@ -17,5 +18,7 @@ interface MovieRepository {
 
     // Local
     suspend fun deleteFromBookmark(id: Int)
-    suspend fun getBookmarks(): Flow<List<BookmarkMovie>>
+    suspend fun markAsBookmarked(movie: Movie): EmptyResult<DataError.Local>
+    fun getBookmarks(): Flow<List<BookmarkMovie>>
+    fun isBookBookmarked(id: Int): Flow<Boolean>
 }

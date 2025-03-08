@@ -6,4 +6,5 @@ interface MovieDetailAction {
     data object OnRateClick: MovieDetailAction
     data class OnSelectedMovieChange(val movie: Movie): MovieDetailAction
     data object OnBackClick: MovieDetailAction
+    data object OnBookmarkClick: MovieDetailAction
 }
