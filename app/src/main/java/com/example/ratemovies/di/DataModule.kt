@@ -6,9 +6,12 @@ import com.example.ratemovies.core.data.networking.HttpClientFactory
 import com.example.ratemovies.movie.data.database.MovieDatabase
 import com.example.ratemovies.movie.data.data_source.MovieDataSourceImpl
 import com.example.ratemovies.movie.data.database.BookmarkMovieDao
+import com.example.ratemovies.movie.data.database.RatingDao
 import com.example.ratemovies.movie.domain.data_source.MovieDataSource
 import com.example.ratemovies.movie.data.repository.MovieRepositoryImpl
+import com.example.ratemovies.movie.data.repository.ProfileRepositoryImpl
 import com.example.ratemovies.movie.domain.repository.MovieRepository
+import com.example.ratemovies.movie.domain.repository.ProfileRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -61,7 +64,19 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideDefaultMovieRepository(remoteMovieDataSource: MovieDataSource, bookmarkMovieDao: BookmarkMovieDao): MovieRepository {
+    fun provideRatingDao(database: MovieDatabase): RatingDao {
+        return database.ratingDao
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieRepositoryImpl(remoteMovieDataSource: MovieDataSource, bookmarkMovieDao: BookmarkMovieDao): MovieRepository {
         return MovieRepositoryImpl(remoteMovieDataSource, bookmarkMovieDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileRepositoryImpl(ratingDao: RatingDao): ProfileRepository {
+        return ProfileRepositoryImpl(ratingDao)
     }
 }

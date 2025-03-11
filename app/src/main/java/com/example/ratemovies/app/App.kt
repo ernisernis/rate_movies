@@ -1,8 +1,6 @@
 package com.example.ratemovies.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -42,6 +40,8 @@ import com.example.ratemovies.movie.presentation.movie_bookmark.MovieBookmarkVie
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailAction
 import com.example.ratemovies.movie.presentation.movie_detail.MovieDetailScreenRoot
 import com.example.ratemovies.movie.presentation.movie_list.MovieListScreenRoot
+import com.example.ratemovies.movie.presentation.movie_profile.MovieProfileScreenRoot
+import com.example.ratemovies.movie.presentation.movie_profile.MovieProfileViewModel
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateAction
 import com.example.ratemovies.movie.presentation.movie_rate.MovieRateScreenRoot
 
@@ -65,6 +65,10 @@ fun App() {
             }
             Route.MovieBookmark.hashCode() -> {
                 selectedIndex = 1
+                bottomBarState.value = true
+            }
+            Route.MovieProfile.hashCode() -> {
+                selectedIndex = 2
                 bottomBarState.value = true
             }
             else -> {
@@ -205,6 +209,19 @@ fun RmNavHost(
                 val selectedMovieViewModel = it.sharedHiltViewModel<SelectedMovieViewModel>(navController)
 
                 MovieBookmarkScreenRoot(
+                    viewModel = viewModel,
+                    onMovieIdClick = { id ->
+                        selectedMovieViewModel.onSelectMovieId(id)
+                        navController.navigate(Route.MovieDetail(id))
+                    }
+                )
+            }
+
+            composable<Route.MovieProfile> {
+                val viewModel = hiltViewModel<MovieProfileViewModel>()
+                val selectedMovieViewModel = it.sharedHiltViewModel<SelectedMovieViewModel>(navController)
+
+                MovieProfileScreenRoot(
                     viewModel = viewModel,
                     onMovieIdClick = { id ->
                         selectedMovieViewModel.onSelectMovieId(id)
