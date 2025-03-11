@@ -70,8 +70,8 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepositoryImpl(remoteMovieDataSource: MovieDataSource, bookmarkMovieDao: BookmarkMovieDao): MovieRepository {
-        return MovieRepositoryImpl(remoteMovieDataSource, bookmarkMovieDao)
+    fun provideMovieRepositoryImpl(remoteMovieDataSource: MovieDataSource, bookmarkMovieDao: BookmarkMovieDao, ratingDao: RatingDao): MovieRepository {
+        return MovieRepositoryImpl(remoteMovieDataSource, bookmarkMovieDao, ratingDao)
     }
 
     @Provides

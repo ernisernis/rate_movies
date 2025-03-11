@@ -2,7 +2,10 @@ package com.example.ratemovies.movie.presentation.movie_rate
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ratemovies.core.domain.util.onError
+import com.example.ratemovies.core.domain.util.onSuccess
 import com.example.ratemovies.movie.data.mappers.toRating
+import com.example.ratemovies.movie.data.mappers.toRatingUi
 import com.example.ratemovies.movie.domain.model.Movie
 import com.example.ratemovies.movie.domain.repository.MovieRepository
 import com.example.ratemovies.movie.presentation.models.toMovieUi
@@ -44,7 +47,7 @@ class MovieRateViewModel @Inject constructor(
             is MovieRateAction.OnMovieRateSubmit -> submitRate(action.movie)
 
             is MovieRateAction.OnSelectedMovieChange -> {
-                // TODO: GetMovieRating
+                getMovieRating(action.movie.id)
                 _state.update { it.copy(
                     movie = action.movie,
                     movieUi = action.movie.toMovieUi()
@@ -81,8 +84,37 @@ class MovieRateViewModel @Inject constructor(
                     description = state.value.description.trim().ifEmpty { null },
                     userRating = state.value.selectedIndex,
                 )
-                // TODO:
+                movieRepository
+                    .rateMovie(
+                        movie = movie,
+                        rating = rating,
+                    )
+                    .onSuccess {
+                        _state.update { it.copy(
+                            popBackStackFlag = true
+                        ) }
+                    }
+                    .onError {
+                        // TODO: handle error
+                    }
             }
         }
     }
+
+    private fun getMovieRating(movieId: Int) {
+        viewModelScope.launch {
+            movieRepository
+                .getRating(movieId)
+                .onSuccess { rating ->
+                    val ratingUi = rating.toRatingUi()
+                    _state.update {
+                        it.copy(
+                            description = ratingUi.description ?: "",
+                            selectedIndex = ratingUi.userRating,
+                        )
+                    }
+                }
+        }
+    }
+
 }
