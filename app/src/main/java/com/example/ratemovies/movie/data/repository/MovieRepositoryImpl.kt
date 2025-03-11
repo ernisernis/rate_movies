@@ -13,7 +13,6 @@ import com.example.ratemovies.movie.data.mappers.toMovie
 import com.example.ratemovies.movie.data.mappers.toMovieDetail
 import com.example.ratemovies.movie.data.mappers.toMovieEntity
 import com.example.ratemovies.movie.data.mappers.toRating
-import com.example.ratemovies.movie.data.mappers.toRatingEntity
 import com.example.ratemovies.movie.domain.data_source.MovieDataSource
 import com.example.ratemovies.movie.domain.model.BookmarkMovie
 import com.example.ratemovies.movie.domain.model.Movie
@@ -105,16 +104,6 @@ class MovieRepositoryImpl(
         return try {
             bookmarkMovieDao.upsertMovieEntity(movie.toMovieEntity())
             bookmarkMovieDao.upsertBookmarkEntity(movie.toBookmarkEntity())
-            Result.Success(Unit)
-        } catch (e: SQLiteException) {
-            Result.Error(DataError.Local.DISK_FULL)
-        }
-    }
-
-    override suspend fun rateMovie(movie: Movie, rating: Rating): EmptyResult<DataError.Local> {
-        return try {
-            ratingDao.upsertMovieEntity(movie.toMovieEntity())
-            ratingDao.upsertRatingEntity(rating.toRatingEntity())
             Result.Success(Unit)
         } catch (e: SQLiteException) {
             Result.Error(DataError.Local.DISK_FULL)

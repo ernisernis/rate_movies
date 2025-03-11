@@ -22,7 +22,6 @@ interface MovieRepository {
     suspend fun getMovie(id: Int): Result<Movie, DataError.Local>
     suspend fun deleteFromBookmark(id: Int)
     suspend fun markAsBookmarked(movie: Movie): EmptyResult<DataError.Local>
-    suspend fun rateMovie(movie: Movie, rating: Rating): EmptyResult<DataError.Local>
     fun getBookmarks(): Flow<List<BookmarkMovie>>
     fun isBookBookmarked(id: Int): Flow<Boolean>
 }

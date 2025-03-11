@@ -8,6 +8,7 @@ import com.example.ratemovies.movie.data.mappers.toRating
 import com.example.ratemovies.movie.data.mappers.toRatingUi
 import com.example.ratemovies.movie.domain.model.Movie
 import com.example.ratemovies.movie.domain.repository.MovieRepository
+import com.example.ratemovies.movie.domain.use_case.RateMovieUseCase
 import com.example.ratemovies.movie.presentation.models.toMovieUi
 import com.example.ratemovies.movie.presentation.models.use_case.ValidateRateDescription
 import com.example.ratemovies.movie.presentation.models.use_case.ValidateRateNumber
@@ -22,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieRateViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
+    private val rateMovieUseCase: RateMovieUseCase,
     private val validateRateDescription: ValidateRateDescription,
     private val validateRateNumber: ValidateRateNumber,
 ) : ViewModel() {
@@ -84,7 +86,7 @@ class MovieRateViewModel @Inject constructor(
                     description = state.value.description.trim().ifEmpty { null },
                     userRating = state.value.selectedIndex,
                 )
-                movieRepository
+                rateMovieUseCase
                     .rateMovie(
                         movie = movie,
                         rating = rating,
