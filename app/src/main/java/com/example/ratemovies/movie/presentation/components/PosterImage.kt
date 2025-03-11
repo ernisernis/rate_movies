@@ -33,7 +33,7 @@ fun PosterImage(
             contentDescription = "Poster image",
             placeholder = errorPainter,
             error = painterResource(R.drawable.poster780w1170hpreview),
-            contentScale = ContentScale.Fit,
+            contentScale = ContentScale.Crop,
         )
     }
 }

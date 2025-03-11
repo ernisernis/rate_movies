@@ -61,7 +61,7 @@ fun MovieListItem(
             contentDescription = stringResource(R.string.description_movie_item),
             error = painterResource(R.drawable.placeholder_gradient),
             placeholder = painterResource(R.drawable.placeholder_gradient),
-            contentScale = ContentScale.Fit,
+            contentScale = ContentScale.Crop,
         )
 
         // Rating row (Icon + Vote text)
