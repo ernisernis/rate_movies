@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,19 +42,12 @@ fun TitleRow(
         }
 
         imageUrl?.let {
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 12.dp,
-                ),
-            ) {
-                PosterImage(
-                    modifier = Modifier
-                        .width(60.dp),
-                    url = it,
-                )
-            }
+            PosterImage(
+                modifier = Modifier
+                    .width(60.dp),
+                url = it,
+            )
         }
-
     }
 }
 

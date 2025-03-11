@@ -2,6 +2,8 @@ package com.example.ratemovies.movie.presentation.components
 
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -19,16 +21,21 @@ fun PosterImage(
     modifier: Modifier = Modifier,
     url: String,
 ) {
-    AsyncImage(
-        modifier =
-            modifier
+    ElevatedCard(
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 12.dp,
+        ),
+    ) {
+        AsyncImage(
+            modifier = modifier
                 .aspectRatio(2f / 3f),
-        model = url,
-        contentDescription = "Poster image",
-        placeholder = errorPainter,
-        error = painterResource(R.drawable.poster780w1170hpreview),
-        contentScale = ContentScale.Fit,
-    )
+            model = url,
+            contentDescription = "Poster image",
+            placeholder = errorPainter,
+            error = painterResource(R.drawable.poster780w1170hpreview),
+            contentScale = ContentScale.Fit,
+        )
+    }
 }
 
 @Preview
