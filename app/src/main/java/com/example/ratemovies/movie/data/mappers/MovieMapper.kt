@@ -8,24 +8,23 @@ import com.example.ratemovies.movie.domain.model.Movie
 import com.example.ratemovies.movie.domain.model.Rating
 import com.example.ratemovies.movie.presentation.models.toDisplayableRuntime
 import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetail
-import java.time.Clock
 
 fun MovieDto.toMovie(): Movie {
     return Movie(
         id = id,
         title = title,
         adult = adult,
-        backdropPath = backdrop_path,
-        genreIds = genre_ids,
-        originalLanguage = original_language,
-        originalTitle = original_title,
+        backdropPath = backdropPath ?: "",
+        genreIds = genreIds,
+        originalLanguage = originalLanguage,
+        originalTitle = originalTitle,
         overview = overview,
         popularity = popularity,
-        posterPath = poster_path,
-        releaseDate = release_date,
+        posterPath = posterPath,
+        releaseDate = releaseDate,
         video = video,
-        voteAverage = vote_average,
-        voteCount = vote_count,
+        voteAverage = voteAverage,
+        voteCount = voteCount,
         movieDetail = defaultMovieDetail,
     )
 }
