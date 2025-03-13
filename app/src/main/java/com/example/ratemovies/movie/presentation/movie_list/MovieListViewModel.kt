@@ -34,21 +34,14 @@ class MovieListViewModel @Inject constructor(
 
     private fun loadMovies() {
         viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    isLoading = true,
-                )
-            }
-
+            _state.update { it.copy(loadingState = LoadingState.Loading) }
             movieRepository
                 .getNowPlayingMovies()
                 .onSuccess { nowPlayingMovies ->
-                    _state.update {
-                        it.copy(
-                            nowPlayingMoviesUi = nowPlayingMovies,
-                            isLoading = false,
-                        )
-                    }
+                    _state.update { it.copy(
+                        nowPlayingMoviesUi = nowPlayingMovies,
+                        loadingState = LoadingState.Success,
+                    ) }
                 }
                 .onError { error ->
                     Log.d("ERNIS33", "loadMovies: $error")
@@ -57,12 +50,10 @@ class MovieListViewModel @Inject constructor(
             movieRepository
                 .getPopularMovies()
                 .onSuccess { popularMovies ->
-                    _state.update {
-                        it.copy(
-                            popularMoviesUi = popularMovies,
-                            isLoading = false,
-                        )
-                    }
+                    _state.update { it.copy(
+                        popularMoviesUi = popularMovies,
+                        loadingState = LoadingState.Success,
+                    ) }
                 }
                 .onError { error ->
                     Log.d("ERNIS33", "loadMovies: $error")
@@ -71,12 +62,10 @@ class MovieListViewModel @Inject constructor(
             movieRepository
                 .getUpcomingMovies()
                 .onSuccess { upcomingMovies ->
-                    _state.update {
-                        it.copy(
-                            upcomingMoviesUi = upcomingMovies,
-                            isLoading = false,
-                        )
-                    }
+                    _state.update { it.copy(
+                        upcomingMoviesUi = upcomingMovies,
+                        loadingState = LoadingState.Success,
+                    ) }
                 }
                 .onError { error ->
                     Log.d("ERNIS33", "loadMovies: $error")
@@ -85,12 +74,10 @@ class MovieListViewModel @Inject constructor(
             movieRepository
                 .getTopRatedMovies()
                 .onSuccess { topRatedMovies ->
-                    _state.update {
-                        it.copy(
-                            topRatedMoviesUi = topRatedMovies,
-                            isLoading = false,
-                        )
-                    }
+                    _state.update { it.copy(
+                        topRatedMoviesUi = topRatedMovies,
+                        loadingState = LoadingState.Success,
+                    ) }
                 }
                 .onError { error ->
                     Log.d("ERNIS33", "loadMovies: $error")

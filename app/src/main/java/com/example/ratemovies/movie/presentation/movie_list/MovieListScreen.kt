@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
@@ -17,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.ratemovies.core.presentation.util.Dimens
 import com.example.ratemovies.movie.domain.model.Movie
 import com.example.ratemovies.movie.presentation.movie_list.components.MovieListItemsSection
 import com.example.ratemovies.movie.presentation.movie_list.components.MovieListLoading
@@ -32,27 +29,33 @@ fun MovieListScreenRoot(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    if (state.isLoading) {
-        MovieListLoading(
-            modifier = Modifier
-                .systemBarsPadding()
-                .fillMaxSize()
-        )
-    } else {
-        MovieListScreen(
-            state = state,
-            modifier = Modifier
-                .systemBarsPadding()
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
-            onAction = { action ->
-                when (action) {
-                    is MovieListAction.OnMovieClick -> onMovieClick(action.movie)
-                    else -> Unit
+    when (state.loadingState) {
+        is LoadingState.Error -> {
+            // TODO:
+        }
+        LoadingState.Loading -> {
+            MovieListLoading(
+                modifier = Modifier
+                    .systemBarsPadding()
+                    .fillMaxSize()
+            )
+        }
+        LoadingState.Success -> {
+            MovieListScreen(
+                state = state,
+                modifier = Modifier
+                    .systemBarsPadding()
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+                onAction = { action ->
+                    when (action) {
+                        is MovieListAction.OnMovieClick -> onMovieClick(action.movie)
+                        else -> Unit
+                    }
+                    viewModel.onAction(action)
                 }
-                viewModel.onAction(action)
-            }
-        )
+            )
+        }
     }
 }
 
@@ -62,34 +65,30 @@ fun MovieListScreen(
     modifier: Modifier = Modifier,
     onAction: (MovieListAction) -> Unit,
 ) {
-    if (state.isLoading) {
-        MovieListLoading()
-    } else {
-        Column(
-            modifier = modifier,
-        ) {
-            MovieListItemsSection(
-                title = "Now Playing",
-                movies = state.nowPlayingMoviesUi,
-                onClick = { onAction(MovieListAction.OnMovieClick(it)) },
-            )
-            MovieListItemsSection(
-                title = "Popular",
-                movies = state.popularMoviesUi,
-                onClick = { onAction(MovieListAction.OnMovieClick(it)) },
-            )
-            MovieListItemsSection(
-                title = "Top Rated",
-                movies = state.topRatedMoviesUi,
-                onClick = { onAction(MovieListAction.OnMovieClick(it)) },
-            )
-            MovieListItemsSection(
-                title = "Upcoming",
-                movies = state.upcomingMoviesUi,
-                onClick = { onAction(MovieListAction.OnMovieClick(it)) },
-            )
-            Spacer(modifier = Modifier.height(100.dp))
-        }
+    Column(
+        modifier = modifier,
+    ) {
+        MovieListItemsSection(
+            title = "Now Playing",
+            movies = state.nowPlayingMoviesUi,
+            onClick = { onAction(MovieListAction.OnMovieClick(it)) },
+        )
+        MovieListItemsSection(
+            title = "Popular",
+            movies = state.popularMoviesUi,
+            onClick = { onAction(MovieListAction.OnMovieClick(it)) },
+        )
+        MovieListItemsSection(
+            title = "Top Rated",
+            movies = state.topRatedMoviesUi,
+            onClick = { onAction(MovieListAction.OnMovieClick(it)) },
+        )
+        MovieListItemsSection(
+            title = "Upcoming",
+            movies = state.upcomingMoviesUi,
+            onClick = { onAction(MovieListAction.OnMovieClick(it)) },
+        )
+        Spacer(modifier = Modifier.height(100.dp))
     }
 }
 
