@@ -26,9 +26,7 @@ class MovieListViewModel @Inject constructor(
 
     fun onAction(action: MovieListAction) {
         when (action) {
-            is MovieListAction.OnMovieClick -> {
-                // TODO
-            }
+            else -> Unit
         }
     }
 
