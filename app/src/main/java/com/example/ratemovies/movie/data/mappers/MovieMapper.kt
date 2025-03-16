@@ -7,7 +7,6 @@ import com.example.ratemovies.movie.data.dto.MovieDto
 import com.example.ratemovies.movie.domain.model.Movie
 import com.example.ratemovies.movie.domain.model.Rating
 import com.example.ratemovies.movie.presentation.models.toDisplayableRuntime
-import com.example.ratemovies.movie.presentation.movie_detail.defaultMovieDetail
 
 fun MovieDto.toMovie(): Movie {
     return Movie(
@@ -25,7 +24,7 @@ fun MovieDto.toMovie(): Movie {
         video = video,
         voteAverage = voteAverage,
         voteCount = voteCount,
-        movieDetail = defaultMovieDetail,
+        movieDetail = null,
     )
 }
 
